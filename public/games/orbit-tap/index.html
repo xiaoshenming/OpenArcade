@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>星点节拍</title>
+  <style>
+    *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;font-family:system-ui,sans-serif;background:#101d1b;color:#f8f3e8}
+    body{display:grid;place-items:center}.stage{position:relative;width:100%;height:100%;min-height:420px;overflow:hidden;background:radial-gradient(circle at 50% 45%,#174541 0,#101d1b 52%,#09100f 100%)}
+    .grid{position:absolute;inset:0;opacity:.15;background-image:linear-gradient(#8de5d8 1px,transparent 1px),linear-gradient(90deg,#8de5d8 1px,transparent 1px);background-size:44px 44px}
+    .hud{position:absolute;z-index:3;top:22px;left:24px;right:24px;display:flex;justify-content:space-between;align-items:center;font-family:monospace;font-size:13px}.hud strong{font-size:22px;color:#f8cc55}
+    .target{position:absolute;z-index:2;width:74px;height:74px;padding:0;border:2px solid #fff;border-radius:50%;background:#ef476f;box-shadow:0 0 0 8px rgba(239,71,111,.2),0 0 30px rgba(239,71,111,.65);cursor:pointer;animation:pulse .75s infinite alternate}.target:after{content:'';position:absolute;inset:23px;border-radius:50%;background:#fff}
+    .message{position:absolute;inset:0;z-index:4;display:grid;place-items:center;text-align:center;background:rgba(9,16,15,.75)}.message[hidden]{display:none}.message strong{display:block;font-size:38px}.message span{display:block;margin-top:10px;color:#acd8d1}
+    @keyframes pulse{to{transform:scale(.86);box-shadow:0 0 0 14px rgba(239,71,111,.08),0 0 42px rgba(239,71,111,.8)}}
+  </style>
+</head>
+<body>
+  <main class="stage" id="stage">
+    <div class="grid"></div>
+    <div class="hud"><span>TIME <strong id="time">20</strong></span><span>SCORE <strong id="score">000</strong></span></div>
+    <button class="target" id="target" aria-label="击中星点"></button>
+    <div class="message" id="message" hidden><div><strong>本轮结束</strong><span>点击主站重试按钮继续</span></div></div>
+  </main>
+  <script>
+    const PROTOCOL='openarcade:v1';const stage=document.querySelector('#stage');const target=document.querySelector('#target');const scoreEl=document.querySelector('#score');const timeEl=document.querySelector('#time');const message=document.querySelector('#message');
+    let score=0,time=20,timer=null,paused=false;
+    const emit=(event)=>parent.postMessage({protocol:PROTOCOL,source:'game',event},location.origin);
+    function place(){const pad=60;target.style.left=(pad+Math.random()*(stage.clientWidth-pad*2-74))+'px';target.style.top=(pad+Math.random()*(stage.clientHeight-pad*2-74))+'px'}
+    function start(){clearInterval(timer);score=0;time=20;paused=false;scoreEl.textContent='000';timeEl.textContent='20';message.hidden=true;target.hidden=false;place();emit({type:'started'});timer=setInterval(()=>{if(paused)return;time--;timeEl.textContent=String(time).padStart(2,'0');if(time<=0){clearInterval(timer);target.hidden=true;message.hidden=false;emit({type:'completed',score})}},1000)}
+    target.addEventListener('click',()=>{if(paused)return;score+=10;scoreEl.textContent=String(score).padStart(3,'0');emit({type:'score',score});place()});
+    addEventListener('message',(e)=>{if(e.origin!==location.origin||e.data?.protocol!==PROTOCOL||e.data?.source!=='host')return;const command=e.data.command;if(command.type==='restart'||command.type==='start')start();if(command.type==='pause')paused=true;if(command.type==='resume')paused=false});
+    addEventListener('load',()=>{emit({type:'ready'});start()});
+  </script>
+</body>
+</html>
