@@ -5,7 +5,14 @@
       "author": "OpenArcade contributors",
       "license": "MIT",
       "source": "original",
-      "sha256": "045a55bbb562a6fc54d71921eeebb1ca1930a996d2e02501f309f18946f9b7de"
+      "sha256": "1038601cd3fe7c46f741c8101680ce949215760d6035e505d9a20e7819a93520"
+    },
+    {
+      "path": "public/images/games/water-sort.jpg",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "generated from original gameplay",
+      "sha256": "7825539960e766139b0d1c815aa55a28953ce2da945ffe34525858594744f980"
     }
   ]
 }

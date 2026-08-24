@@ -53,7 +53,7 @@ src/games/my-game/
 - `opaque-origin`：社区默认。仅允许脚本，使用随机 channel 建立专属 MessagePort，不拥有同源访问权。
 - `trusted-same-origin`：仅供审核后的 Godot/WASM 构建，不能用于未知贡献者。
 
-接入方式见 [游戏接入指南](docs/adding-a-game.md)，兼容规则见 [SDK 版本策略](docs/sdk-versioning.md)，安全边界见 [威胁模型](docs/threat-model.md)，量化结果见 [架构 Review](docs/architecture-review.md)。
+接入方式见 [游戏接入指南](docs/adding-a-game.md)，视觉原则见 [UI 方向](docs/ui-direction.md)，兼容规则见 [SDK 版本策略](docs/sdk-versioning.md)，安全边界见 [威胁模型](docs/threat-model.md)，量化结果见 [架构 Review](docs/architecture-review.md)。
 
 ## 性能预算
 

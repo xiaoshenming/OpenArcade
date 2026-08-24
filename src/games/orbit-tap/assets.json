@@ -5,7 +5,7 @@
       "author": "OpenArcade contributors",
       "license": "MIT",
       "source": "original",
-      "sha256": "93c443840c275650242166e13d982e601d134abaddbd5760ffca3b00912e99f5"
+      "sha256": "1cba297e144bcd7e7990cd89e7da83bf42cb20c542ed128a18e9172325ffae92"
     },
     {
       "path": "public/games/orbit-tap/app.js",
@@ -13,6 +13,13 @@
       "license": "MIT",
       "source": "original",
       "sha256": "73e2660a9e5b7caf4f9963c6fff46d079b8822ef19bde87717a20c65c760d1b5"
+    },
+    {
+      "path": "public/images/games/orbit-tap.jpg",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "generated from original gameplay",
+      "sha256": "d7546e05ee96bc3907119cf42e934f0fa497ae84707b09bb8cdb16e5430c9d38"
     }
   ]
 }

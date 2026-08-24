@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>星点节拍</title>
   <style>
-    *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;font-family:system-ui,sans-serif;background:#101d1b;color:#f8f3e8}
-    body{display:grid;place-items:center}.stage{position:relative;width:100%;height:100%;min-height:360px;overflow:hidden;background:radial-gradient(circle at 50% 45%,#174541 0,#101d1b 52%,#09100f 100%)}
-    .grid{position:absolute;inset:0;opacity:.15;background-image:linear-gradient(#8de5d8 1px,transparent 1px),linear-gradient(90deg,#8de5d8 1px,transparent 1px);background-size:44px 44px}
-    .hud{position:absolute;z-index:3;top:22px;left:24px;right:24px;display:flex;justify-content:space-between;align-items:center;font-family:monospace;font-size:13px}.hud strong{font-size:22px;color:#f8cc55}
-    .target{position:absolute;z-index:2;width:74px;height:74px;padding:0;border:2px solid #fff;border-radius:50%;background:#ef476f;box-shadow:0 0 0 8px rgba(239,71,111,.2),0 0 30px rgba(239,71,111,.65);cursor:pointer;animation:pulse .75s infinite alternate}.target:after{content:'';position:absolute;inset:23px;border-radius:50%;background:#fff}
-    .message{position:absolute;inset:0;z-index:4;display:grid;place-items:center;text-align:center;background:rgba(9,16,15,.75)}.message[hidden]{display:none}.message strong{display:block;font-size:38px}.message span{display:block;margin-top:10px;color:#acd8d1}
-    @keyframes pulse{to{transform:scale(.86);box-shadow:0 0 0 14px rgba(239,71,111,.08),0 0 42px rgba(239,71,111,.8)}}
+    *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;font-family:Inter,system-ui,sans-serif;background:#edf1fa;color:#242a36}
+    body{display:grid;place-items:center}.stage{position:relative;width:100%;height:100%;min-height:360px;overflow:hidden;background:#edf1fa}
+    .grid{position:absolute;inset:0;opacity:.4;background-image:linear-gradient(#d9deeb 1px,transparent 1px),linear-gradient(90deg,#d9deeb 1px,transparent 1px);background-size:48px 48px}
+    .hud{position:absolute;z-index:3;top:20px;left:22px;right:22px;display:flex;justify-content:space-between;align-items:center;color:#697284;font-size:11px;font-weight:750}.hud span{padding:8px 11px;border:1px solid #d8dde8;border-radius:8px;background:rgba(255,255,255,.88)}.hud strong{margin-left:5px;font-size:18px;color:#242a36;font-variant-numeric:tabular-nums}
+    .target{position:absolute;z-index:2;width:72px;height:72px;padding:0;border:3px solid #fff;border-radius:50%;background:#ef5f78;box-shadow:0 0 0 8px rgba(239,95,120,.16),0 16px 34px rgba(144,52,75,.24);cursor:pointer;animation:pulse .75s infinite alternate}.target:after{content:'';position:absolute;inset:23px;border-radius:50%;background:#fff}
+    .message{position:absolute;inset:0;z-index:4;display:grid;place-items:center;text-align:center;background:rgba(237,241,250,.9);backdrop-filter:blur(8px)}.message[hidden]{display:none}.message strong{display:block;font-size:34px}.message span{display:block;margin-top:9px;color:#697284}
+    @keyframes pulse{to{transform:scale(.88);box-shadow:0 0 0 14px rgba(239,95,120,.08),0 20px 40px rgba(144,52,75,.28)}}
   </style>
 </head>
 <body>
