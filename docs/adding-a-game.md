@@ -1,68 +1,97 @@
 # 游戏接入指南
 
-OpenArcade 支持两种卡带。轻量 Web 游戏优先使用动态模块；拥有独立构建产物、WASM 或引擎运行时的游戏使用 iframe。
+## 选择运行时
 
-## 动态模块
+未知贡献者和独立 HTML 游戏必须选择 `opaque-origin` iframe。只有维护者审核过、确实需要最低延迟的轻量游戏才能选择 `trusted-module`。Godot/WASM 若无法在 opaque origin 下通过 CORS 加载资源，可申请 `trusted-same-origin`，但需要额外安全审查。
 
-1. 在 `src/games/<game-id>/` 创建游戏组件。
-2. 组件接收 `GameModuleProps`，只通过 `emit` 报告状态。
-3. 在 `GameHost.tsx` 的 `moduleRegistry` 注册动态 import。
-4. 在 `platform/manifest.ts` 添加 `loader: 'module'` 的清单。
+## 创建描述文件
 
-游戏事件：`ready`、`started`、`score`、`completed`、`failed`、`request-restart`。
+新增 `src/games/<id>/game.json`。Vite 会自动发现，无需修改中央清单或加载器。
 
-宿主命令：`start`、`pause`、`resume`、`restart`、`mute`。
-
-游戏不应直接读取或修改生命值、登录、订单和广告状态。这些能力属于宿主。
-
-## iframe / Godot Web
-
-把完整导出目录放到 `public/games/<game-id>/`，并在清单中配置：
-
-```ts
+```json
 {
-  id: 'my-godot-game',
-  loader: 'iframe',
-  src: '/games/my-godot-game/index.html',
-  // 其余展示字段
+  "id": "my-game",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@github-name",
+  "license": "MIT",
+  "title": "游戏名称",
+  "shortTitle": "短名称",
+  "description": "一句玩法说明。",
+  "category": "arcade",
+  "accent": "#12aabb",
+  "order": 10,
+  "status": "ready",
+  "scorePolicy": { "max": 10000, "eventsPerSecond": 30 },
+  "loader": "iframe",
+  "entry": "/games/my-game/index.html",
+  "isolation": "opaque-origin",
+  "permissions": []
 }
 ```
 
-iframe 向宿主发送：
+描述文件会校验目录名、重复 ID、SDK 版本、颜色、文本长度、权限和分数策略。
 
-```js
-parent.postMessage({
-  protocol: 'openarcade:v1',
-  source: 'game',
-  event: { type: 'completed', score: 1200 },
-}, location.origin)
+## 登记素材
+
+同目录必须提供 `assets.json`：
+
+```json
+{
+  "assets": [
+    {
+      "path": "public/games/my-game/assets/click.ogg",
+      "author": "Author",
+      "license": "CC0-1.0",
+      "source": "https://example.com/source",
+      "sha256": "完整的 SHA-256 十六进制摘要"
+    }
+  ]
+}
 ```
 
-监听宿主命令：
+路径从仓库根目录开始。CI 会校验文件存在、SHA-256、SPDX allowlist，并要求 public 游戏目录里的每个文件都被登记。只使用原创、MIT、Apache-2.0 或 CC0-1.0 内容。
 
-```js
-window.addEventListener('message', (message) => {
-  if (message.origin !== location.origin) return
-  const payload = message.data
-  if (payload?.protocol !== 'openarcade:v1' || payload?.source !== 'host') return
-  if (payload.command.type === 'restart') restartGame()
-})
+## trusted-module
+
+创建严格命名的 `Game.tsx`，默认导出接收 `GameModuleProps` 的组件。游戏只通过 `emit` 报告事件：
+
+- `ready`、`started`
+- `score`、`completed`、`failed`
+- `request-restart`
+
+组件必须处理 `paused`、`muted` 和重新挂载。它与宿主共享 DOM 和主线程，不是安全沙箱。
+
+## opaque iframe
+
+把静态产物放到 `public/games/<id>/`，在 HTML 中加载宿主提供的 SDK：
+
+```html
+<script src="/sdk/openarcade-v1.js"></script>
+<script src="/games/my-game/app.js"></script>
 ```
 
-Godot 4 可通过 `JavaScriptBridge.get_interface("parent")` 调用父页面的 `postMessage`，或在导出模板中放置一层 JavaScript adapter。保留协议 envelope，不要让 GDScript 依赖宿主页面 DOM。
+```js
+const sdk = OpenArcade.createSdk({ onCommand(command) {
+  if (command.type === 'pause') pauseGame()
+  if (command.type === 'restart') restartGame()
+} })
+sdk.ready()
+sdk.started()
+sdk.score(100)
+sdk.complete(800)
+```
 
-## 清单要求
+SDK 会排队早期事件，在随机 channel 握手成功后转移专属 MessagePort。不要访问 `parent.document`，不要自己实现生命值、广告或支付。
 
-- `id` 只使用小写字母、数字和连字符，并保持永久稳定。
-- 动态模块必须能被代码分割，不得把大型引擎放进主包。
-- iframe 必须支持宿主同源部署，并在自己的 viewport 内响应式布局。
-- 游戏必须在收到重复 `restart` 时安全重置。
-- 所有用户可见素材需原创、公共领域或有兼容许可证。
+## Godot
 
-## 提交前验证
+Godot Web adapter 应把 GDScript 事件转发给同一 SDK。优先将构建部署到具备正确 CORS/CORP 头的独立游戏源；确需同源 WASM 加载时声明 `trusted-same-origin` 并由维护者审查。
+
+## 提交验证
 
 ```bash
-npm run test
-npm run lint
-npm run build
+npm run check
 ```
+
+PR 还必须附带桌面和移动端截图，并说明包体积变化。

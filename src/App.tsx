@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { CirclePause, CirclePlay, Coins, Expand, Gamepad2, GitFork, Heart, Menu, Pause, Play, RotateCcw, Sparkles, Volume2, VolumeX, X } from 'lucide-react'
 import { GameHost } from './components/GameHost'
+import { reportGameDiagnostic } from './platform/diagnostics'
 import { games } from './platform/manifest'
+import { GameSessionPolicy } from './platform/session-policy'
 import { loadPlayer, playerRules, savePlayer, type PlayerState } from './platform/storage'
 import type { GameEvent } from './platform/types'
 
@@ -13,12 +15,19 @@ export default function App() {
   const [muted, setMuted] = useState(false)
   const [score, setScore] = useState(0)
   const [rewardOpen, setRewardOpen] = useState(false)
+  const [restartConfirmOpen, setRestartConfirmOpen] = useState(false)
   const [rewardLoading, setRewardLoading] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const cabinetRef = useRef<HTMLDivElement>(null)
   const selectedGame = useMemo(() => games.find((game) => game.id === selectedId) ?? games[0], [selectedId])
+  const sessionPolicy = useMemo(
+    () => new GameSessionPolicy(selectedGame.scorePolicy, `${selectedId}:${sessionKey}`),
+    [selectedGame, selectedId, sessionKey],
+  )
 
-  useEffect(() => savePlayer(player), [player])
+  useEffect(() => {
+    savePlayer(player)
+  }, [player])
 
   const requestRestart = useCallback(() => {
     if (player.lives <= 0) {
@@ -31,6 +40,11 @@ export default function App() {
   }, [player.lives])
 
   const handleEvent = useCallback((event: GameEvent) => {
+    const decision = sessionPolicy.accept(event)
+    if (!decision.accepted) {
+      reportGameDiagnostic(selectedId, event, decision.reason ?? 'rejected')
+      return
+    }
     if (event.type === 'score') setScore(event.score)
     if (event.type === 'completed') {
       setScore(event.score)
@@ -39,14 +53,18 @@ export default function App() {
         bestScores: { ...current.bestScores, [selectedId]: Math.max(current.bestScores[selectedId] ?? 0, event.score) },
       }))
     }
-    if (event.type === 'request-restart') requestRestart()
-  }, [requestRestart, selectedId])
+    if (event.type === 'request-restart') {
+      setPaused(true)
+      setRestartConfirmOpen(true)
+    }
+  }, [selectedId, sessionPolicy])
 
   const selectGame = (id: string) => {
     setSelectedId(id)
     setSessionKey((key) => key + 1)
     setScore(0)
     setPaused(false)
+    setRestartConfirmOpen(false)
     setMenuOpen(false)
   }
 
@@ -160,6 +178,21 @@ export default function App() {
       </main>
 
       <footer className="site-footer"><span>为她，也为每一个爱玩的人。</span><span>OPENARCADE · OPEN SOURCE MINI GAMES</span></footer>
+
+      {restartConfirmOpen && (
+        <div className="modal-backdrop" role="presentation">
+          <section className="reward-dialog" role="dialog" aria-modal="true" aria-labelledby="restart-title">
+            <div className="reward-icon"><RotateCcw size={30} /></div>
+            <span className="dialog-kicker">RESTART REQUEST</span>
+            <h2 id="restart-title">游戏请求重新开始</h2>
+            <p>只有你的确认才能消耗一次机会。游戏代码不能自行扣除生命值。</p>
+            <button className="reward-button" onClick={() => { setRestartConfirmOpen(false); setPaused(false); requestRestart() }}>
+              <RotateCcw size={18} />确认重开
+            </button>
+            <button className="game-icon-button" onClick={() => { setRestartConfirmOpen(false); setPaused(false) }}>继续当前游戏</button>
+          </section>
+        </div>
+      )}
 
       {rewardOpen && (
         <div className="modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget && !rewardLoading) setRewardOpen(false) }}>

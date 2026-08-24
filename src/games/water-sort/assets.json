@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/water-sort/water-sort.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "045a55bbb562a6fc54d71921eeebb1ca1930a996d2e02501f309f18946f9b7de"
+    }
+  ]
+}

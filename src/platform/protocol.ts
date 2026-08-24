@@ -1,24 +1,13 @@
-import { z } from 'zod'
-import type { GameEvent, HostCommand } from './types'
+import { PROTOCOL, type GameEvent, type HostCommand } from '../sdk/contracts'
+import { gameEnvelopeSchema } from '../sdk/schema'
 
-export const PROTOCOL = 'openarcade:v1' as const
+export { PROTOCOL }
 
-const gameEventSchema = z.discriminatedUnion('type', [
-  z.object({ type: z.literal('ready') }),
-  z.object({ type: z.literal('started') }),
-  z.object({ type: z.literal('score'), score: z.number().finite() }),
-  z.object({ type: z.literal('completed'), score: z.number().finite() }),
-  z.object({ type: z.literal('failed'), score: z.number().finite() }),
-  z.object({ type: z.literal('request-restart') }),
-])
-
-const envelopeSchema = z.object({ protocol: z.literal(PROTOCOL), source: z.literal('game'), event: gameEventSchema })
-
-export function parseGameMessage(value: unknown): GameEvent | null {
-  const parsed = envelopeSchema.safeParse(value)
-  return parsed.success ? parsed.data.event : null
+export function parseGameMessage(value: unknown, channel: string): GameEvent | null {
+  const parsed = gameEnvelopeSchema.safeParse(value)
+  return parsed.success && parsed.data.channel === channel ? parsed.data.event : null
 }
 
-export function hostMessage(command: HostCommand) {
-  return { protocol: PROTOCOL, source: 'host' as const, command }
+export function hostMessage(command: HostCommand, channel: string) {
+  return { protocol: PROTOCOL, source: 'host' as const, channel, command }
 }

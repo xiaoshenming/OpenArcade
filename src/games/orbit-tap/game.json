@@ -1,0 +1,22 @@
+{
+  "id": "orbit-tap",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "星点节拍",
+  "shortTitle": "节拍",
+  "description": "在星点亮起时击中它，二十秒内累积尽可能高的分数。",
+  "category": "arcade",
+  "accent": "#06a6a6",
+  "order": 2,
+  "status": "ready",
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "iframe",
+  "entry": "/games/orbit-tap/index.html",
+  "isolation": "opaque-origin",
+  "permissions": []
+}

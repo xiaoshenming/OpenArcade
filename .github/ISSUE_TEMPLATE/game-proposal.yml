@@ -1,0 +1,32 @@
+name: Game proposal
+description: Propose an original OpenArcade cartridge
+title: "[Game] "
+labels: [game-proposal]
+body:
+  - type: input
+    id: gameplay
+    attributes:
+      label: Gameplay
+      description: Describe the original rules and player loop.
+    validations:
+      required: true
+  - type: dropdown
+    id: runtime
+    attributes:
+      label: Runtime
+      options: [opaque-origin iframe, trusted-module request, Godot/WASM review]
+    validations:
+      required: true
+  - type: textarea
+    id: assets
+    attributes:
+      label: Asset provenance
+      description: List authors, sources, and SPDX licenses.
+    validations:
+      required: true
+  - type: input
+    id: budget
+    attributes:
+      label: Estimated compressed size
+    validations:
+      required: true

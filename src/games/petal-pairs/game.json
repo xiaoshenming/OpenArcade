@@ -1,0 +1,20 @@
+{
+  "id": "petal-pairs",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "花笺成双",
+  "shortTitle": "成双",
+  "description": "翻开花笺，记住图案，让散落的心意重新成双。",
+  "category": "cozy",
+  "accent": "#ffb000",
+  "order": 3,
+  "status": "soon",
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

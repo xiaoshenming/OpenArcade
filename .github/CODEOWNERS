@@ -1,0 +1,6 @@
+* @xiaoshenming
+/src/sdk/ @xiaoshenming
+/src/platform/ @xiaoshenming
+/src/games/**/game.json @xiaoshenming
+/public/games/ @xiaoshenming
+/vercel.json @xiaoshenming
