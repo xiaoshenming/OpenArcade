@@ -1,7 +1,7 @@
 {
   "id": "petal-pairs",
   "sdkVersion": 1,
-  "gameVersion": "1.0.0",
+  "gameVersion": "1.1.0",
   "owner": "@xiaoshenming",
   "license": "MIT",
   "title": "花笺成双",
@@ -10,7 +10,8 @@
   "category": "cozy",
   "accent": "#ffb000",
   "order": 3,
-  "status": "soon",
+  "status": "ready",
+  "levelCount": 40,
   "scorePolicy": {
     "max": 5000,
     "eventsPerSecond": 20

@@ -12,7 +12,7 @@ OpenArcade 协议使用整数主版本，当前为 `openarcade:v1`。描述文�
 
 ## 生命周期
 
-标准顺序为：`connect → ready → started → score* → completed|failed`。`request-restart` 每个会话最多接受一次。iframe 必须在 10 秒内发送 `ready`，重开后旧 MessagePort 和 channel 立即失效。
+单关游戏的标准顺序为：`connect → ready → started → score* → completed|failed`。声明可选 `levelCount` 的渐进游戏使用 `connect → ready → load-level → started → score* → completed|failed`；完成事件不携带关卡编号，宿主只按会话中不可变的当前关卡推进。`request-restart` 每个会话最多接受一次。iframe 必须在 10 秒内发送 `ready`，重开后旧 MessagePort 和 channel 立即失效。
 
 ## 发布流程
 

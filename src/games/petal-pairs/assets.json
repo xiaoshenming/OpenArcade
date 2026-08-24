@@ -1,3 +1,18 @@
 {
-  "assets": []
+  "assets": [
+    {
+      "path": "src/games/petal-pairs/petal-pairs.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "d5fd18aeacb19bfeb8f8435a25b70022870982576d6b1cf4721d581128af3306"
+    },
+    {
+      "path": "public/images/games/petal-pairs.jpg",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "generated from original gameplay",
+      "sha256": "fc926f466ed9f31bf7d00dfa00dcd2ec3cdbeff8e00389eb93c8aaf2c2ee96df"
+    }
+  ]
 }

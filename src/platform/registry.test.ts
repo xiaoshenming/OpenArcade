@@ -9,6 +9,6 @@ describe('automatic game discovery', () => {
   it('connects only existing module entrypoints', () => {
     expect(getGameModule('water-sort')).toBeTypeOf('function')
     expect(getGameModule('orbit-tap')).toBeUndefined()
-    expect(getGameModule('petal-pairs')).toBeUndefined()
+    expect(getGameModule('petal-pairs')).toBeTypeOf('function')
   })
 })

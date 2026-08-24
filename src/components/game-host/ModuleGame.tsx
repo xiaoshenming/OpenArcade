@@ -16,10 +16,11 @@ interface Props {
   sessionKey: number
   paused: boolean
   muted: boolean
+  level: number
   onEvent: (event: GameEvent) => void
 }
 
-export function ModuleGame({ game, sessionKey, paused, muted, onEvent }: Props) {
+export function ModuleGame({ game, sessionKey, paused, muted, level, onEvent }: Props) {
   const Module = modules.get(game.id)
   if (!Module) return <ErrorState message={`找不到模块：${game.id}`} onRetry={() => window.location.reload()} />
 
@@ -29,7 +30,7 @@ export function ModuleGame({ game, sessionKey, paused, muted, onEvent }: Props) 
       <Suspense fallback={<LoadingState />}>
         {/* Registry components are created once at module initialization. */}
         {/* eslint-disable-next-line react-hooks/static-components */}
-        <Module key={resetKey} sessionKey={sessionKey} paused={paused} muted={muted} emit={onEvent} />
+        <Module key={resetKey} sessionKey={sessionKey} paused={paused} muted={muted} level={level} emit={onEvent} />
       </Suspense>
     </GameErrorBoundary>
   )

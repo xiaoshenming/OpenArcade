@@ -6,14 +6,15 @@ const MAX_LOCAL_SCORE = 1_000_000_000
 export interface PlayerState {
   lives: number
   bestScores: Record<string, number>
+  unlockedLevels: Record<string, number>
 }
 
-const fallback: PlayerState = { lives: DEFAULT_LIVES, bestScores: {} }
+const fallback: PlayerState = { lives: DEFAULT_LIVES, bestScores: {}, unlockedLevels: {} }
 
-function safeScores(value: unknown) {
+function safeRecord(value: unknown, max: number) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return {}
   return Object.fromEntries(Object.entries(value).filter(([, score]) => (
-    typeof score === 'number' && Number.isInteger(score) && score >= 0 && score <= MAX_LOCAL_SCORE
+    typeof score === 'number' && Number.isInteger(score) && score >= 0 && score <= max
   )))
 }
 
@@ -23,7 +24,8 @@ export function loadPlayer(): PlayerState {
     const lives = typeof value.lives === 'number' && Number.isFinite(value.lives) ? value.lives : DEFAULT_LIVES
     return {
       lives: Math.min(MAX_LIVES, Math.max(0, Math.floor(lives))),
-      bestScores: safeScores(value.bestScores),
+      bestScores: safeRecord(value.bestScores, MAX_LOCAL_SCORE),
+      unlockedLevels: safeRecord(value.unlockedLevels, 500),
     }
   } catch {
     return { ...fallback }

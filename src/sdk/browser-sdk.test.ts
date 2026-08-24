@@ -8,7 +8,7 @@ interface BrowserSdk {
 }
 
 declare global {
-  var OpenArcade: { createSdk: () => BrowserSdk } | undefined
+  var OpenArcade: { createSdk: (options?: { onCommand?: (command: unknown) => void }) => BrowserSdk } | undefined
 }
 
 afterEach(() => {
@@ -45,6 +45,23 @@ describe('browser SDK conformance', () => {
       { protocol: 'openarcade:v1', source: 'game', channel, event: { type: 'ready' } },
       { protocol: 'openarcade:v1', source: 'game', channel, event: { type: 'started' } },
     ])
+    sdk.destroy()
+  })
+
+  it('forwards additive load-level commands without changing completion events', () => {
+    const channel = '0123456789abcdef'
+    history.replaceState(null, '', `/#oa-channel=${channel}`)
+    window.eval(readFileSync('public/sdk/openarcade-v1.js', 'utf8'))
+    const commands: unknown[] = []
+    const sdk = globalThis.OpenArcade!.createSdk({ onCommand: (command) => commands.push(command) })
+    const port = { postMessage: () => undefined, start: () => undefined, close: () => undefined, onmessage: null as ((message: MessageEvent) => void) | null }
+    window.dispatchEvent(new MessageEvent('message', {
+      source: window,
+      data: { protocol: 'openarcade:v1', source: 'host', channel, type: 'connect' },
+      ports: [port as unknown as MessagePort],
+    }))
+    port.onmessage?.({ data: { protocol: 'openarcade:v1', source: 'host', channel, command: { type: 'load-level', level: 7 } } } as MessageEvent)
+    expect(commands).toEqual([{ type: 'load-level', level: 7 }])
     sdk.destroy()
   })
 })

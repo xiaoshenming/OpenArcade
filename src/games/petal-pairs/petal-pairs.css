@@ -1,0 +1,14 @@
+.pairs-game { position: relative; display: grid; grid-template-rows: auto 1fr auto; min-height: 500px; padding: 22px; overflow: hidden; background: #fff7f9; }
+.pairs-readout { display: flex; align-items: center; justify-content: space-between; color: #7b6a72; font-size: 11px; }
+.pairs-readout strong { color: #30272b; font-size: 12px; font-variant-numeric: tabular-nums; }
+.pairs-board { --pair-columns: 4; display: grid; grid-template-columns: repeat(var(--pair-columns), minmax(0, 74px)); align-content: center; justify-content: center; gap: clamp(7px,1.5vw,12px); padding: 18px 0; }
+.pair-card { display: grid; place-items: center; aspect-ratio: .78; min-width: 0; padding: 0; border: 1px solid #e3ccd4; border-radius: 8px; color: transparent; background: #ef7890; box-shadow: 0 7px 16px rgba(112,54,73,.12); cursor: pointer; transform-style: preserve-3d; transition: transform .2s ease, background .2s ease; }
+.pair-card::after { content: 'OA'; color: rgba(255,255,255,.8); font-size: 11px; font-weight: 800; }
+.pair-card span { display: none; font-size: clamp(20px,4vw,34px); }
+.pair-card.is-revealed { color: #30272b; background: white; transform: rotateY(180deg); }
+.pair-card.is-revealed::after { display: none; }
+.pair-card.is-revealed span { display: block; transform: rotateY(180deg); }
+.pair-card.is-matched { border-color: #7bcab6; background: #e9f8f3; box-shadow: none; }
+.pairs-restart { justify-self: center; display: inline-flex; align-items: center; gap: 7px; height: 38px; padding: 0 14px; border: 1px solid #e3ccd4; border-radius: 8px; color: #493940; background: white; font-weight: 700; cursor: pointer; }
+.pairs-preview { position: absolute; right: 0; bottom: 72px; left: 0; text-align: center; color: #b24562; font-size: 11px; font-weight: 800; pointer-events: none; }
+@media (max-width:640px) { .pairs-game { min-height:420px; padding:14px; } .pairs-board { grid-template-columns:repeat(var(--pair-columns),minmax(0,54px)); gap:6px; padding:12px 0; } .pair-card span { font-size:21px; } }

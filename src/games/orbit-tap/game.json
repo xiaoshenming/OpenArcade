@@ -1,16 +1,17 @@
 {
   "id": "orbit-tap",
   "sdkVersion": 1,
-  "gameVersion": "1.0.0",
+  "gameVersion": "1.1.0",
   "owner": "@xiaoshenming",
   "license": "MIT",
   "title": "星点节拍",
   "shortTitle": "节拍",
-  "description": "在星点亮起时击中它，二十秒内累积尽可能高的分数。",
+  "description": "追上不断变化的星点节拍，在三十关里挑战更快、更小的目标。",
   "category": "arcade",
   "accent": "#06a6a6",
   "order": 2,
   "status": "ready",
+  "levelCount": 30,
   "scorePolicy": {
     "max": 10000,
     "eventsPerSecond": 30

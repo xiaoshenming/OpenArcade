@@ -11,6 +11,7 @@
   "accent": "#ef476f",
   "order": 1,
   "status": "ready",
+  "levelCount": 60,
   "scorePolicy": {
     "max": 1000,
     "eventsPerSecond": 20

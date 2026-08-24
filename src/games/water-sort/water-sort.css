@@ -10,7 +10,7 @@
 }
 .game-readout { display: flex; justify-content: space-between; align-items: center; color: #687585; font-size: 11px; font-weight: 650; }
 .game-readout strong { color: #252b35; font-size: 13px; font-variant-numeric: tabular-nums; }
-.tube-board { display: flex; align-items: center; justify-content: center; gap: clamp(10px, 3vw, 30px); min-height: 340px; padding: 34px 6px 18px; }
+.tube-board { display: flex; flex-wrap: wrap; align-content: center; align-items: center; justify-content: center; gap: clamp(8px, 2vw, 22px); width: min(100%, 780px); min-height: 340px; margin: 0 auto; padding: 28px 6px 14px; }
 .tube { position: relative; width: clamp(44px, 8vw, 62px); height: 190px; border: 0; padding: 0; background: transparent; cursor: pointer; transition: transform .2s ease; }
 .tube:hover { transform: translateY(-5px); }
 .tube.is-selected { transform: translateY(-17px) rotate(2deg); }
@@ -26,4 +26,4 @@
 .win-stamp span { color: #ef5f78; font-size: 11px; font-weight: 800; }
 .win-stamp strong { margin-top: 8px; font-size: clamp(32px, 7vw, 54px); }
 @keyframes stamp-in { from { opacity: 0; transform: scale(1.05); } }
-@media (max-width: 640px) { .water-game { min-height: 420px; padding: 17px; } .tube-board { min-height: 285px; gap: 8px; padding-top: 28px; } .tube { width: 42px; height: 165px; } }
+@media (max-width: 640px) { .water-game { min-height: 420px; padding: 15px; } .tube-board { width: min(100%, 310px); min-height: 300px; gap: 7px; padding: 12px 4px 8px; } .tube { width: 36px; height: 135px; } }

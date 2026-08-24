@@ -22,6 +22,7 @@
   "accent": "#12aabb",
   "order": 10,
   "status": "ready",
+  "levelCount": 30,
   "scorePolicy": { "max": 10000, "eventsPerSecond": 30 },
   "loader": "iframe",
   "entry": "/games/my-game/index.html",
@@ -60,7 +61,7 @@
 - `score`、`completed`、`failed`
 - `request-restart`
 
-组件必须处理 `paused`、`muted` 和重新挂载。它与宿主共享 DOM 和主线程，不是安全沙箱。
+组件必须处理 `paused`、`muted` 和重新挂载。渐进游戏通过可选的 `level` prop 读取宿主锁定的当前关卡；完成事件只报告分数，不能报告或解锁关卡。它与宿主共享 DOM 和主线程，不是安全沙箱。
 
 ## opaque iframe
 
@@ -75,14 +76,14 @@
 const sdk = OpenArcade.createSdk({ onCommand(command) {
   if (command.type === 'pause') pauseGame()
   if (command.type === 'restart') restartGame()
+  if (command.type === 'load-level') { loadLevel(command.level); sdk.started() }
 } })
 sdk.ready()
-sdk.started()
 sdk.score(100)
 sdk.complete(800)
 ```
 
-SDK 会排队早期事件，在随机 channel 握手成功后转移专属 MessagePort。不要访问 `parent.document`，不要自己实现生命值、广告或支付。
+`levelCount` 是可选字段，省略时兼容为单关游戏。渐进 iframe 在 `ready` 后等待宿主发送一次 `load-level`，暂停和静音不能重载关卡。宿主拥有选关、解锁与“下一关”；游戏不能请求切关。SDK 会排队早期事件，在随机 channel 握手成功后转移专属 MessagePort。不要访问 `parent.document`，不要自己实现生命值、广告或支付。
 
 ## Godot
 

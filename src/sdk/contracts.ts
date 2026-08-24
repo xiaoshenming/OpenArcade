@@ -14,6 +14,7 @@ export type HostCommand =
   | { type: 'pause' }
   | { type: 'resume' }
   | { type: 'restart' }
+  | { type: 'load-level'; level: number }
   | { type: 'mute'; muted: boolean }
 
 export type GameCategory = 'logic' | 'arcade' | 'cozy'
@@ -33,6 +34,7 @@ export interface ManifestBase {
   owner: string
   license: string
   scorePolicy: { max: number; eventsPerSecond: number }
+  levelCount?: number
 }
 
 export interface ModuleManifest extends ManifestBase {
@@ -53,5 +55,6 @@ export interface GameModuleProps {
   sessionKey: number
   paused: boolean
   muted: boolean
+  level?: number
   emit: (event: GameEvent) => void
 }

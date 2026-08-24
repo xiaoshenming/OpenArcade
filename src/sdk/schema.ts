@@ -18,6 +18,7 @@ const commonManifest = z.object({
     max: z.number().int().positive().max(1_000_000_000),
     eventsPerSecond: z.number().int().min(1).max(120),
   }),
+  levelCount: z.number().int().min(1).max(500).optional(),
 })
 
 const manifestByLoader = z.discriminatedUnion('loader', [

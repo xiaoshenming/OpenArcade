@@ -8,13 +8,14 @@ interface GameHostProps {
   sessionKey: number
   paused: boolean
   muted: boolean
+  level: number
   onEvent: (event: GameEvent) => void
 }
 
 export function GameHost(props: GameHostProps) {
   if (props.game.status === 'soon') return <ComingSoon />
   if (props.game.loader === 'iframe') {
-    return <IframeGame key={`${props.game.id}:${props.sessionKey}`} game={props.game} paused={props.paused} muted={props.muted} onEvent={props.onEvent} />
+    return <IframeGame key={`${props.game.id}:${props.sessionKey}`} game={props.game} paused={props.paused} muted={props.muted} level={props.level} onEvent={props.onEvent} />
   }
   return <ModuleGame {...props} />
 }

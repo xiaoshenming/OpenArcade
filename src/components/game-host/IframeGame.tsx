@@ -11,10 +11,11 @@ interface Props {
   game: IframeManifest
   paused: boolean
   muted: boolean
+  level: number
   onEvent: (event: GameEvent) => void
 }
 
-export function IframeGame({ game, paused, muted, onEvent }: Props) {
+export function IframeGame({ game, paused, muted, level, onEvent }: Props) {
   const frameRef = useRef<HTMLIFrameElement>(null)
   const portRef = useRef<MessagePort | null>(null)
   const timeoutRef = useRef<number | null>(null)
@@ -60,6 +61,10 @@ export function IframeGame({ game, paused, muted, onEvent }: Props) {
     send({ type: paused ? 'pause' : 'resume' })
     send({ type: 'mute', muted })
   }, [muted, paused, send, status])
+
+  useEffect(() => {
+    if (status === 'ready' && game.levelCount !== undefined) send({ type: 'load-level', level })
+  }, [game.levelCount, level, send, status])
 
   const retry = () => {
     setStatus('loading')
