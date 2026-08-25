@@ -1,5 +1,5 @@
 export interface WaterLevel { readonly tubes: readonly (readonly number[])[]; readonly par: number; readonly solution: string }
-export const WATER_LEVELS: readonly WaterLevel[] = [
+const WATER_CATALOG: readonly WaterLevel[] = [
   { par: 8, solution: '0313231201202302', tubes: [[1,2,2,0],[2,2,1,0],[1,0,1,0],[],[]] },
   { par: 8, solution: '1323121301032012', tubes: [[1,0,2,2],[2,0,1,0],[2,1,1,0],[],[]] },
   { par: 7, solution: '03042402131213', tubes: [[2,0,0,1],[1,1,2,1],[2,2,0,0],[],[]] },
@@ -61,6 +61,8 @@ export const WATER_LEVELS: readonly WaterLevel[] = [
   { par: 17, solution: '0607373013102346432427541201525625', tubes: [[2,5,0,0],[2,4,2,1],[4,5,3,1],[1,2,5,5],[3,3,1,0],[4,0,4,3],[],[]] },
   { par: 19, solution: '06273237235052151245465456153537010201', tubes: [[0,2,0,5],[0,3,2,4],[2,3,1,1],[1,3,1,3],[4,5,5,4],[5,4,2,0],[],[]] },
 ]
+
+export const WATER_LEVELS = WATER_CATALOG
 
 export function createWaterBoard(level: number): number[][] {
   const selected = WATER_LEVELS[level - 1] ?? WATER_LEVELS[0]

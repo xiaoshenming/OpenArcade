@@ -5,14 +5,14 @@
       "author": "OpenArcade contributors",
       "license": "MIT",
       "source": "original",
-      "sha256": "d5fd18aeacb19bfeb8f8435a25b70022870982576d6b1cf4721d581128af3306"
+      "sha256": "3b9047b1616b978926e6a954137965acdef1bcc2d1c7f15ad95bcd2e3cdc0c2a"
     },
     {
       "path": "public/images/games/petal-pairs.jpg",
       "author": "OpenArcade contributors",
       "license": "MIT",
       "source": "generated from original gameplay",
-      "sha256": "fc926f466ed9f31bf7d00dfa00dcd2ec3cdbeff8e00389eb93c8aaf2c2ee96df"
+      "sha256": "00a17a28acb43e35505205b7553334d7b4309c8d7265e98248fb4623caef54a9"
     }
   ]
 }

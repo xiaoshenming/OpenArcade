@@ -5,24 +5,26 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>星点节拍</title>
   <style>
-    *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;font-family:Inter,system-ui,sans-serif;background:#edf1fa;color:#242a36}
-    body{display:grid;place-items:center}.stage{position:relative;width:100%;height:100%;min-height:360px;overflow:hidden;background:#edf1fa}
-    .grid{position:absolute;inset:0;opacity:.4;background-image:linear-gradient(#d9deeb 1px,transparent 1px),linear-gradient(90deg,#d9deeb 1px,transparent 1px);background-size:48px 48px}
-    .hud{position:absolute;z-index:3;top:16px;left:18px;right:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:7px;color:#697284;font-size:9px;font-weight:750}.hud span{padding:7px 8px;border:1px solid #d8dde8;border-radius:8px;text-align:center;background:rgba(255,255,255,.9)}.hud strong{display:block;margin-top:2px;font-size:15px;color:#242a36;font-variant-numeric:tabular-nums}
-    .target{position:absolute;z-index:2;width:72px;height:72px;padding:0;border:3px solid #fff;border-radius:50%;background:#ef5f78;box-shadow:0 0 0 8px rgba(239,95,120,.16),0 16px 34px rgba(144,52,75,.24);cursor:pointer;animation:pulse .75s infinite alternate}.target[hidden]{display:none}.target:after{content:'';position:absolute;inset:32%;border-radius:50%;background:#fff}
-    .message{position:absolute;inset:0;z-index:4;display:grid;place-items:center;text-align:center;background:rgba(237,241,250,.9);backdrop-filter:blur(8px)}.message[hidden]{display:none}.message strong{display:block;font-size:34px}.message span{display:block;margin-top:9px;color:#697284}
-    @keyframes pulse{to{transform:scale(.88);box-shadow:0 0 0 14px rgba(239,95,120,.08),0 20px 40px rgba(144,52,75,.28)}}
+    *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;font-family:Inter,system-ui,sans-serif;background:#edf1fa;color:#242a36}body{display:grid;place-items:center}
+    .stage{position:relative;width:100%;height:100%;min-height:360px;overflow:hidden;background:#edf1fa;transition:background .3s}.stage[data-mode=hop]{background:#f7f1e6}.stage[data-mode=chase]{background:#e9f6f3}.stage[data-mode=avoid]{background:#f3eef7}.stage[data-mode=combo]{background:#fff0f3}.stage[data-mode=hybrid]{background:#f0f1f8}
+    .grid{position:absolute;inset:0;opacity:.38;background-image:linear-gradient(#d9deeb 1px,transparent 1px),linear-gradient(90deg,#d9deeb 1px,transparent 1px);background-size:48px 48px}
+    .hud{position:absolute;z-index:3;top:14px;left:18px;right:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:7px;color:#697284;font-size:9px;font-weight:750}.hud span{padding:6px 8px;border:1px solid #d8dde8;border-radius:8px;text-align:center;background:rgba(255,255,255,.9)}.hud strong{display:block;margin-top:2px;font-size:15px;color:#242a36;font-variant-numeric:tabular-nums}
+    .rule{position:absolute;z-index:3;top:69px;left:18px;right:18px;display:flex;align-items:center;gap:9px;min-height:35px;padding:7px 10px;border-left:3px solid #ef5f78;background:rgba(255,255,255,.82)}.rule strong{font-size:11px}.rule span{flex:1;color:#697284;font-size:10px}.rule em{padding:4px 6px;border-radius:5px;color:#a33652;background:white;font-size:9px;font-style:normal;font-weight:800}
+    .target,.decoy{position:absolute;z-index:2;min-width:44px;min-height:44px;padding:0;cursor:pointer}.target{border:3px solid #fff;border-radius:50%;background:#ef5f78;box-shadow:0 0 0 8px rgba(239,95,120,.16),0 16px 34px rgba(144,52,75,.24);animation:pulse .75s infinite alternate}.target:after{content:'★';position:absolute;inset:0;display:grid;place-items:center;color:white;font-size:22px}.stage[data-drift=true] .target,.stage[data-drift=true] .decoy{transition:left .7s ease,top .7s ease}.stage[data-mode=combo] .target{background:#f04f77;box-shadow:0 0 0 11px rgba(240,79,119,.18),0 16px 34px rgba(144,52,75,.24)}
+    .decoy{width:48px;height:48px;border:3px solid #798294;border-radius:10px;background:rgba(255,255,255,.55);transform:rotate(45deg)}.decoy:after{content:'×';position:absolute;inset:0;display:grid;place-items:center;color:#798294;font-size:20px;transform:rotate(-45deg)}.target[hidden],.decoy[hidden]{display:none}
+    .message{position:absolute;inset:0;z-index:4;display:grid;place-items:center;text-align:center;background:rgba(237,241,250,.92);backdrop-filter:blur(8px)}.message[hidden]{display:none}.message strong{display:block;font-size:34px}.message span{display:block;margin-top:9px;color:#697284}.is-paused .target,.is-paused .decoy{animation-play-state:paused;transition:none!important}
+    @keyframes pulse{to{transform:scale(.88);box-shadow:0 0 0 14px rgba(239,95,120,.08),0 20px 40px rgba(144,52,75,.28)}}@media(prefers-reduced-motion:reduce){.target,.decoy{animation:none!important;transition:none!important}}
   </style>
 </head>
 <body>
   <main class="stage" id="stage">
     <div class="grid"></div>
-    <div class="hud"><span>LEVEL<strong id="level">01</strong></span><span>TIME<strong id="time">20</strong></span><span>HITS<strong id="quota">0/5</strong></span><span>SCORE<strong id="score">0000</strong></span></div>
+    <div class="hud"><span>LEVEL<strong id="level">01</strong></span><span>TIME<strong id="time">18</strong></span><span>HITS<strong id="quota">0/5</strong></span><span>SCORE<strong id="score">0000</strong></span></div>
+    <div class="rule"><strong id="mode">定点反应</strong><span id="rule-copy">命中后才会移动</span><em id="rule-state">命中后移动</em></div>
     <button class="target" id="target" aria-label="击中星点" hidden></button>
+    <button class="decoy" aria-label="避开干扰星点" hidden></button><button class="decoy" aria-label="避开干扰星点" hidden></button><button class="decoy" aria-label="避开干扰星点" hidden></button>
     <div class="message" id="message" hidden><div><strong>本轮结束</strong><span>点击主站重试按钮继续</span></div></div>
   </main>
-  <script src="/sdk/openarcade-v1.js"></script>
-  <script src="/games/orbit-tap/levels.js"></script>
-  <script src="/games/orbit-tap/app.js"></script>
+  <script src="/sdk/openarcade-v1.js"></script><script src="/games/orbit-tap/levels.js"></script><script src="/games/orbit-tap/app.js"></script>
 </body>
 </html>

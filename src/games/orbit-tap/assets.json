@@ -5,28 +5,28 @@
       "author": "OpenArcade contributors",
       "license": "MIT",
       "source": "original",
-      "sha256": "e78d51ef0e996f32886f145d0e954e2222850a5f99d48f3c0165c6204203eafa"
+      "sha256": "fe00fc8df17a94984161eaf39cf85f87cf22f89a6514dff8b1707aa89f783106"
     },
     {
       "path": "public/games/orbit-tap/app.js",
       "author": "OpenArcade contributors",
       "license": "MIT",
       "source": "original",
-      "sha256": "81bf7671252a4f66358110060c93e13e9dd65bd08cb0219cf780898510c85974"
+      "sha256": "c87926fcc043e0df228ed760a275e9776e698b88529c21a8ccab174dc4453b1b"
     },
     {
       "path": "public/games/orbit-tap/levels.js",
       "author": "OpenArcade contributors",
       "license": "MIT",
       "source": "original",
-      "sha256": "a6ea9f753a78845dd07a1d542c9ddb602abc4954500d978f2498f521b40cc27b"
+      "sha256": "2d0a34b603dcafd9f00046fba36fa1bec8cf11bb80668b7cbcc6565add5b0e64"
     },
     {
       "path": "public/images/games/orbit-tap.jpg",
       "author": "OpenArcade contributors",
       "license": "MIT",
       "source": "generated from original gameplay",
-      "sha256": "d684eb912e5cb8b94a332cada08e3da303f5aed68d1406d35b87f5837c0a322a"
+      "sha256": "a69df14ad20170322dba334282e4d21b311b97e598494960b8b893edc095c558"
     }
   ]
 }
