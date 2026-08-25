@@ -23,6 +23,8 @@
   "order": 10,
   "status": "ready",
   "levelCount": 30,
+  "instructions": ["规则说明一。", "规则说明二。"],
+  "highlights": ["入门章节", "终局试炼"],
   "scorePolicy": { "max": 10000, "eventsPerSecond": 30 },
   "loader": "iframe",
   "entry": "/games/my-game/index.html",
@@ -31,7 +33,7 @@
 }
 ```
 
-描述文件会校验目录名、重复 ID、SDK 版本、颜色、文本长度、权限和分数策略。
+描述文件会校验目录名、重复 ID、SDK 版本、颜色、文本长度、权限和分数策略。可选的 `instructions`（2–6 条）和 `highlights`（1–8 条）用于宿主游戏大厅；旧卡带省略时使用兼容文案。
 
 ## 登记素材
 

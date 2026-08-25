@@ -35,6 +35,8 @@ export interface ManifestBase {
   license: string
   scorePolicy: { max: number; eventsPerSecond: number }
   levelCount?: number
+  instructions?: string[]
+  highlights?: string[]
 }
 
 export interface ModuleManifest extends ManifestBase {

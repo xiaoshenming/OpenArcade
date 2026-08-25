@@ -1,7 +1,7 @@
 {
   "id": "water-sort",
   "sdkVersion": 1,
-  "gameVersion": "1.1.0",
+  "gameVersion": "1.2.0",
   "owner": "@xiaoshenming",
   "license": "MIT",
   "title": "琉璃分色",
@@ -12,6 +12,13 @@
   "order": 1,
   "status": "ready",
   "levelCount": 60,
+  "instructions": [
+    "先选择有液体的试管，再选择可以承接它的目标试管。",
+    "只能倒入空管，或倒在顶部颜色相同且仍有空间的液体上。",
+    "让每支非空试管最终装满同一种颜色即可完成关卡。",
+    "留意每关的迷雾、封印、限步和撤销规则，它们会逐章组合。"
+  ],
+  "highlights": ["流向教学", "雾色记忆", "封印调度", "精确限步", "终局矩阵"],
   "scorePolicy": {
     "max": 1000,
     "eventsPerSecond": 20

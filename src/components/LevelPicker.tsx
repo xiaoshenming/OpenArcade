@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
 import { LockKeyhole, X } from 'lucide-react'
+import { ModalDialog } from './ModalDialog'
 
 interface Props {
   current: number
@@ -11,18 +11,11 @@ interface Props {
 }
 
 export function LevelPicker({ current, unlocked, total, title, onSelect, onClose }: Props) {
-  useEffect(() => {
-    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === 'Escape') onClose() }
-    document.addEventListener('keydown', closeOnEscape)
-    return () => document.removeEventListener('keydown', closeOnEscape)
-  }, [onClose])
-
   return (
-    <div className="modal-backdrop level-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose() }}>
-      <section className="level-dialog" role="dialog" aria-modal="true" aria-labelledby="level-picker-title">
+    <ModalDialog className="level-dialog" labelledBy="level-picker-title" onClose={onClose}>
         <header>
           <div><span>选择关卡</span><h2 id="level-picker-title">{title}</h2></div>
-          <button className="dialog-close" onClick={onClose} autoFocus aria-label="关闭关卡选择"><X size={20} /></button>
+          <button className="dialog-close" onClick={onClose} aria-label="关闭关卡选择"><X size={20} /></button>
         </header>
         <div className="level-grid">
           {Array.from({ length: total }, (_, index) => index + 1).map((level) => {
@@ -37,7 +30,6 @@ export function LevelPicker({ current, unlocked, total, title, onSelect, onClose
           })}
         </div>
         <footer><span>已解锁 {unlocked} / {total}</span><progress value={unlocked} max={total} /></footer>
-      </section>
-    </div>
+    </ModalDialog>
   )
 }

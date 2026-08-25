@@ -6,6 +6,10 @@ async function openGameLibraryOnMobile(page: Page) {
   if (await menu.isVisible()) await menu.click()
 }
 
+async function startSelectedGame(page: Page) {
+  await page.getByRole('button', { name: /开始第 \d+ 关/ }).click()
+}
+
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
     if (sessionStorage.getItem('openarcade:e2e-initialized')) return
@@ -15,13 +19,51 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/')
 })
 
+test('game cards open a rules lobby before any runtime starts', async ({ page }) => {
+  await page.evaluate(() => localStorage.setItem('openarcade:player:v1', JSON.stringify({ lives: 5, bestScores: {}, unlockedLevels: { 'water-sort': 5 } })))
+  await page.reload()
+  await expect(page.getByRole('region', { name: '琉璃分色 游戏大厅' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: '玩法规则' })).toBeVisible()
+  await expect(page.getByText('封印调度', { exact: true })).toBeVisible()
+  await expect(page.locator('.water-game')).toHaveCount(0)
+  const chooseLevel = page.getByRole('button', { name: '选择关卡' })
+  await chooseLevel.click()
+  await expect(page.getByRole('dialog', { name: '琉璃分色' })).toBeVisible()
+  await expect(page.getByRole('button', { name: '关闭关卡选择' })).toBeFocused()
+  await page.keyboard.press('Escape')
+  await expect(chooseLevel).toBeFocused()
+  await chooseLevel.click()
+  await page.getByRole('button', { name: '进入关卡 3' }).click()
+  await expect(page.getByRole('button', { name: '开始第 3 关' })).toBeVisible()
+  await expect(page.locator('.water-game')).toHaveCount(0)
+
+  await page.getByRole('button', { name: /星点节拍/ }).click()
+  await expect(page.getByRole('region', { name: '星点节拍 游戏大厅' })).toBeVisible()
+  await expect(page.locator('iframe[title="星点节拍"]')).toHaveCount(0)
+  await startSelectedGame(page)
+  await expect(page.locator('iframe[title="星点节拍"]')).toBeVisible()
+  const game = page.frameLocator('iframe[title="星点节拍"]')
+  await page.getByRole('button', { name: '返回游戏大厅' }).click()
+  await expect(page.locator('iframe[title="星点节拍"]')).toBeHidden()
+  await expect(page.getByRole('button', { name: '继续第 1 关' })).toBeFocused()
+  const timeAtLobby = await game.locator('#time').textContent()
+  await page.waitForTimeout(1100)
+  expect(await game.locator('#time').textContent()).toBe(timeAtLobby)
+  await page.getByRole('button', { name: '继续第 1 关' }).click()
+  await expect(page.locator('iframe[title="星点节拍"]')).toBeVisible()
+  await expect.poll(() => game.locator('#time').textContent(), { timeout: 1800 }).not.toBe(timeAtLobby)
+})
+
 test('trusted module cannot spend a life without user confirmation', async ({ page }) => {
   await expect(page.getByRole('heading', { name: '琉璃分色' })).toBeVisible()
+  await startSelectedGame(page)
   const firstMove = WATER_LEVELS[0].solution.slice(0, 2)
   await page.getByRole('button', { name: new RegExp('^试管 ' + (Number(firstMove[0]) + 1) + '，') }).click()
   await page.getByRole('button', { name: new RegExp('^试管 ' + (Number(firstMove[1]) + 1) + '，') }).click()
   await expect(page.locator('.game-readout strong')).toContainText('01 步')
   await page.getByRole('button', { name: /琉璃分色/ }).click()
+  await expect(page.getByRole('button', { name: '继续第 1 关' })).toBeVisible()
+  await page.getByRole('button', { name: '继续第 1 关' }).click()
   await expect(page.locator('.game-readout strong')).toContainText('01 步')
   await page.getByRole('button', { name: '重开', exact: true }).click()
 
@@ -34,6 +76,8 @@ test('trusted module cannot spend a life without user confirmation', async ({ pa
 test('opaque iframe completes MessagePort handshake and ignores window spoofing', async ({ page }) => {
   await openGameLibraryOnMobile(page)
   await page.getByRole('button', { name: /星点节拍/ }).click()
+  await expect(page.locator('iframe[title="星点节拍"]')).toHaveCount(0)
+  await startSelectedGame(page)
   const iframe = page.locator('iframe[title="星点节拍"]')
   await expect(iframe).toHaveAttribute('sandbox', 'allow-scripts')
   await expect(iframe).not.toHaveAttribute('sandbox', /allow-same-origin/)
@@ -58,6 +102,7 @@ test('opaque iframe completes MessagePort handshake and ignores window spoofing'
 })
 
 test('solves a verified water level and unlocks the next without spending a life', async ({ page }) => {
+  await startSelectedGame(page)
   const solution = WATER_LEVELS[0].solution
   for (let offset = 0; offset < solution.length; offset += 2) {
     const from = Number(solution[offset]) + 1
@@ -74,13 +119,14 @@ test('solves a verified water level and unlocks the next without spending a life
   await expect(page.getByRole('button', { name: '当前关卡 2' })).toBeDisabled()
   await expect(page.getByRole('button', { name: '关卡 3，未解锁' })).toBeDisabled()
   await page.reload()
-  await expect(page.locator('.level-button')).toContainText('关卡 2 / 60')
+  await expect(page.getByRole('button', { name: '开始第 2 关' })).toBeVisible()
   await expect(page.locator('.life-counter strong')).toHaveText('5')
 })
 
 test('plays the deterministic Petal Pairs level to completion', async ({ page }) => {
   await page.getByRole('button', { name: /花笺成双/ }).click()
   await expect(page.getByRole('heading', { name: '花笺成双' })).toBeVisible()
+  await startSelectedGame(page)
   await page.locator('.pair-card').first().waitFor()
   await expect(page.locator('.pairs-preview')).toBeHidden({ timeout: 4_000 })
   const symbols = await page.locator('.pair-card span').allTextContents()
@@ -101,6 +147,7 @@ test('first five levels expose visibly different mechanics in every game', async
     lives: 5, bestScores: {}, unlockedLevels: { 'water-sort': 5, 'orbit-tap': 5, 'petal-pairs': 5 },
   })))
   await page.reload()
+  await startSelectedGame(page)
 
   const waterRules = [await page.locator('.water-rule span').textContent()]
   await expect(page.getByRole('button', { name: /禁用撤销/ })).toBeDisabled()
@@ -115,6 +162,7 @@ test('first five levels expose visibly different mechanics in every game', async
   expect(new Set(waterRules).size).toBe(5)
 
   await page.getByRole('button', { name: /花笺成双/ }).click()
+  await startSelectedGame(page)
   await page.locator('.pair-card').first().waitFor()
   const pairRules = [await page.locator('.pairs-rule span').textContent()]
   await expect(page.locator('.pairs-game')).toHaveClass(/mode-shifting/)
@@ -136,6 +184,7 @@ test('first five levels expose visibly different mechanics in every game', async
   expect(new Set(pairRules).size).toBe(5)
 
   await page.getByRole('button', { name: /星点节拍/ }).click()
+  await startSelectedGame(page)
   let game = page.frameLocator('iframe[title="星点节拍"]')
   await game.locator('#mode').waitFor()
   const orbitRules = [await game.locator('#mode').textContent()]
@@ -161,6 +210,7 @@ test('final chapters combine mechanics instead of repeating one rule', async ({ 
     lives: 5, bestScores: {}, unlockedLevels: { 'water-sort': 60, 'orbit-tap': 30, 'petal-pairs': 40 },
   })))
   await page.reload()
+  await startSelectedGame(page)
   await expect(page.locator('.water-rule')).toContainText('终局·万色归一')
   expect(await page.locator('.liquid-layer.is-hidden').count()).toBeGreaterThan(0)
   await expect(page.locator('.tube.is-locked')).toBeDisabled()
@@ -174,6 +224,7 @@ test('final chapters combine mechanics instead of repeating one rule', async ({ 
   await expect(page.locator('.tube.is-locked')).toHaveCount(0)
 
   await page.getByRole('button', { name: /花笺成双/ }).click()
+  await startSelectedGame(page)
   await page.locator('.pair-card').first().waitFor()
   await expect(page.locator('.pairs-game')).toHaveClass(/mode-gauntlet/)
   await expect(page.locator('.pairs-rule')).toContainText('目标')
@@ -192,6 +243,7 @@ test('final chapters combine mechanics instead of repeating one rule', async ({ 
   await expect(page.locator('.pairs-rule')).toContainText('失误 1/')
 
   await page.getByRole('button', { name: /星点节拍/ }).click()
+  await startSelectedGame(page)
   const game = page.frameLocator('iframe[title="星点节拍"]')
   await game.getByRole('button', { name: '击中星点' }).waitFor({ state: 'visible' })
   await expect(game.locator('#mode')).toHaveText('星域主宰')
@@ -223,5 +275,5 @@ test('final chapters combine mechanics instead of repeating one rule', async ({ 
 test('arcade shell has no horizontal overflow', async ({ page }) => {
   const dimensions = await page.evaluate(() => ({ width: innerWidth, scrollWidth: document.documentElement.scrollWidth }))
   expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.width)
-  await expect(page.locator('.cabinet')).toBeInViewport()
+  await expect(page.locator('.game-lobby')).toBeInViewport()
 })

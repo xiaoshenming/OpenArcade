@@ -33,6 +33,13 @@ describe('game manifest policy', () => {
     expect(gameManifestSchema.safeParse({ ...module, levelCount: 501 }).success).toBe(false)
   })
 
+  it('accepts bounded optional lobby rules without breaking legacy manifests', () => {
+    const game = { ...base, loader: 'module', isolation: 'trusted-module' }
+    expect(gameManifestSchema.safeParse({ ...game, instructions: ['Complete the current objective.', 'Restart requests need host approval.'], highlights: ['Opening', 'Finale'] }).success).toBe(true)
+    expect(gameManifestSchema.safeParse({ ...game, instructions: ['Only one rule.'] }).success).toBe(false)
+    expect(gameManifestSchema.safeParse({ ...game, highlights: Array.from({ length: 9 }, (_, index) => 'Chapter ' + index) }).success).toBe(false)
+  })
+
   it('rejects unsupported SDK versions and malformed identifiers', () => {
     const game = { ...base, loader: 'module', isolation: 'trusted-module' }
     expect(gameManifestSchema.safeParse({ ...game, sdkVersion: 2 }).success).toBe(false)

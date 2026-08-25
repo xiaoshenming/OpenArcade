@@ -1,7 +1,7 @@
 {
   "id": "petal-pairs",
   "sdkVersion": 1,
-  "gameVersion": "1.2.0",
+  "gameVersion": "1.3.0",
   "owner": "@xiaoshenming",
   "license": "MIT",
   "title": "花笺成双",
@@ -12,6 +12,13 @@
   "order": 3,
   "status": "ready",
   "levelCount": 40,
+  "instructions": [
+    "翻开两张花笺，图案相同即可完成一组配对。",
+    "闪记阶段先观察位置；隐藏后要依靠记忆找回相同图案。",
+    "指定花色关只能完成当前目标，其他组合会计为一次失误。",
+    "流动牌阵会在成功配对后移动余牌，高阶关会叠加失误预算。"
+  ],
+  "highlights": ["逐张闪记", "失误预算", "指定花色", "流动牌阵", "万花终局"],
   "scorePolicy": {
     "max": 5000,
     "eventsPerSecond": 20
