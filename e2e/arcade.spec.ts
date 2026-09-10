@@ -67,7 +67,7 @@ test('trusted module cannot spend a life without user confirmation', async ({ pa
   await expect(page.locator('.game-readout strong')).toContainText('01 步')
   await page.getByRole('button', { name: '重开', exact: true }).click()
 
-  await expect(page.getByRole('dialog', { name: '游戏请求重新开始' })).toBeVisible()
+  await expect(page.getByRole('dialog', { name: '重新开始本关' })).toBeVisible()
   await expect(page.locator('.life-counter strong')).toHaveText('5')
   await page.getByRole('button', { name: '确认重开' }).click()
   await expect(page.locator('.life-counter strong')).toHaveText('4')
@@ -142,10 +142,29 @@ test('plays the deterministic Petal Pairs level to completion', async ({ page })
   await expect(page.getByText('关卡 1 完成')).toBeVisible()
 })
 
+test('petal pairs mistakes raise the host failure overlay and retry spends one life', async ({ page }) => {
+  await page.evaluate(() => localStorage.setItem('openarcade:player:v1', JSON.stringify({ lives: 5, bestScores: {}, unlockedLevels: { 'petal-pairs': 3 } })))
+  await page.reload()
+  await page.getByRole('button', { name: /花笺成双/ }).click()
+  await page.getByRole('button', { name: '开始第 3 关' }).click()
+  await page.locator('.pair-card').first().waitFor()
+  await expect(page.locator('.pairs-preview')).toBeHidden({ timeout: 4_000 })
+  const symbols = await page.locator('.pair-card span').allTextContents()
+  const mismatch = symbols.findIndex((symbol, index) => index > 0 && symbol !== symbols[0])
+  for (let round = 1; round <= 2; round += 1) {
+    await page.locator('.pair-card').nth(0).click()
+    await page.locator('.pair-card').nth(mismatch).click()
+    await expect(page.locator('.pairs-rule')).toContainText(`失误 ${round}/2`)
+  }
+  await expect(page.getByText('挑战失败')).toBeVisible()
+  await expect(page.locator('.life-counter strong')).toHaveText('5')
+  await page.getByRole('button', { name: '再试一次' }).click()
+  await expect(page.locator('.life-counter strong')).toHaveText('4')
+  await expect(page.getByText('挑战失败')).toBeHidden()
+})
+
 test('first five levels expose visibly different mechanics in every game', async ({ page }) => {
-  await page.evaluate(() => localStorage.setItem('openarcade:player:v1', JSON.stringify({
-    lives: 5, bestScores: {}, unlockedLevels: { 'water-sort': 5, 'orbit-tap': 5, 'petal-pairs': 5 },
-  })))
+  await page.evaluate(() => localStorage.setItem('openarcade:player:v1', JSON.stringify({ lives: 5, bestScores: {}, unlockedLevels: { 'water-sort': 5, 'orbit-tap': 5, 'petal-pairs': 5 } })))
   await page.reload()
   await startSelectedGame(page)
 

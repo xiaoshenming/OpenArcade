@@ -16,7 +16,7 @@
     const combo = mode === 'combo' || mode === 'hybrid' && [9,10,15,19,20,23,25,28,29,30].includes(safe)
     return Object.freeze({
       level: safe, chapter: band + 1, mode, title, detail, duration: 18 + Math.min(7, band),
-      quota: 4 + Math.ceil(safe * .42), size: Math.max(44, 78 - Math.floor((safe - 1) / 3) * 3),
+      quota: 4 + Math.ceil(safe * .42), size: Math.max(52, 78 - Math.floor((safe - 1) / 3) * 3),
       lifetime: pace ? Math.max(720, 2350 - band * 190 - pace * 240) : 0,
       decoys, drift: Boolean(drift), combo, penalty: 1 + Math.floor(band / 2), seed: (safe * 2654435761) >>> 0,
     })

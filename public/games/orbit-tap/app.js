@@ -67,7 +67,7 @@ function placeAll() {
   decoys.forEach((decoy, index) => {
     const visible = index < config.decoys
     decoy.hidden = !visible
-    if (visible) placeElement(decoy, generators[index + 1], Math.max(44, config.size - 4), occupied)
+    if (visible) placeElement(decoy, generators[index + 1], Math.max(48, config.size - 4), occupied)
   })
 }
 

@@ -36,7 +36,7 @@ describe('orbit tap level system', () => {
     const levels = Array.from({ length: 30 }, (_, index) => api.getLevel(index + 1))
     expect(levels[0]).toMatchObject({ level: 1, quota: 5, size: 78, lifetime: 0 })
     expect(levels.at(-1)?.level).toBe(30)
-    expect(levels.every((level) => level.size >= 44 && level.quota <= level.duration)).toBe(true)
+    expect(levels.every((level) => level.size >= 52 && level.quota <= level.duration)).toBe(true)
     expect(new Set(levels.map((level) => JSON.stringify(level))).size).toBe(30)
     expect(api.getLevel(999)).toEqual(levels.at(-1))
     expect(api.getLevel(Number.NaN)).toEqual(levels[0])

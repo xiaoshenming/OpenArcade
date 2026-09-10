@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { ArrowLeft, CirclePause, CirclePlay, Expand, Gamepad2, GitFork, Heart, Pause, Play, RotateCcw, Sparkles, Trophy, Volume2, VolumeX, X } from 'lucide-react'
+import { ArrowLeft, CirclePause, CirclePlay, Expand, Gamepad2, GitFork, Heart, HeartCrack, Play, RotateCcw, Sparkles, Trophy, Volume2, VolumeX } from 'lucide-react'
 import { GameHost } from './components/GameHost'
 import { GameLobby } from './components/GameLobby'
 import { LevelPicker } from './components/LevelPicker'
-import { ModalDialog } from './components/ModalDialog'
+import { RestartDialog, RewardDialog } from './components/arcade-dialogs'
 import { reportGameDiagnostic } from './platform/diagnostics'
 import { games } from './platform/manifest'
 import { getLevelCount, getUnlockedLevel, normalizeUnlockedLevels, unlockNextLevel } from './platform/progression'
@@ -31,6 +31,7 @@ export default function App() {
   const [score, setScore] = useState(0)
   const [rewardOpen, setRewardOpen] = useState(false)
   const [restartConfirmOpen, setRestartConfirmOpen] = useState(false)
+  const [failedOpen, setFailedOpen] = useState(false)
   const [levelPickerOpen, setLevelPickerOpen] = useState(false)
   const [levelComplete, setLevelComplete] = useState(false)
   const [rewardLoading, setRewardLoading] = useState(false)
@@ -53,6 +54,7 @@ export default function App() {
     setScore(0)
     setPaused(false)
     setLevelComplete(false)
+    setFailedOpen(false)
     setLevelPickerOpen(false)
   }, [beginSession, level, playing, runtimeActive, unlockedLevel])
 
@@ -69,7 +71,13 @@ export default function App() {
     beginSession()
     setScore(0)
     setLevelComplete(false)
+    setFailedOpen(false)
   }, [beginSession, player.lives])
+
+  const openRestartConfirm = useCallback(() => {
+    setPaused(true)
+    setRestartConfirmOpen(true)
+  }, [])
 
   const handleEvent = useCallback((event: GameEvent) => {
     if (!isCurrentSession(eventEpoch)) {
@@ -101,11 +109,12 @@ export default function App() {
       }))
       setLevelComplete(true)
     }
-    if (safeEvent.type === 'request-restart') {
+    if (safeEvent.type === 'failed') {
       setPaused(true)
-      setRestartConfirmOpen(true)
+      setFailedOpen(true)
     }
-  }, [eventEpoch, isCurrentSession, level, selectedGame, selectedId, sessionPolicy])
+    if (safeEvent.type === 'request-restart') openRestartConfirm()
+  }, [eventEpoch, isCurrentSession, level, openRestartConfirm, selectedGame, selectedId, sessionPolicy])
 
   const selectGame = (id: string) => {
     if (id === selectedId) {
@@ -125,6 +134,7 @@ export default function App() {
     setScore(0)
     setPaused(false)
     setRestartConfirmOpen(false)
+    setFailedOpen(false)
     setLevelPickerOpen(false)
     setLevelComplete(false)
   }
@@ -133,6 +143,7 @@ export default function App() {
     acceptingEvents.current = true
     setLifecycle('playing')
     setPaused(false)
+    setFailedOpen(false)
     if (runtimeActive) return
     beginSession()
     setScore(0)
@@ -144,9 +155,8 @@ export default function App() {
     setLifecycle('lobby-paused')
     setPaused(true)
     setRestartConfirmOpen(false)
+    setFailedOpen(false)
   }
-
-  const restart = requestRestart
 
   const claimReward = () => {
     setRewardLoading(true)
@@ -214,7 +224,7 @@ export default function App() {
         <section className="play-area">
           <div className="section-kicker"><span>{playing ? '正在游玩' : '游戏大厅'}</span><span className="availability"><i /> {playing ? '会话已连接' : '准备就绪'}</span></div>
           {!playing && <GameLobby game={selectedGame} level={level} levelCount={levelCount} unlocked={unlockedLevel} bestScore={player.bestScores[selectedId] ?? 0} resume={runtimeActive} onChooseLevel={() => setLevelPickerOpen(true)} onPlay={startGame} />}
-          {playing && <div className="game-title-row"><div><h1>{selectedGame.title}</h1><p>{selectedGame.description}</p></div><div className="score-block"><span>BEST</span><strong>{String(player.bestScores[selectedId] ?? score).padStart(4, '0')}</strong></div></div>}
+          {playing && <div className="game-title-row"><div><h1>{selectedGame.title}</h1><p>{selectedGame.description}</p></div><div className="score-block"><strong>{String(score).padStart(4, '0')}</strong><small>BEST {String(player.bestScores[selectedId] ?? 0).padStart(4, '0')}</small></div></div>}
           {runtimeActive && (
             <div className="cabinet" ref={cabinetRef} hidden={!playing}>
               <div className="cabinet-bar">
@@ -225,7 +235,7 @@ export default function App() {
                 <div className="cabinet-controls">
                   <button onClick={() => setMuted((value) => !value)} title={muted ? '打开声音' : '静音'} aria-label={muted ? '打开声音' : '静音'}>{muted ? <VolumeX size={18} /> : <Volume2 size={18} />}</button>
                   <button onClick={() => setPaused((value) => !value)} title={paused ? '继续' : '暂停'} aria-label={paused ? '继续游戏' : '暂停游戏'}>{paused ? <CirclePlay size={19} /> : <CirclePause size={19} />}</button>
-                  <button onClick={restart} title="重新开始" aria-label="重新开始"><RotateCcw size={18} /></button>
+                  <button onClick={openRestartConfirm} title="重新开始" aria-label="重新开始"><RotateCcw size={18} /></button>
                   <button onClick={toggleFullscreen} title="全屏" aria-label="全屏显示"><Expand size={18} /></button>
                 </div>
               </div>
@@ -233,8 +243,12 @@ export default function App() {
                 <GameHost game={selectedGame} sessionKey={sessionKey} paused={paused} muted={muted} level={level} onEvent={handleEvent} />
                 {paused && !levelComplete && <button className="pause-overlay" onClick={() => setPaused(false)}><Play size={34} fill="currentColor" /><strong>已暂停</strong><span>点击继续</span></button>}
                 {levelComplete && <div className="completion-overlay" role="status"><Trophy size={38} /><span>关卡 {level} 完成</span><strong>{level === levelCount ? '全部通关' : '漂亮！继续下一关'}</strong><div>
-                  <button className="completion-secondary" onClick={() => { beginSession(); setScore(0); setLevelComplete(false) }}>再玩一次</button>
+                  <button className="completion-secondary" onClick={() => { beginSession(); setScore(0); setLevelComplete(false); setFailedOpen(false) }}>再玩一次</button>
                   {level < levelCount && <button className="completion-primary" onClick={() => changeLevel(level + 1)}>下一关</button>}
+                </div></div>}
+                {failedOpen && <div className="completion-overlay is-failure" role="alert"><HeartCrack size={38} /><span>挑战失败</span><strong>重试将消耗 1 次机会。</strong><div>
+                  <button className="completion-primary" onClick={() => { setFailedOpen(false); setPaused(false); requestRestart() }}>再试一次</button>
+                  <button className="completion-secondary" onClick={() => { setFailedOpen(false); returnToLobby() }}>返回大厅</button>
                 </div></div>}
               </div>
             </div>
@@ -248,30 +262,9 @@ export default function App() {
         <LevelPicker current={level} unlocked={unlockedLevel} total={levelCount} title={selectedGame.title} onSelect={changeLevel} onClose={() => setLevelPickerOpen(false)} />
       )}
 
-      {restartConfirmOpen && (
-        <ModalDialog className="reward-dialog" labelledBy="restart-title" onClose={() => { setRestartConfirmOpen(false); setPaused(false) }}>
-            <div className="reward-icon"><RotateCcw size={30} /></div>
-            <span className="dialog-kicker">RESTART REQUEST</span>
-            <h2 id="restart-title">游戏请求重新开始</h2>
-            <p>只有你的确认才能消耗一次机会。游戏代码不能自行扣除生命值。</p>
-            <button className="reward-button" onClick={() => { setRestartConfirmOpen(false); setPaused(false); requestRestart() }}>
-              <RotateCcw size={18} />确认重开
-            </button>
-            <button className="dialog-secondary" onClick={() => { setRestartConfirmOpen(false); setPaused(false) }}>继续当前游戏</button>
-        </ModalDialog>
-      )}
+      {restartConfirmOpen && <RestartDialog onConfirm={() => { setRestartConfirmOpen(false); setPaused(false); requestRestart() }} onDismiss={() => { setRestartConfirmOpen(false); setPaused(false) }} />}
 
-      {rewardOpen && (
-        <ModalDialog className="reward-dialog" labelledBy="reward-title" onClose={() => { if (!rewardLoading) setRewardOpen(false) }}>
-            <button className="dialog-close" onClick={() => setRewardOpen(false)} disabled={rewardLoading} aria-label="关闭"><X size={20} /></button>
-            <div className="reward-icon"><Heart size={30} fill="currentColor" /></div>
-            <span className="dialog-kicker">ONE MORE ROUND</span>
-            <h2 id="reward-title">机会用完了</h2>
-            <p>观看一段演示内容，立即获得 3 次重试机会。正式上线时请在服务端验证真实广告回调。</p>
-            <button className="reward-button" onClick={claimReward} disabled={rewardLoading}>{rewardLoading ? <><Pause size={18} /> 正在播放演示…</> : <><Play size={18} fill="currentColor" /> 观看并领取 3 次</>}</button>
-            <small>演示模式 · 不包含真实广告或支付</small>
-        </ModalDialog>
-      )}
+      {rewardOpen && <RewardDialog claiming={rewardLoading} onClaim={claimReward} onClose={() => { if (!rewardLoading) setRewardOpen(false) }} />}
     </div>
   )
 }

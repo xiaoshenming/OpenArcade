@@ -62,3 +62,34 @@ describe('App session authority', () => {
     window.removeEventListener('openarcade:diagnostic', listener)
   })
 })
+
+describe('App failure overlay and restart confirmation', () => {
+  it('shows the failure overlay on a failed event and spends one life on retry', async () => {
+    const view = render(<App />)
+    fireEvent.click(view.getByRole('button', { name: '开始第 1 关' }))
+    await waitFor(() => expect(view.getByTestId('mock-game')).toBeTruthy())
+    const retained = host.callbacks.at(-1)!
+    act(() => {
+      retained({ type: 'ready' })
+      retained({ type: 'started' })
+      retained({ type: 'failed', score: 0 })
+    })
+
+    expect(view.getByText('挑战失败')).toBeTruthy()
+    fireEvent.click(view.getByRole('button', { name: '再试一次' }))
+    expect(view.queryByText('挑战失败')).toBeNull()
+    expect(view.container.querySelector('.life-counter strong')).toHaveTextContent('4')
+  })
+
+  it('routes the cabinet restart button through the confirmation dialog', async () => {
+    const view = render(<App />)
+    fireEvent.click(view.getByRole('button', { name: '开始第 1 关' }))
+    await waitFor(() => expect(view.getByTestId('mock-game')).toBeTruthy())
+    fireEvent.click(view.getByRole('button', { name: '重新开始' }))
+
+    expect(view.container.querySelector('.life-counter strong')).toHaveTextContent('5')
+    expect(view.getByRole('dialog', { name: '重新开始本关' })).toBeTruthy()
+    fireEvent.click(view.getByRole('button', { name: '确认重开' }))
+    expect(view.container.querySelector('.life-counter strong')).toHaveTextContent('4')
+  })
+})
