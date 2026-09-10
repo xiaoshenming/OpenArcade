@@ -23,9 +23,5 @@
 .pairs-board:not([data-shift="0"]) .pair-card:not(.is-matched) { animation: card-drift .35s ease; }
 @keyframes card-drift { 50% { transform: translateY(-5px); } }
 .pairs-restart { justify-self: center; display: inline-flex; align-items: center; gap: 7px; height: 38px; padding: 0 14px; border: 1px solid #e3ccd4; border-radius: 8px; color: #493940; background: white; font-weight: 700; cursor: pointer; }
-.pairs-fail { position: absolute; inset: 0; z-index: 8; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255,249,239,.95); }
-.pairs-fail strong { font-size: 30px; }
-.pairs-fail span { margin: 7px 0 18px; color: #7b6a72; font-size: 11px; }
-.pairs-fail button { height: 40px; padding: 0 16px; border: 0; border-radius: 8px; color: white; background: #ef7890; font-weight: 750; cursor: pointer; }
 .pairs-preview { position: absolute; right: 0; bottom: 72px; left: 0; text-align: center; color: #b24562; font-size: 11px; font-weight: 800; pointer-events: none; }
 @media (max-width:640px) { .pairs-game { min-height:420px; padding:14px; } .pairs-board { grid-template-columns:repeat(var(--pair-columns),minmax(0,54px)); gap:6px; padding:12px 0; } .pair-card span { font-size:21px; } }

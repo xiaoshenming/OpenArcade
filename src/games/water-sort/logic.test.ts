@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { CAPACITY, isSolved, pour, type Board } from './logic'
+import { advanceSolution, CAPACITY, isSolved, pour, solutionStep, type Board } from './logic'
 
 describe('water sort state machine', () => {
   it('moves the entire contiguous top color block', () => {
@@ -20,5 +20,20 @@ describe('water sort state machine', () => {
   it('recognizes only empty or full monochrome tubes as solved', () => {
     expect(isSolved([Array(CAPACITY).fill(0), [], Array(CAPACITY).fill(1)])).toBe(true)
     expect(isSolved([[0], [], Array(CAPACITY).fill(1)])).toBe(false)
+  })
+})
+
+describe('solution helpers', () => {
+  it('reads the step at current progress and returns null out of bounds', () => {
+    expect(solutionStep('0313', 0)).toEqual({ from: 0, to: 3 })
+    expect(solutionStep('0313', 1)).toEqual({ from: 1, to: 3 })
+    expect(solutionStep('0313', 2)).toBeNull()
+    expect(solutionStep('0313', -1)).toBeNull()
+  })
+
+  it('advances progress on a matching move and flags divergence otherwise', () => {
+    expect(advanceSolution('0313', 0, 0, 3)).toEqual({ progress: 1, diverged: false })
+    expect(advanceSolution('0313', 0, 3, 0)).toEqual({ progress: 0, diverged: true })
+    expect(advanceSolution('0313', 2, 0, 3)).toEqual({ progress: 2, diverged: true })
   })
 })

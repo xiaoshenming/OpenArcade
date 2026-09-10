@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from 'react'
 import { ArrowRight, RefreshCw, RotateCcw, ShieldAlert } from 'lucide-react'
 import type { GameModuleProps } from '../../platform/types'
+import { createGameAudio } from '../../platform/game-audio'
 import { createPairDeck, getPairLevel, nextSequenceTarget, rotateUnmatched } from './logic'
 import './petal-pairs.css'
 
 const scoreFor = (moves: number, mistakes: number) => Math.max(100, 5000 - moves * 70 - mistakes * 120)
 
-export default function PetalPairsGame({ paused, emit, level = 1 }: GameModuleProps) {
+export default function PetalPairsGame({ paused, muted, emit, level = 1 }: GameModuleProps) {
   const levelNumber = Math.min(40, Math.max(1, level))
   const spec = getPairLevel(levelNumber)
   const [deck, setDeck] = useState(() => createPairDeck(levelNumber))
@@ -19,6 +20,9 @@ export default function PetalPairsGame({ paused, emit, level = 1 }: GameModulePr
   const [mistakes, setMistakes] = useState(0)
   const [failed, setFailed] = useState(false)
   const target = useMemo(() => nextSequenceTarget(deck, matched), [deck, matched])
+  const audio = useMemo(() => createGameAudio(), [])
+
+  useEffect(() => audio.setMuted(muted), [audio, muted])
 
   useEffect(() => {
     emit({ type: 'ready' })
@@ -40,6 +44,7 @@ export default function PetalPairsGame({ paused, emit, level = 1 }: GameModulePr
     const success = same && allowed
     const timer = window.setTimeout(() => {
       if (success) {
+        audio.play('match')
         const nextMatched = [...matched, first, second]
         setMatched(nextMatched)
         if (spec.shifting && nextMatched.length < deck.length) {
@@ -48,24 +53,27 @@ export default function PetalPairsGame({ paused, emit, level = 1 }: GameModulePr
         }
         emit({ type: 'score', score: scoreFor(moves, mistakes) })
       } else {
+        audio.play('mismatch')
         const nextMistakes = mistakes + 1
         setMistakes(nextMistakes)
         if (spec.maxMistakes && nextMistakes >= spec.maxMistakes) {
           setFailed(true)
+          audio.play('lose')
           emit({ type: 'failed', score: scoreFor(moves, nextMistakes) })
         }
       }
       setFlipped([])
     }, success ? 260 : spec.mismatchMs)
     return () => window.clearTimeout(timer)
-  }, [deck, emit, failed, flipped, matched, mistakes, moves, paused, spec.maxMistakes, spec.mismatchMs, spec.sequence, spec.shifting, target])
+  }, [audio, deck, emit, failed, flipped, matched, mistakes, moves, paused, spec.maxMistakes, spec.mismatchMs, spec.sequence, spec.shifting, target])
 
   useEffect(() => {
-    if (moves > 0 && matched.length === deck.length) emit({ type: 'completed', score: scoreFor(moves, mistakes) })
-  }, [deck.length, emit, matched.length, mistakes, moves])
+    if (moves > 0 && matched.length === deck.length) { audio.play('win'); emit({ type: 'completed', score: scoreFor(moves, mistakes) }) }
+  }, [audio, deck.length, emit, matched.length, mistakes, moves])
 
   const flip = (index: number) => {
     if (paused || failed || previewing || flipped.length >= 2 || flipped.includes(index) || matched.includes(index)) return
+    audio.play('select')
     setFlipped((items) => [...items, index])
     if (flipped.length === 1) setMoves((value) => value + 1)
   }
@@ -84,7 +92,6 @@ export default function PetalPairsGame({ paused, emit, level = 1 }: GameModulePr
       </div>
       <button className="pairs-restart" onClick={() => emit({ type: 'request-restart' })}><RotateCcw size={17} />重开本关</button>
       {previewing && <div className="pairs-preview">记住它们的位置</div>}
-      {failed && <div className="pairs-fail"><strong>失误用尽</strong><span>记住变化，再试一次</span><button onClick={() => emit({ type: 'request-restart' })}>重新挑战</button></div>}
     </div>
   )
 }

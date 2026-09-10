@@ -9,7 +9,7 @@ import { games } from './platform/manifest'
 import { getLevelCount, getUnlockedLevel, normalizeUnlockedLevels, unlockNextLevel } from './platform/progression'
 import { useSessionAuthority } from './platform/use-session-authority'
 import { GameSessionPolicy } from './platform/session-policy'
-import { loadPlayer, playerRules, savePlayer, type PlayerState } from './platform/storage'
+import { applyLifeRegen, loadPlayer, playerRules, savePlayer, type PlayerState } from './platform/storage'
 import { gameEventSchema } from './sdk/schema'
 import type { GameEvent } from './platform/types'
 
@@ -62,12 +62,19 @@ export default function App() {
     savePlayer(player)
   }, [player])
 
+  useEffect(() => {
+    const tick = () => setPlayer((current) => applyLifeRegen(current))
+    tick()
+    const timer = window.setInterval(tick, 30_000)
+    return () => window.clearInterval(timer)
+  }, [])
+
   const requestRestart = useCallback(() => {
     if (player.lives <= 0) {
       setRewardOpen(true)
       return
     }
-    setPlayer((current) => ({ ...current, lives: Math.max(0, current.lives - 1) }))
+    setPlayer((current) => ({ ...current, lives: Math.max(0, current.lives - 1), livesUpdatedAt: Date.now() }))
     beginSession()
     setScore(0)
     setLevelComplete(false)
@@ -161,7 +168,7 @@ export default function App() {
   const claimReward = () => {
     setRewardLoading(true)
     window.setTimeout(() => {
-      setPlayer((current) => ({ ...current, lives: Math.min(playerRules.maxLives, current.lives + 3) }))
+      setPlayer((current) => ({ ...current, lives: Math.min(playerRules.maxLives, current.lives + 3), livesUpdatedAt: Date.now() }))
       setRewardLoading(false)
       setRewardOpen(false)
     }, 1200)
@@ -185,7 +192,7 @@ export default function App() {
           <a href="https://github.com/xiaoshenming/OpenArcade" target="_blank" rel="noreferrer">GitHub</a>
         </nav>
         <div className="topbar-actions">
-          <div className="life-counter" title="可用重试次数">
+          <div className="life-counter" title="每 20 分钟自动恢复 1 次机会">
             <Heart size={16} fill="currentColor" />
             <strong>{player.lives}</strong>
             <span>次机会</span>

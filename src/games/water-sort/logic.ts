@@ -30,3 +30,20 @@ export function pour(board: Board, from: number, to: number): MoveResult {
 export function isSolved(board: Board) {
   return board.every((tube) => tube.length === 0 || (tube.length === CAPACITY && tube.every((color) => color === tube[0])))
 }
+
+export interface SolutionStep {
+  from: number
+  to: number
+}
+
+export function solutionStep(solution: string, progress: number): SolutionStep | null {
+  const offset = progress * 2
+  if (progress < 0 || offset + 2 > solution.length) return null
+  return { from: Number(solution[offset]), to: Number(solution[offset + 1]) }
+}
+
+export function advanceSolution(solution: string, progress: number, from: number, to: number): { progress: number; diverged: boolean } {
+  const step = solutionStep(solution, progress)
+  if (!step || step.from !== from || step.to !== to) return { progress, diverged: true }
+  return { progress: progress + 1, diverged: false }
+}

@@ -24,11 +24,55 @@ let ended = false
 let config = OpenArcadeOrbit.getLevel(1)
 let generators = []
 
+const audioCues = {
+  hit: { type: 'triangle', notes: [660, 880], gain: .06, stepMs: 55 },
+  decoy: { type: 'sawtooth', notes: [130, 98], gain: .05, stepMs: 90 },
+  win: { type: 'triangle', notes: [523, 659, 784], gain: .06, stepMs: 95 },
+  lose: { type: 'sine', notes: [330, 247], gain: .05, stepMs: 120 },
+  tick: { type: 'square', notes: [1040], gain: .03, stepMs: 45 }
+}
+let audioContext = null
+let muted = false
+
+function ensureAudio() {
+  if (audioContext || muted) return audioContext
+  const constructor = window.AudioContext || window.webkitAudioContext
+  if (!constructor) return null
+  try {
+    audioContext = new constructor()
+  } catch {
+    audioContext = null
+  }
+  return audioContext
+}
+
+function playCue(cue) {
+  if (muted) return
+  const audio = ensureAudio()
+  if (!audio) return
+  const spec = audioCues[cue]
+  spec.notes.forEach((frequency, index) => {
+    const oscillator = audio.createOscillator()
+    const envelope = audio.createGain()
+    const start = audio.currentTime + index * spec.stepMs / 1000
+    const end = start + spec.stepMs / 1000 + .05
+    oscillator.type = spec.type
+    oscillator.frequency.value = frequency
+    envelope.gain.setValueAtTime(.0001, start)
+    envelope.gain.exponentialRampToValueAtTime(spec.gain, start + .012)
+    envelope.gain.exponentialRampToValueAtTime(.0001, end)
+    oscillator.connect(envelope).connect(audio.destination)
+    oscillator.start(start)
+    oscillator.stop(end + .02)
+  })
+}
+
 const sdk = globalThis.OpenArcade.createSdk({ onCommand(command) {
   if (command.type === 'load-level') start(command.level)
   if (command.type === 'restart' || command.type === 'start') start(level)
   if (command.type === 'pause') setPaused(true)
   if (command.type === 'resume') setPaused(false)
+  if (command.type === 'mute') muted = Boolean(command.muted)
 } })
 
 function setPaused(nextPaused) {
@@ -86,6 +130,7 @@ function updateHud() {
 function finish(completed) {
   if (ended) return
   ended = true
+  playCue(completed ? 'win' : 'lose')
   clearInterval(timer)
   clearInterval(moveTimer)
   target.hidden = true
@@ -125,6 +170,7 @@ function start(nextLevel) {
     time -= 1
     updateHud()
     if (time <= 0) finish(false)
+    else if (time <= 5) playCue('tick')
   }, 1000)
   if (config.lifetime) moveTimer = setInterval(() => {
     if (paused || ended) return
@@ -136,6 +182,7 @@ function start(nextLevel) {
 
 target.addEventListener('click', () => {
   if (paused || ended || target.hidden) return
+  playCue('hit')
   hits += 1
   streak = config.combo ? streak + 1 : 0
   const multiplier = config.combo ? Math.min(5, streak) : 1
@@ -148,6 +195,7 @@ target.addEventListener('click', () => {
 
 decoys.forEach((decoy) => decoy.addEventListener('click', () => {
   if (paused || ended || decoy.hidden) return
+  playCue('decoy')
   strikes += 1
   streak = 0
   time = Math.max(0, time - config.penalty)
