@@ -208,7 +208,7 @@ export default function App() {
             <span>{games.length} 款</span>
           </div>
           <div className="game-list">
-            {games.map((game) => (
+            {games.map((game, index) => (
               <button
                 key={game.id}
                 className={`game-list-item ${selectedId === game.id ? 'is-selected' : ''}`}
@@ -223,6 +223,7 @@ export default function App() {
                 </span>
                 <span className="game-copy"><strong>{game.title}</strong><small>{game.category === 'logic' ? '逻辑解谜' : game.category === 'arcade' ? '反应挑战' : '轻松记忆'}</small></span>
                 {game.status === 'soon' ? <em>SOON</em> : selectedId === game.id ? <CirclePlay size={20} fill="currentColor" /> : <Play size={17} />}
+                <span className="cart-tag" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
               </button>
             ))}
           </div>

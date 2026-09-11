@@ -14,7 +14,7 @@ export function LevelPicker({ current, unlocked, total, title, onSelect, onClose
   return (
     <ModalDialog className="level-dialog" labelledBy="level-picker-title" onClose={onClose}>
         <header>
-          <div><span>选择关卡</span><h2 id="level-picker-title">{title}</h2></div>
+          <div><span className="dialog-kicker">选择关卡</span><h2 id="level-picker-title">{title}</h2></div>
           <button className="dialog-close" onClick={onClose} aria-label="关闭关卡选择"><X size={20} /></button>
         </header>
         <div className="level-grid">
@@ -23,7 +23,7 @@ export function LevelPicker({ current, unlocked, total, title, onSelect, onClose
             const isCurrent = level === current
             const label = locked ? '关卡 ' + level + '，未解锁' : isCurrent ? '当前关卡 ' + level : '进入关卡 ' + level
             return (
-              <button key={level} className={isCurrent ? 'is-current' : ''} disabled={locked || isCurrent} aria-current={isCurrent ? 'step' : undefined} onClick={() => onSelect(level)} aria-label={label}>
+              <button key={level} className={isCurrent ? 'is-current' : locked ? 'is-locked' : ''} disabled={locked || isCurrent} aria-current={isCurrent ? 'step' : undefined} onClick={() => onSelect(level)} aria-label={label}>
                 {locked ? <LockKeyhole size={13} /> : level}
               </button>
             )

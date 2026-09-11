@@ -26,6 +26,7 @@ export function GameLobby({ game, level, levelCount, unlocked, bestScore, resume
       <div className="lobby-hero">
         <img src={`/images/games/${game.id}.jpg`} alt={`${game.title} 实际游戏画面`} width="1000" height="560" decoding="async" />
         <div className="lobby-hero-shade" />
+        <div className="lobby-marquee"><div className={available ? 'lobby-badge' : 'lobby-badge is-soon'}>{available ? resume ? 'CONTINUE?' : 'READY' : 'SOON'}</div></div>
         <div className="lobby-hero-copy">
           <span>{categoryName[game.category]} · {levelCount} 关</span>
           <h1>{game.title}</h1>

@@ -39,7 +39,7 @@ export function ModalDialog({ labelledBy, className, onClose, children, closeOnB
 
   return (
     <div className="modal-backdrop" onMouseDown={(event) => { if (closeOnBackdrop && event.target === event.currentTarget) closeRef.current() }}>
-      <section ref={dialogRef} className={className} role="dialog" aria-modal="true" aria-labelledby={labelledBy}>{children}</section>
+      <section ref={dialogRef} className={`modal-frame ${className}`} role="dialog" aria-modal="true" aria-labelledby={labelledBy}>{children}</section>
     </div>
   )
 }

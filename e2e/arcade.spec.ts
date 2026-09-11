@@ -2,8 +2,7 @@ import { expect, test, type Page } from '@playwright/test'
 import { WATER_LEVELS } from '../src/games/water-sort/levels'
 
 async function openGameLibraryOnMobile(page: Page) {
-  const menu = page.getByRole('button', { name: '打开游戏菜单' })
-  if (await menu.isVisible()) await menu.click()
+  const menu = page.getByRole('button', { name: '打开游戏菜单' }); if (await menu.isVisible()) await menu.click()
 }
 
 async function startSelectedGame(page: Page) {
@@ -208,8 +207,7 @@ test('first five levels expose visibly different mechanics in every game', async
   await game.locator('#mode').waitFor()
   const orbitRules = [await game.locator('#mode').textContent()]
   await expect(game.locator('#stage')).toHaveAttribute('data-mode', 'combo')
-  await game.getByRole('button', { name: '击中星点' }).click({ force: true })
-  await game.getByRole('button', { name: '击中星点' }).click({ force: true })
+  await game.locator('#target').evaluate((el) => { el.click(); el.click() })
   await expect(game.locator('#rule-state')).toHaveText('连击 ×2')
   for (let level = 1; level <= 4; level += 1) {
     await page.locator('.level-button').click()
@@ -219,15 +217,13 @@ test('first five levels expose visibly different mechanics in every game', async
     orbitRules.push(await game.locator('#mode').textContent())
   }
   expect(new Set(orbitRules).size).toBe(5)
-  await game.getByRole('button', { name: '避开干扰星点' }).click({ force: true })
+  await game.locator('.decoy').first().evaluate((el) => el.click())
   await expect(game.locator('#rule-state')).toHaveText('失误 1/3')
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(await page.evaluate(() => innerWidth))
 })
 
 test('final chapters combine mechanics instead of repeating one rule', async ({ page }) => {
-  await page.evaluate(() => localStorage.setItem('openarcade:player:v1', JSON.stringify({
-    lives: 5, bestScores: {}, unlockedLevels: { 'water-sort': 60, 'orbit-tap': 30, 'petal-pairs': 40 },
-  })))
+  await page.evaluate(() => localStorage.setItem('openarcade:player:v1', JSON.stringify({ lives: 5, bestScores: {}, unlockedLevels: { 'water-sort': 60, 'orbit-tap': 30, 'petal-pairs': 40 } })))
   await page.reload()
   await startSelectedGame(page)
   await expect(page.locator('.water-rule')).toContainText('终局·万色归一')
