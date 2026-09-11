@@ -4,6 +4,7 @@ import { GameHost } from './components/GameHost'
 import { GameLobby } from './components/GameLobby'
 import { LevelPicker } from './components/LevelPicker'
 import { RestartDialog, RewardDialog } from './components/arcade-dialogs'
+import { ScoreTally } from './components/score-tally'
 import { reportGameDiagnostic } from './platform/diagnostics'
 import { games } from './platform/manifest'
 import { getLevelCount, getUnlockedLevel, normalizeUnlockedLevels, unlockNextLevel } from './platform/progression'
@@ -194,7 +195,7 @@ export default function App() {
         <div className="topbar-actions">
           <div className="life-counter" title="每 20 分钟自动恢复 1 次机会">
             <Heart size={16} fill="currentColor" />
-            <strong>{player.lives}</strong>
+            <strong key={player.lives}>{player.lives}</strong>
             <span>次机会</span>
           </div>
           <a className="icon-button" href="https://github.com/xiaoshenming/OpenArcade" target="_blank" rel="noreferrer" aria-label="打开 GitHub"><GitFork size={19} /></a>
@@ -232,7 +233,7 @@ export default function App() {
         <section className="play-area">
           <div className="section-kicker"><span>{playing ? '正在游玩' : '游戏大厅'}</span><span className="availability"><i /> {playing ? '会话已连接' : '准备就绪'}</span></div>
           {!playing && <GameLobby game={selectedGame} level={level} levelCount={levelCount} unlocked={unlockedLevel} bestScore={player.bestScores[selectedId] ?? 0} resume={runtimeActive} onChooseLevel={() => setLevelPickerOpen(true)} onPlay={startGame} />}
-          {playing && <div className="game-title-row"><div><h1>{selectedGame.title}</h1><p>{selectedGame.description}</p></div><div className="score-block"><strong>{String(score).padStart(4, '0')}</strong><small>BEST {String(player.bestScores[selectedId] ?? 0).padStart(4, '0')}</small></div></div>}
+          {playing && <div className="game-title-row"><div><h1>{selectedGame.title}</h1><p>{selectedGame.description}</p></div><div className="score-block"><ScoreTally value={score} label={String(player.bestScores[selectedId] ?? 0).padStart(4, '0')} /></div></div>}
           {runtimeActive && (
             <div className="cabinet" ref={cabinetRef} hidden={!playing}>
               <div className="cabinet-bar">

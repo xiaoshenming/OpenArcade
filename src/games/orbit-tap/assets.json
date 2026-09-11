@@ -5,14 +5,14 @@
       "author": "OpenArcade contributors",
       "license": "MIT",
       "source": "original",
-      "sha256": "4c040dc0730767a23b21503d188e164099f45584312ce6f40dffbde0794b14a4"
+      "sha256": "63f0896fc2c85a493e67371191acdb686b00d2f9576f4687680dd1ced4e67542"
     },
     {
       "path": "public/games/orbit-tap/app.js",
       "author": "OpenArcade contributors",
       "license": "MIT",
       "source": "original",
-      "sha256": "2bdea32021d8feff340cfa0a48feb853a3c597a95e146a81ff1a73bc84d52b9c"
+      "sha256": "6c78c2d636ecc487cf68ae59badf4bf4a2dca98e221cec0e1c1603f7f450e4a9"
     },
     {
       "path": "public/games/orbit-tap/levels.js",

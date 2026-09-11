@@ -11,6 +11,8 @@ const ruleState = document.querySelector('#rule-state')
 const message = document.querySelector('#message')
 const messageTitle = message.querySelector('strong')
 const messageCopy = message.querySelector('span')
+const sparkColors = ['#ff5f7e', '#2fd6b8', '#ffc94d']
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 let score = 0
 let time = 0
 let hits = 0
@@ -67,6 +69,34 @@ function playCue(cue) {
   })
 }
 
+function spawnBurst(element, text) {
+  if (reduceMotion) return
+  const stageBox = stage.getBoundingClientRect()
+  const box = element.getBoundingClientRect()
+  const x = box.left - stageBox.left + box.width / 2
+  const y = box.top - stageBox.top + box.height / 2
+  for (let index = 0; index < 7; index += 1) {
+    const spark = document.createElement('span')
+    const angle = Math.PI * 2 * index / 7 + Math.random() * .9
+    const distance = 24 + Math.random() * 28
+    spark.className = 'spark'
+    spark.style.left = x + 'px'
+    spark.style.top = y + 'px'
+    spark.style.background = sparkColors[index % sparkColors.length]
+    spark.style.setProperty('--dx', Math.cos(angle) * distance + 'px')
+    spark.style.setProperty('--dy', Math.sin(angle) * distance + 'px')
+    spark.addEventListener('animationend', () => spark.remove())
+    stage.appendChild(spark)
+  }
+  const pop = document.createElement('span')
+  pop.className = 'score-pop'
+  pop.textContent = text
+  pop.style.left = x + 'px'
+  pop.style.top = (y - 6) + 'px'
+  pop.addEventListener('animationend', () => pop.remove())
+  stage.appendChild(pop)
+}
+
 const sdk = globalThis.OpenArcade.createSdk({ onCommand(command) {
   if (command.type === 'load-level') start(command.level)
   if (command.type === 'restart' || command.type === 'start') start(level)
@@ -113,11 +143,14 @@ function placeAll() {
     decoy.hidden = !visible
     if (visible) placeElement(decoy, generators[index + 1], Math.max(48, config.size - 4), occupied)
   })
+  target.classList.add('is-spawn')
+  setTimeout(() => target.classList.remove('is-spawn'), 240)
 }
 
 function updateHud() {
   scoreElement.textContent = String(score).padStart(4, '0')
   timeElement.textContent = String(time).padStart(2, '0')
+  timeElement.classList.toggle('is-urgent', time > 0 && time <= 5)
   levelElement.textContent = String(level).padStart(2, '0')
   quotaElement.textContent = hits + '/' + config.quota
   modeElement.textContent = config.title
@@ -158,6 +191,8 @@ function start(nextLevel) {
   stage.dataset.mode = config.mode
   stage.dataset.drift = String(config.drift)
   stage.classList.remove('is-paused')
+  target.classList.remove('is-pop', 'is-spawn')
+  timeElement.classList.remove('is-urgent')
   target.style.width = config.size + 'px'
   target.style.height = config.size + 'px'
   message.hidden = true
@@ -189,6 +224,9 @@ target.addEventListener('click', () => {
   score = Math.min(10000, score + (100 + level * 3) * multiplier)
   updateHud()
   sdk.score(score)
+  spawnBurst(target, '+' + (100 + level * 3) * multiplier)
+  target.classList.add('is-pop')
+  setTimeout(() => target.classList.remove('is-pop'), 160)
   if (hits >= config.quota) finish(true)
   else placeAll()
 })
@@ -202,6 +240,8 @@ decoys.forEach((decoy) => decoy.addEventListener('click', () => {
   score = Math.max(0, score - 75)
   updateHud()
   sdk.score(score)
+  decoy.classList.add('is-hit')
+  setTimeout(() => decoy.classList.remove('is-hit'), 280)
   if (strikes >= 3 || time <= 0) finish(false)
   else placeAll()
 }))

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { ArrowRight, RefreshCw, RotateCcw, ShieldAlert } from 'lucide-react'
 import type { GameModuleProps } from '../../platform/types'
 import { createGameAudio } from '../../platform/game-audio'
+import { prefersReducedMotion } from '../../platform/motion'
 import { createPairDeck, getPairLevel, nextSequenceTarget, rotateUnmatched } from './logic'
 import './petal-pairs.css'
 
@@ -19,8 +20,17 @@ export default function PetalPairsGame({ paused, muted, emit, level = 1 }: GameM
   const [moves, setMoves] = useState(0)
   const [mistakes, setMistakes] = useState(0)
   const [failed, setFailed] = useState(false)
+  const [popping, setPopping] = useState<number[]>([])
   const target = useMemo(() => nextSequenceTarget(deck, matched), [deck, matched])
   const audio = useMemo(() => createGameAudio(), [])
+  const reduceMotion = prefersReducedMotion()
+  const shaking = !paused && flipped.length === 2 && !(deck[flipped[0]] === deck[flipped[1]] && (!spec.sequence || deck[flipped[0]] === target)) && !reduceMotion
+
+  useEffect(() => {
+    if (!popping.length) return
+    const timer = window.setTimeout(() => setPopping([]), 320)
+    return () => window.clearTimeout(timer)
+  }, [popping])
 
   useEffect(() => audio.setMuted(muted), [audio, muted])
 
@@ -45,6 +55,7 @@ export default function PetalPairsGame({ paused, muted, emit, level = 1 }: GameM
     const timer = window.setTimeout(() => {
       if (success) {
         audio.play('match')
+        if (!prefersReducedMotion()) setPopping([first, second])
         const nextMatched = [...matched, first, second]
         setMatched(nextMatched)
         if (spec.shifting && nextMatched.length < deck.length) {
@@ -83,11 +94,11 @@ export default function PetalPairsGame({ paused, muted, emit, level = 1 }: GameM
     <div className={`pairs-game mode-${spec.mode}`} aria-label="花笺成双游戏区">
       <div className="pairs-readout"><span>关卡 {String(levelNumber).padStart(2, '0')}</span><strong>{matched.length / 2} / {deck.length / 2} 对 · {moves} 次</strong></div>
       <div className="pairs-rule"><span>{ruleIcon}{spec.title}</span><small>{spec.detail}</small>{spec.sequence && <em>目标 {target}</em>}{spec.maxMistakes && <em>失误 {mistakes}/{spec.maxMistakes}</em>}</div>
-      <div className="pairs-board" data-shift={shiftEpoch} style={{ '--pair-columns': spec.columns } as React.CSSProperties}>
+      <div className={`pairs-board ${previewing && spec.previewMode === 'all' ? 'is-previewing' : ''}`} data-shift={shiftEpoch} style={{ '--pair-columns': spec.columns } as React.CSSProperties}>
         {deck.map((symbol, index) => {
           const previewReveal = previewing && (spec.previewMode === 'all' || index === previewIndex)
           const revealed = previewReveal || flipped.includes(index) || matched.includes(index)
-          return <button key={`${shiftEpoch}-${index}`} className={`pair-card ${revealed ? 'is-revealed' : ''} ${matched.includes(index) ? 'is-matched' : ''}`} onClick={() => flip(index)} aria-label={revealed ? `卡片 ${index + 1}：${symbol}` : `翻开卡片 ${index + 1}`}><span>{symbol}</span></button>
+          return <button key={`${shiftEpoch}-${index}`} className={`pair-card ${revealed ? 'is-revealed' : ''} ${matched.includes(index) ? 'is-matched' : ''} ${shaking && flipped.includes(index) ? 'is-shaking' : ''} ${popping.includes(index) ? 'is-popping' : ''}`} style={{ '--enter-index': index, '--enter-from': index % 2 === 1 ? '14px' : '-14px', '--reveal-delay': `${index * 36}ms` } as React.CSSProperties} onClick={() => flip(index)} aria-label={revealed ? `卡片 ${index + 1}：${symbol}` : `翻开卡片 ${index + 1}`}><span>{symbol}</span></button>
         })}
       </div>
       <button className="pairs-restart" onClick={() => emit({ type: 'request-restart' })}><RotateCcw size={17} />重开本关</button>

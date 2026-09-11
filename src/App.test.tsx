@@ -58,7 +58,7 @@ describe('App session authority', () => {
     expect(diagnostics).toContainEqual(expect.objectContaining({ gameId: 'water-sort', reason: 'lobby-session' }))
     fireEvent.click(view.getByRole('button', { name: '继续第 1 关' }))
     act(() => retained({ type: 'score', score: 200 }))
-    expect(view.container.querySelector('.score-block strong')).toHaveTextContent('0200')
+    await waitFor(() => expect(view.container.querySelector('.score-block strong')).toHaveTextContent('0200'), { timeout: 3000 })
     window.removeEventListener('openarcade:diagnostic', listener)
   })
 })

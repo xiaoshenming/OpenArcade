@@ -1,4 +1,4 @@
-import { useEffect, useRef, type ReactNode } from 'react'
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 
 interface Props {
   labelledBy: string
@@ -13,7 +13,21 @@ const focusSelector = 'button:not(:disabled), a[href], input:not(:disabled), [ta
 export function ModalDialog({ labelledBy, className, onClose, children, closeOnBackdrop = true }: Props) {
   const dialogRef = useRef<HTMLElement>(null)
   const closeRef = useRef(onClose)
+  const closingRef = useRef(false)
+  const [closing, setClosing] = useState(false)
   useEffect(() => { closeRef.current = onClose }, [onClose])
+
+  const startClose = useCallback(() => {
+    if (closingRef.current) return
+    closingRef.current = true
+    setClosing(true)
+  }, [])
+
+  useEffect(() => {
+    if (!closing) return
+    const timer = window.setTimeout(() => closeRef.current(), 160)
+    return () => window.clearTimeout(timer)
+  }, [closing])
 
   useEffect(() => {
     const previous = document.activeElement instanceof HTMLElement ? document.activeElement : null
@@ -21,7 +35,7 @@ export function ModalDialog({ labelledBy, className, onClose, children, closeOnB
     const focusable = () => Array.from(dialog?.querySelectorAll<HTMLElement>(focusSelector) ?? [])
     focusable()[0]?.focus()
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') { event.preventDefault(); closeRef.current(); return }
+      if (event.key === 'Escape') { event.preventDefault(); startClose(); return }
       if (event.key !== 'Tab') return
       const items = focusable()
       if (!items.length) { event.preventDefault(); return }
@@ -35,10 +49,15 @@ export function ModalDialog({ labelledBy, className, onClose, children, closeOnB
       document.removeEventListener('keydown', onKeyDown)
       if (previous?.isConnected) previous.focus()
     }
-  }, [])
+  }, [startClose])
+
+  const endClosing = (event: React.AnimationEvent) => {
+    if (!closing) return
+    if (event.target === event.currentTarget || event.target === dialogRef.current) closeRef.current()
+  }
 
   return (
-    <div className="modal-backdrop" onMouseDown={(event) => { if (closeOnBackdrop && event.target === event.currentTarget) closeRef.current() }}>
+    <div className={`modal-backdrop${closing ? ' is-closing' : ''}`} onMouseDown={(event) => { if (closeOnBackdrop && event.target === event.currentTarget) startClose() }} onAnimationEnd={endClosing}>
       <section ref={dialogRef} className={`modal-frame ${className}`} role="dialog" aria-modal="true" aria-labelledby={labelledBy}>{children}</section>
     </div>
   )
