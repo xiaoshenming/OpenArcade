@@ -1,0 +1,28 @@
+{
+  "id": "vine-link",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "藤蔓花园",
+  "shortTitle": "藤蔓",
+  "description": "以构造式蛇形分割生成六十座花畦，牵引同色藤蔓铺满全园，预算与固定老藤限制逐章叠加。",
+  "category": "cozy",
+  "accent": "#4ade80",
+  "order": 30,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "从同色嫩芽出发拖拽藤蔓，或点选相邻格子逐格延伸。",
+    "藤蔓不能相交或压过其他嫩芽，路径随时可以倒退重画。",
+    "铺满花畦上的每一寸土地即可过关，多余步数会扣除分数。",
+    "预算关卡限制总步数，老藤关卡的部分藤蔓已固定不可改动。"
+  ],
+  "highlights": ["蛇形分割生成", "铺满即胜", "步数预算", "固定老藤", "八色花园"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "mole-beat",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "地鼠节拍",
+  "shortTitle": "地鼠",
+  "description": "九洞草皮上的节奏打地鼠：双洞同现、炸弹鼠、金鼠与连击倍率逐章叠加，seeded 调度 60 关确定可重放。",
+  "category": "arcade",
+  "accent": "#ffb000",
+  "order": 26,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "地鼠按节拍从九洞升出，点击洞口即可敲中得分。",
+    "命中达到配额即过关；时间耗尽未达配额则失败。",
+    "炸弹鼠误击扣 100 分并眩晕半秒，金鼠分值三倍。",
+    "高章节双洞同现节奏更快，连续命中可叠连击倍率。"
+  ],
+  "highlights": ["seeded 调度", "双洞同现", "炸弹鼠眩晕", "金鼠三倍分", "连击倍率", "60关节拍风暴"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

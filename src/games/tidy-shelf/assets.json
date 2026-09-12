@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/tidy-shelf/tidy-shelf.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "1e7fc5131811c44ccffed39274199e854955affcc60cbe1ed5e620fd8dddc434"
+    }
+  ]
+}

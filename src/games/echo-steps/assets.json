@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/echo-steps/echo-steps.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "c655b15cf2c943356800f1fd6ddfac69cd9d1276e0597354029fae424ce20bd5"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { computeClues, generatePuzzle, isLineSolvable, lineClue, lineDone, propagate, puzzleComplete, scoreFor, solveLine } from './logic'
+import { CROSSED, EMPTY, FILLED, computeClues, generatePuzzle, isLineSolvable, lineClue, lineDone, propagate, puzzleComplete, scoreFor, solveLine, weaveLockedRows } from './logic'
 
 describe('silk line solver', () => {
   it('narrows lines to the intersection of viable placements', () => {
@@ -65,6 +65,17 @@ describe('silk scoring and completion helpers', () => {
     expect(lineDone([1, 0, 1], [0, 0, 1])).toBe(false)
     expect(puzzleComplete([1, 0, 1], [1, 2, 1])).toBe(true)
     expect(puzzleComplete([1, 0, 1], [1, 0, 0])).toBe(false)
+  })
+
+  it('prefills only the requested shuttle-locked rows with solution states', () => {
+    const pattern = [1, 0, 1, 0, 1, 1, 0, 0, 1]
+    expect(weaveLockedRows(pattern, 3, [])).toEqual([0, 0, 0, 0, 0, 0, 0, 0, 0])
+    expect(weaveLockedRows(pattern, 3, [0])).toEqual([1, 2, 1, 0, 0, 0, 0, 0, 0])
+    expect(weaveLockedRows(pattern, 3, [2])).toEqual([0, 0, 0, 0, 0, 0, 2, 2, 1])
+    expect(weaveLockedRows(pattern, 3, [0, 1])).toEqual([1, 2, 1, 2, 1, 1, 0, 0, 0])
+    const locked = weaveLockedRows(pattern, 3, [1])
+    expect(lineDone(pattern.slice(3, 6), locked.slice(3, 6))).toBe(true)
+    expect(weaveLockedRows(pattern, 3, [1]).every((mark) => mark === EMPTY || mark === FILLED || mark === CROSSED)).toBe(true)
   })
 })
 

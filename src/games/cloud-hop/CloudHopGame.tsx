@@ -70,8 +70,6 @@ export default function CloudHopGame({ paused, muted, emit, level = 1 }: GameMod
 
   const restart = () => {
     if (pausedRef.current) return
-    worldRef.current = createWorld(gates)
-    setView(snapshot(worldRef.current, spec, gates, wind))
     emitRef.current({ type: 'request-restart' })
   }
 

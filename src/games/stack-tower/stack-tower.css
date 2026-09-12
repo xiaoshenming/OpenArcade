@@ -1,0 +1,47 @@
+.tw-game { position: relative; display: grid; grid-template-rows: auto auto 1fr auto; gap: 9px; min-height: 540px; padding: 20px; overflow: hidden; color: #8b96b8; background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 8%, #2a2413 0%, #0d1122 74%); }
+.tw-game::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(90% 70% at 50% 36%, rgba(244,211,94,.09) 0%, rgba(238,241,251,.02) 46%, rgba(4,7,16,.5) 100%); box-shadow: inset 0 0 130px rgba(4,7,16,.55); }
+.tw-game > * { position: relative; z-index: 1; }
+.tw-game.chapter-1 { background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 8%, #1c2a24 0%, #0d1122 74%); }
+.tw-game.chapter-2 { background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 8%, #14243a 0%, #0d1122 74%); }
+.tw-game.chapter-3 { background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 8%, #241a2c 0%, #0d1122 74%); }
+.tw-game.chapter-4 { background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 8%, #2c1a22 0%, #0d1122 74%); }
+.tw-game.chapter-5 { background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 8%, #2a2413 0%, #0d1122 74%); }
+.tw-readout { display: flex; align-items: center; justify-content: space-between; padding: 7px 12px; border: 1px solid rgba(139,150,184,.24); border-radius: 8px; background: linear-gradient(180deg, rgba(33,40,70,.92), rgba(14,18,35,.88)); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), 0 6px 16px rgba(0,0,0,.35); font-size: 11px; }
+.tw-readout strong { color: #eef1fb; font-size: 12px; font-variant-numeric: tabular-nums; }
+.tw-rule { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 36px; padding: 6px 10px; border: 1px solid rgba(139,150,184,.2); border-left: 3px solid #f4d35e; border-radius: 0 8px 8px 0; background: linear-gradient(180deg, rgba(30,37,64,.92), rgba(16,20,38,.9)); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 8px 20px rgba(0,0,0,.4); font-size: 10px; }
+.tw-rule span { flex: 1; min-width: 140px; color: #eef1fb; font-weight: 700; }
+.tw-rule em { padding: 4px 7px; border-radius: 6px; font-size: 10px; font-style: normal; font-weight: 800; white-space: nowrap; color: #8b96b8; background: rgba(139,150,184,.16); }
+.tw-rule .is-goal { color: #0d1122; background: #f4d35e; box-shadow: 0 0 10px rgba(244,211,94,.5); }
+.tw-rule .is-on { color: #0d1122; background: #2fd6b8; box-shadow: 0 0 10px rgba(47,214,184,.5); }
+.tw-rule .is-off { opacity: .45; }
+.tw-rule .is-ice { color: #0d2a45; background: #7fc3ef; box-shadow: 0 0 10px rgba(127,195,239,.55); }
+.tw-stage { position: relative; display: flex; gap: 10px; align-items: stretch; justify-content: center; min-height: 0; }
+.tw-board { display: grid; flex: 1; max-width: 330px; grid-template-columns: repeat(10, 1fr); grid-template-rows: repeat(14, 1fr); aspect-ratio: 10 / 14; gap: 2px; padding: 5px; box-sizing: border-box; touch-action: none; user-select: none; -webkit-user-select: none; border: 1px solid rgba(139,150,184,.3); border-radius: 12px; background: linear-gradient(180deg, rgba(10,14,28,.92), rgba(6,9,20,.96)); box-shadow: inset 0 0 50px rgba(4,7,16,.7), 0 12px 30px rgba(0,0,0,.5); }
+.tw-game.is-won .tw-board { border-color: rgba(47,214,184,.7); box-shadow: inset 0 0 50px rgba(4,7,16,.7), 0 0 24px rgba(47,214,184,.35); }
+.tw-game.is-lost .tw-board { border-color: rgba(255,95,126,.7); box-shadow: inset 0 0 50px rgba(4,7,16,.7), 0 0 24px rgba(255,95,126,.3); }
+.tw-cell { border-radius: 3px; background: rgba(139,150,184,.07); box-shadow: inset 0 0 0 1px rgba(139,150,184,.05); }
+.tw-cell.is-1 { border: 1px solid rgba(255,244,200,.5); background: linear-gradient(180deg, #ffedb0 0%, #f4d35e 52%, #c99f2e 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 4px rgba(140,95,15,.45), 0 1px 3px rgba(0,0,0,.4); }
+.tw-cell.is-2 { border: 1px solid rgba(160,172,204,.4); background: repeating-linear-gradient(45deg, rgba(20,26,46,.5) 0 4px, transparent 4px 8px), linear-gradient(180deg, #6b7694 0%, #4a5470 60%, #333b52 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 1px 3px rgba(0,0,0,.4); }
+.tw-cell.is-3 { border: 1px solid rgba(255,255,255,.65); background: linear-gradient(180deg, #b7fff1 0%, #2fd6b8 55%, #17a08a 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 0 10px rgba(47,214,184,.65), 0 1px 3px rgba(0,0,0,.4); }
+.tw-cell.is-4 { border: 1px solid rgba(190,230,255,.75); background: repeating-linear-gradient(135deg, rgba(255,255,255,.35) 0 3px, transparent 3px 7px), linear-gradient(180deg, #cfeeff 0%, #7fc3ef 55%, #3f7fc0 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 0 8px rgba(127,195,239,.5), 0 1px 3px rgba(0,0,0,.4); }
+.tw-side { display: flex; flex-direction: column; gap: 8px; width: 104px; }
+.tw-next { display: grid; place-items: center; gap: 4px; padding: 8px 4px; border: 1px solid rgba(139,150,184,.24); border-radius: 10px; background: linear-gradient(180deg, rgba(33,40,70,.9), rgba(14,18,35,.88)); font-size: 10px; font-weight: 700; color: #8b96b8; }
+.tw-mini { display: grid; grid-template-columns: repeat(4, 14px); grid-auto-rows: 14px; gap: 2px; }
+.tw-mini i { border-radius: 2px; background: rgba(139,150,184,.1); }
+.tw-mini i.on { border: 1px solid rgba(255,244,200,.5); background: linear-gradient(180deg, #ffedb0, #f4d35e 60%, #c99f2e); box-shadow: 0 0 6px rgba(244,211,94,.5); }
+.tw-hint { padding: 8px; border: 1px dashed rgba(139,150,184,.3); border-radius: 10px; font-size: 10px; line-height: 1.7; color: #8b96b8; text-align: center; }
+.tw-game button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid rgba(244,211,94,.55); border-radius: 10px; color: #eef1fb; background: linear-gradient(180deg, #39406b 0%, #1c2340 55%, #141a2e 100%); font-weight: 700; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 4px 0 #0a0e1c, 0 10px 20px rgba(0,0,0,.45); transition: transform var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast) var(--ease-standard), filter var(--dur-fast) var(--ease-standard); }
+.tw-game button:hover:not(:disabled) { filter: brightness(1.12); border-color: #ffe08a; }
+.tw-game button:active:not(:disabled) { transform: translateY(3px); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 1px 0 #0a0e1c; }
+.tw-game button:disabled { opacity: .45; cursor: default; }
+.tw-forge { min-height: 44px; color: #241c05; border-color: rgba(47,214,184,.7); background: linear-gradient(180deg, #9df2df 0%, #2fd6b8 60%, #17a08a 100%); }
+.tw-stamp { position: absolute; inset: 0; z-index: 3; display: grid; place-content: center; justify-items: center; gap: 10px; text-align: center; border-radius: 12px; background: rgba(6,9,20,.76); backdrop-filter: blur(4px); animation: tw-stamp-in 340ms var(--ease-spring); }
+.tw-stamp span { color: #eef1fb; font-size: 20px; font-weight: 800; letter-spacing: 4px; text-shadow: 0 0 18px rgba(244,211,94,.55); }
+.tw-stamp strong { color: #f4d35e; font-size: 26px; font-variant-numeric: tabular-nums; }
+.tw-stamp button { min-height: 44px; padding: 0 18px; }
+@keyframes tw-stamp-in { from { opacity: 0; transform: translateY(16px) scale(.94); } }
+.tw-pad { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.tw-pad button { width: 52px; height: 50px; touch-action: manipulation; }
+.tw-pad .tw-restart { flex: 1; width: auto; min-width: 130px; min-height: 50px; }
+.tw-game.reduce-motion *, .tw-game.reduce-motion *::before { animation: none !important; transition: none !important; }
+@media (max-width: 640px) { .tw-game { min-height: 460px; padding: 12px; gap: 7px; } .tw-board { max-width: 100%; } .tw-side { width: 86px; } .tw-mini { grid-template-columns: repeat(4, 12px); grid-auto-rows: 12px; } .tw-pad button { width: 48px; height: 46px; } .tw-pad .tw-restart { min-height: 46px; } .tw-rule { font-size: 9px; } }

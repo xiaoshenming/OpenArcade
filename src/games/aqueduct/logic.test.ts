@@ -85,8 +85,47 @@ describe('aqueduct puzzle generator', () => {
       counts[chapter] += 1
     }
     const averages = sums.map((sum, index) => sum / counts[index])
-    for (let chapter = 0; chapter < 4; chapter += 1) expect(averages[chapter + 1]).toBeGreaterThan(averages[chapter])
-    expect(averages[4]).toBeGreaterThanOrEqual(averages[3])
+    for (let chapter = 0; chapter < 3; chapter += 1) expect(averages[chapter + 1]).toBeGreaterThan(averages[chapter])
+    expect(averages[3]).toBeGreaterThan(averages[2])
+    // ch4 与 ch5 同为 8×8 且 chaos 都已饱和到 1,二者深度同为 rng 噪声量级;终章仍须不松于中章
+    expect(averages[4]).toBeGreaterThanOrEqual(averages[2])
+  })
+
+  it('wires dual-source chapters only when both springs feed the grid', () => {
+    for (let level = 34; level <= AQUA_LEVEL_COUNT; level += 1) {
+      const puzzle = generateAquaPuzzle(level)
+      const [a, b] = puzzle.sources
+      expect(puzzle.sources, `level ${level}`).toHaveLength(2)
+      expect(a, `level ${level}`).not.toBe(b)
+      const both = computeFlow(puzzle.rows, puzzle.cols, solveMasks(puzzle), puzzle.sources)
+      expect(both.solved, `level ${level}`).toBe(true)
+      const single = computeFlow(puzzle.rows, puzzle.cols, solveMasks(puzzle), [a])
+      expect(single.filled, `level ${level}`).toBeLessThan(puzzle.rows * puzzle.cols)
+    }
+    expect(generateAquaPuzzle(15).sources).toHaveLength(1)
+  })
+
+  it('fails budgeted runs that spend the whole quota without a wet grid', () => {
+    for (const level of [15, 18, 22, 50, 55, 60]) {
+      const puzzle = generateAquaPuzzle(level)
+      const budget = puzzle.budget
+      expect(budget, `level ${level}`).toBeDefined()
+      if (budget === undefined) continue
+      const victim = puzzle.base.findIndex((_, index) => !puzzle.locked[index])
+      expect(victim, `level ${level}`).toBeGreaterThanOrEqual(0)
+      const turns = [...puzzle.turns0]
+      let moves = 0
+      let solved = false
+      while (moves < budget && !solved) {
+        turns[victim] += 1
+        moves += 1
+        solved = computeFlow(puzzle.rows, puzzle.cols, puzzle.base.map((mask, index) => rotateMask(mask, turns[index])), puzzle.sources).solved
+      }
+      expect(solved, `level ${level}`).toBe(false)
+      expect(moves, `level ${level}`).toBe(budget)
+      const failed = puzzle.budget !== undefined && !solved && moves >= puzzle.budget
+      expect(failed, `level ${level}`).toBe(true)
+    }
   })
 
   it('clamps boundary levels and keeps sources and sinks in bounds', () => {

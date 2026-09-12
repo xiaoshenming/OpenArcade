@@ -27,6 +27,7 @@ function NumberDriftRound({ puzzle, rule, paused, muted, emit }: RoundProps) {
   const [peekEpoch, setPeekEpoch] = useState(0)
   const completed = useMemo(() => tilesEqual(tiles, puzzle.target), [tiles, puzzle.target])
   const goalShown = !rule.fog || completed || revealed
+  const goalVisible = goalShown && !paused
 
   useEffect(() => audio.setMuted(muted), [audio, muted])
 
@@ -107,9 +108,9 @@ function NumberDriftRound({ puzzle, rule, paused, muted, emit }: RoundProps) {
       </div>
       <div className="drift-stage">
         <div
-          className={`drift-goal ${goalShown ? '' : 'is-fogged'}`}
+          className={`drift-goal ${goalVisible ? '' : 'is-fogged'}`}
           style={{ gridTemplateColumns: `repeat(${puzzle.columns}, 24px)` } as CSSProperties}
-          aria-hidden={!goalShown}
+          aria-hidden={!goalVisible}
         >
           {puzzle.target.map((value, index) => <span key={index}>{value === 0 ? '·' : value}</span>)}
         </div>

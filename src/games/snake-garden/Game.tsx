@@ -15,7 +15,7 @@ const PAD_DIRS = [
   { dir: 'right', icon: ChevronRight, label: '右' },
 ] as const
 
-const cellStyle = (cell: Point): CSSProperties => ({ transform: `translate(calc(${cell.x} * 100%), calc(${cell.y} * 100%))` })
+const cellStyle = (cell: Point): CSSProperties => ({ translate: `calc(${cell.x} * 100%) calc(${cell.y} * 100%)` })
 
 export default function SnakeGardenGame(props: GameModuleProps) {
   const requested = Number(props.level)

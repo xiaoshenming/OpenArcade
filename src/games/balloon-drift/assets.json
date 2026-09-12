@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/balloon-drift/balloon-drift.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "a1d37bb651e2f9c9337b1451f25c226b73c7f6646262e2d124c502ceba9f1aab"
+    }
+  ]
+}

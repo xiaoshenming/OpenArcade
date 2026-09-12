@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/tea-orders/tea-orders.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "55282c72b4f1404fdd46a4633d784051fc05e87b214856a8ff81fbad825ea2b4"
+    }
+  ]
+}

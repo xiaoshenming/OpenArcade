@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/bonsai-prune/bonsai-prune.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "cadd7190c4c29819642cdaf753944a58c0e3334a1860996cd19478d466cdc026"
+    }
+  ]
+}

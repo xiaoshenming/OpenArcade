@@ -1,0 +1,72 @@
+.bonsai-game {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto auto;
+  width: 100%;
+  min-height: 520px;
+  padding: 22px;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 0%, #16241d 0%, #0d1122 74%);
+  box-shadow: inset 0 0 120px rgba(4, 7, 16, .52), inset 0 1px 0 rgba(255, 255, 255, .06);
+}
+.bonsai-game::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.045 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23f)'/%3E%3C/svg%3E"); }
+.bonsai-game.mode-shape { background: radial-gradient(circle at 50% 0%, #182620 0%, #0d1122 74%); }
+.bonsai-game.mode-deep { background: radial-gradient(circle at 50% 0%, #142430 0%, #0d1122 74%); }
+.bonsai-game.mode-budget { background: radial-gradient(circle at 50% 0%, #2a2114 0%, #0d1122 74%); }
+.bonsai-game.mode-fog { background: radial-gradient(circle at 50% 0%, #1d2436 0%, #0d1122 74%); }
+.bonsai-game.mode-master { background: radial-gradient(circle at 50% 0%, #142a22 0%, #0d1122 76%); }
+.bonsai-readout, .bonsai-rule, .bonsai-board, .bonsai-target, .bonsai-actions { position: relative; z-index: 1; }
+.bonsai-readout { display: flex; justify-content: space-between; align-items: center; padding: 7px 12px; border: 1px solid rgba(139,150,184,.24); border-radius: 8px; background: linear-gradient(180deg, rgba(26,38,32,.92), rgba(14,18,32,.88)); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), inset 0 -1px 0 rgba(0,0,0,.42), 0 6px 16px rgba(0,0,0,.35); color: #9db8aa; font-size: 11px; font-weight: 650; }
+.bonsai-readout strong { color: #e4ffe9; font-size: 13px; font-variant-numeric: tabular-nums; text-shadow: 0 0 14px rgba(134,239,172,.4); }
+.bonsai-rule { display: flex; align-items: center; gap: 10px; min-height: 38px; margin-top: 10px; padding: 8px 11px; border: 1px solid rgba(139,150,184,.2); border-left: 3px solid #86efac; border-radius: 0 8px 8px 0; background: linear-gradient(180deg, rgba(28,36,44,.92), rgba(16,20,38,.9)); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), inset 0 -1px 0 rgba(0,0,0,.4), 0 8px 20px rgba(0,0,0,.4); }
+.bonsai-rule span { display: inline-flex; align-items: center; gap: 7px; color: #e8f5ec; font-size: 11px; font-weight: 800; }
+.bonsai-rule span svg { color: #86efac; flex: none; }
+.bonsai-rule small { margin-left: auto; color: #8b96b8; font-size: 10px; }
+.bonsai-board { display: flex; justify-content: center; overflow-x: auto; margin: 10px 0 6px; padding: 18px 10px 8px; border-radius: 14px; background: radial-gradient(rgba(134,239,172,.06) 1px, transparent 1.6px) 0 0 / 17px 17px, linear-gradient(180deg, rgba(21,26,45,.9), rgba(13,17,34,.96)); box-shadow: inset 0 0 0 1px rgba(139,150,184,.16), inset 0 1px 0 rgba(255,255,255,.1), inset 0 14px 34px rgba(0,0,0,.4); }
+.bonsai-tree, .bonsai-tree ul { display: flex; justify-content: center; margin: 0; padding: 0; list-style: none; }
+.bonsai-tree ul { padding-top: 18px; gap: 5px; }
+.bonsai-tree li { position: relative; display: flex; flex-direction: column; align-items: center; padding: 18px 2px 0; }
+.bonsai-tree li::before { content: ''; position: absolute; top: 0; left: 50%; width: 2px; height: 18px; margin-left: -1px; background: linear-gradient(180deg, #6d523c, #a9704c); border-radius: 2px; }
+.bonsai-tree li::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #6d523c, #a9704c); }
+.bonsai-tree li:first-child::after { left: calc(50% + 1px); }
+.bonsai-tree li:last-child::after { right: calc(50% + 1px); }
+.bonsai-tree li:only-child::after { display: none; }
+.bonsai-tree > li::before, .bonsai-tree > li::after { display: none; }
+.bnode { position: relative; display: grid; place-items: center; border: 0; padding: 0; background: transparent; cursor: pointer; transition: transform var(--dur-fast) var(--ease-spring), box-shadow var(--dur-fast) var(--ease-standard), filter var(--dur-fast) var(--ease-standard); }
+.bnode::after { content: ''; position: absolute; left: 50%; top: 50%; width: 44px; height: 44px; transform: translate(-50%, -50%); border-radius: 50%; }
+.bnode:disabled { cursor: default; }
+.bnode.is-twig { width: 17px; height: 17px; border-radius: 50%; background: radial-gradient(circle at 32% 30%, #c89a6f, #7a5638 68%); box-shadow: 0 0 0 2px rgba(255,255,255,.14), 0 3px 7px rgba(0,0,0,.5); }
+.bnode.is-leaf { width: 30px; height: 30px; border-radius: 62% 38% 58% 42% / 48% 60% 40% 52%; background: linear-gradient(145deg, #9df0b6, #2e9e5b 74%); color: #08130c; font-size: 12px; font-weight: 900; box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 4px 9px rgba(0,0,0,.48); }
+.bnode.is-twig:hover { transform: scale(1.35); box-shadow: 0 0 0 2px rgba(255,95,126,.65), 0 0 14px rgba(255,95,126,.55); }
+.bnode.is-leaf:hover { transform: scale(1.14) rotate(-6deg); box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 0 0 2px rgba(255,95,126,.55), 0 0 16px rgba(255,95,126,.45); }
+.bnode:active:not(:disabled) { transform: scale(.9); }
+.bonsai-tree li.is-falling { transform-origin: 50% -10px; animation: branch-fall .56s var(--ease-exit) both; pointer-events: none; }
+.bonsai-game[data-paused] .bonsai-tree li.is-falling { animation-play-state: paused; }
+@keyframes branch-fall { 55% { opacity: .85; } 100% { opacity: 0; transform: rotate(16deg) translateY(46px); } }
+.bonsai-target { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px; padding: 11px 12px; border-radius: 12px; background: linear-gradient(180deg, rgba(26,34,30,.94), rgba(14,18,32,.94)); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), inset 0 -3px 6px rgba(0,0,0,.35), 0 9px 20px rgba(0,0,0,.42); }
+.leaf-chip { display: grid; place-items: center; min-width: 26px; height: 26px; padding: 0 4px; border-radius: 8px; font-size: 11px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.leaf-chip.is-kept { color: #08130c; background: linear-gradient(145deg, #9df0b6, #2e9e5b); box-shadow: 0 0 10px rgba(134,239,172,.4); }
+/* 雾叶与死叶同款雾样式:不悬停/按压就分不清哪片必留哪片该剪 */
+.leaf-chip.is-veiled { position: relative; color: #cbd6f2; background: repeating-linear-gradient(135deg, rgba(203,214,242,.24) 0 4px, transparent 4px 8px), rgba(38,46,72,.8); box-shadow: inset 0 0 0 1px rgba(139,150,184,.4); animation: fog-drift 2.4s ease-in-out infinite; }
+.leaf-chip.is-veiled .leaf-chip-reveal { display: none; position: absolute; inset: 0; place-items: center; border-radius: 8px; color: #0b1224; background: #e7ecff; }
+.leaf-chip.is-veiled:hover .leaf-chip-reveal, .leaf-chip.is-veiled:active .leaf-chip-reveal { display: grid; }
+@keyframes fog-drift { 50% { filter: brightness(1.35); } }
+.bonsai-actions { display: flex; justify-content: center; gap: 9px; margin-top: 12px; }
+.bonsai-button { display: inline-flex; align-items: center; gap: 7px; height: 44px; padding: 0 15px; border: 1px solid rgba(139,150,184,.32); border-radius: 9px; color: #eef1fb; background: linear-gradient(180deg, #2c3560 0%, #1a2138 52%, #131829 100%); font-weight: 700; font-size: 12px; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,.18), inset 0 -2px 4px rgba(0,0,0,.35), 0 3px 0 rgba(5,8,18,.85), 0 8px 18px rgba(0,0,0,.4); transition: border-color .15s ease, transform .15s ease, box-shadow .15s ease; }
+.bonsai-button:hover:not(:disabled) { border-color: rgba(134,239,172,.7); box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 3px 0 rgba(5,8,18,.85), 0 0 18px rgba(134,239,172,.3); }
+.bonsai-button:active:not(:disabled) { transform: translateY(2px); }
+.bonsai-button:disabled { opacity: .35; cursor: not-allowed; }
+.bonsai-panel { position: absolute; inset: 0; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; background: rgba(13,17,34,.88); backdrop-filter: blur(8px); animation: scene-in .35s ease both; }
+.bonsai-panel span { color: #86efac; font-size: 11px; font-weight: 800; letter-spacing: .2em; }
+.bonsai-panel strong { color: #e4ffe9; font-size: clamp(32px, 7vw, 52px); text-shadow: 0 0 18px rgba(134,239,172,.45); }
+.bonsai-panel.is-fail span { color: #ff5f7e; }
+.bonsai-panel.is-fail strong { color: #ffd7de; text-shadow: 0 0 18px rgba(255,95,126,.45); }
+@keyframes scene-in { from { opacity: 0; transform: scale(1.04); } }
+@media (max-width: 640px) {
+  .bonsai-game { min-height: 450px; padding: 13px; }
+  .bonsai-board { margin: 8px 0 4px; padding: 12px 6px 6px; }
+  .bonsai-tree ul { padding-top: 14px; gap: 3px; }
+  .bonsai-tree li { padding-top: 14px; }
+  .bonsai-tree li::before { height: 14px; }
+  .bnode.is-leaf { width: 27px; height: 27px; font-size: 11px; }
+}

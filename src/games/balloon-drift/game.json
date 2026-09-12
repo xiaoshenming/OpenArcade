@@ -1,0 +1,28 @@
+{
+  "id": "balloon-drift",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "气球浮踪",
+  "shortTitle": "气球",
+  "description": "气球自底部升空：辨色出击、避开黑刺、迎着侧风追击串球，seeded 升空表 60 关确定可重放。",
+  "category": "arcade",
+  "accent": "#ff9ec3",
+  "order": 27,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "气球从底部升起，点击即可扎破并获得分数。",
+    "只扎当前目标色，扎错颜色扣 50 分；黑刺球误触扣 1 命。",
+    "目标色气球逃出顶部记 1 次 miss，3 次 miss 即失败。",
+    "侧风关气球正弦漂移，一串三只一次全破额外 +200 分。"
+  ],
+  "highlights": ["seeded 升空表", "辨色规则", "黑刺扣命", "正弦风漂", "串球+200", "60关浮踪风暴"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

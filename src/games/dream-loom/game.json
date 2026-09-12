@@ -1,0 +1,29 @@
+{
+  "id": "dream-loom",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "织梦机",
+  "shortTitle": "织梦",
+  "description": "用画笔、整行整列循环移位与 2x2 旋转，把空白织布复刻成目标图案。",
+  "category": "cozy",
+  "accent": "#c4b5fd",
+  "order": 35,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "先选工具，再点织格施加：画笔切换单格，行列工具循环移位。",
+    "差异格会脉动高亮，当前织布与目标图案完全一致即通关。",
+    "整行整列移位会把花纹推到另一端，善用它搬运图案。",
+    "回旋章节起，2x2 区域可顺时针或逆时针旋转。",
+    "工具用量不超过配额即通关，超出参考步数会扣分。"
+  ],
+  "highlights": ["单格画笔", "循环移位", "2x2 回旋", "差异脉动", "配额挑战"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

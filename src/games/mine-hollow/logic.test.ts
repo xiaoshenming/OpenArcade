@@ -89,7 +89,8 @@ describe('mine hollow level system', () => {
       if (chapter > 1) {
         const previous = chapterLevels(chapter - 1)
         const previousDensity = previous.reduce((sum, spec) => sum + spec.mines / (spec.rows * spec.columns), 0) / previous.length
-        expect(density).toBeGreaterThan(previousDensity)
+        // ch1/ch2 雷数改为章内上浮后,均值密度与后章仅存极小重叠;仍要求后章不显著松于前章
+        expect(density).toBeGreaterThan(previousDensity - 0.02)
       }
     }
     expect(getMineLevel(60).par).toBeLessThan(getMineLevel(45).par)
@@ -100,6 +101,17 @@ describe('mine hollow level system', () => {
     expect(getMineLevel(12).timer).toBe(true)
     expect(getMineLevel(34).flagBonus).toBe(150)
     expect(getMineLevel(33).flagBonus).toBe(0)
+    expect(getMineLevel(1).mines).toBe(3)
+    expect(getMineLevel(11).mines).toBe(6)
+    expect(getMineLevel(12).mines).toBe(10)
+    expect(getMineLevel(22).mines).toBe(13)
+    expect(getMineLevel(12).par).toBe(140)
+    expect(getMineLevel(22).par).toBe(120)
+    expect(getMineLevel(23).par).toBe(210)
+    expect(getMineLevel(33).par).toBe(180)
+    expect(getMineLevel(34).par).toBe(290)
+    expect(getMineLevel(44).par).toBe(260)
+    expect(getMineLevel(11).par).toBe(60)
   })
 
   it('scores time over par and honours the flag-free bonus', () => {

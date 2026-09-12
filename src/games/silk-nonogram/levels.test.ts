@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { computeClues, isLineSolvable } from './logic'
-import { chapterOf, createSilkPuzzle, getSilkLevel, SILK_LEVEL_COUNT, type SilkLevelSpec } from './levels'
+import { computeClues, isLineSolvable, weaveLockedRows } from './logic'
+import { chapterOf, createSilkPuzzle, getSilkLevel, lockedRowsFor, SILK_LEVEL_COUNT, type SilkLevelSpec } from './levels'
 
 const allSpecs = (): SilkLevelSpec[] => Array.from({ length: SILK_LEVEL_COUNT }, (_, index) => getSilkLevel(index + 1))
 
@@ -19,11 +19,12 @@ describe('silk chapter ladder', () => {
   it('introduces one new mechanic per chapter and combines them at the finale', () => {
     const specs = allSpecs()
     expect(specs.filter((spec) => spec.chapter === 2).every((spec) => spec.hints === 3 && spec.mode === 'shuttle')).toBe(true)
-    expect(specs.filter((spec) => spec.chapter === 3).every((spec) => spec.maxMistakes === 3)).toBe(true)
-    expect(specs.filter((spec) => spec.chapter === 4).every((spec) => spec.maxMistakes === 4 && spec.mode === 'tempo')).toBe(true)
-    expect(specs.filter((spec) => spec.chapter === 5).every((spec) => spec.maxMistakes === 5 && spec.timeLimit === 720)).toBe(true)
+    expect(specs.filter((spec) => spec.chapter === 3).every((spec) => spec.maxMistakes === 3 && spec.lockedRows === 0)).toBe(true)
+    expect(specs.filter((spec) => spec.chapter === 4).every((spec) => spec.maxMistakes === 3 && spec.mode === 'tempo' && spec.lockedRows >= 1 && spec.lockedRows <= 2)).toBe(true)
+    expect(specs.filter((spec) => spec.chapter === 5).every((spec) => spec.maxMistakes === 3 && spec.lockedRows === 2 && spec.timeLimit === 720)).toBe(true)
     expect(specs.filter((spec) => spec.chapter < 5).every((spec) => spec.timeLimit === undefined)).toBe(true)
     expect(specs.filter((spec) => spec.chapter < 3).every((spec) => spec.maxMistakes === undefined)).toBe(true)
+    expect(specs.filter((spec) => spec.chapter <= 3).every((spec) => spec.lockedRows === 0)).toBe(true)
     expect([1, 12, 23, 34, 45].map((level) => getSilkLevel(level).hints)).toEqual([0, 3, 1, 0, 0])
     expect(specs.filter((spec) => spec.chapter >= 2).every((spec) => spec.hints <= 3)).toBe(true)
   })
@@ -37,7 +38,48 @@ describe('silk chapter ladder', () => {
     for (let level = 12; level < specs.length; level += 1) {
       expect(specs[level].hints).toBeLessThanOrEqual(specs[level - 1].hints)
     }
+    for (let level = 23; level < specs.length; level += 1) {
+      expect(specs[level].maxMistakes ?? 0, `level ${level + 1}`).toBeLessThanOrEqual(specs[level - 1].maxMistakes ?? 0)
+    }
+    for (let level = 34; level < specs.length; level += 1) {
+      expect(specs[level].lockedRows, `level ${level + 1}`).toBeGreaterThanOrEqual(specs[level - 1].lockedRows)
+    }
     expect(specs.map((spec) => spec.par)).toEqual([...Array(11).fill(60), ...Array(11).fill(100), ...Array(11).fill(180), ...Array(11).fill(300), ...Array(16).fill(480)])
+  })
+})
+
+describe('silk locked rows', () => {
+  it('picks deterministic known-correct rows from chapters four and five', () => {
+    expect(lockedRowsFor(33)).toEqual([])
+    expect(lockedRowsFor(34)).toHaveLength(1)
+    expect(lockedRowsFor(40)).toHaveLength(2)
+    expect(lockedRowsFor(60)).toHaveLength(2)
+    for (const level of [34, 39, 40, 44, 45, 60]) {
+      const first = lockedRowsFor(level)
+      const second = lockedRowsFor(level)
+      expect(first).toEqual(second)
+      const puzzle = createSilkPuzzle(level)
+      expect(first.every((row) => row >= 0 && row < puzzle.size), `level ${level}`).toBe(true)
+      expect(new Set(first).size, `level ${level}`).toBe(first.length)
+      for (const row of first) {
+        expect(puzzle.pattern.slice(row * puzzle.size, row * puzzle.size + puzzle.size).some((cell) => cell === 1), `level ${level} row ${row}`).toBe(true)
+      }
+    }
+  })
+
+  it('prefills locked rows with the exact solution states', () => {
+    for (const level of [34, 41, 52, 60]) {
+      const puzzle = createSilkPuzzle(level)
+      const locked = lockedRowsFor(level)
+      const marks = weaveLockedRows(puzzle.pattern, puzzle.size, locked)
+      expect(marks.every((mark, index) => mark === 0 || locked.includes(Math.floor(index / puzzle.size))), `level ${level}`).toBe(true)
+      for (const row of locked) {
+        const slice = marks.slice(row * puzzle.size, row * puzzle.size + puzzle.size)
+        expect(puzzle.pattern.slice(row * puzzle.size, row * puzzle.size + puzzle.size).every((cell, index) => (cell === 1) === (slice[index] === 1)), `level ${level} row ${row}`).toBe(true)
+        expect(slice.every((mark) => mark !== 0), `level ${level} row ${row}`).toBe(true)
+      }
+      expect(locked.length ? puzzle.rowClues.filter((_, row) => locked.includes(row)).length : 0).toBe(locked.length)
+    }
   })
 })
 
@@ -71,7 +113,7 @@ describe('silk puzzle catalog', () => {
     expect(getSilkLevel(0)).toMatchObject({ level: 1, chapter: 1, size: 5, hints: 0 })
     expect(getSilkLevel(-9)).toMatchObject({ level: 1 })
     expect(getSilkLevel(12.9)).toMatchObject({ level: 12, chapter: 2 })
-    expect(getSilkLevel(999)).toMatchObject({ level: 60, chapter: 5, title: '终局·万丝归一', maxMistakes: 5, timeLimit: 720 })
+    expect(getSilkLevel(999)).toMatchObject({ level: 60, chapter: 5, title: '终局·万丝归一', maxMistakes: 3, lockedRows: 2, timeLimit: 720 })
     for (const level of [0, -3, 999, 45.5]) {
       const puzzle = createSilkPuzzle(level)
       expect(puzzle.lineSolvable).toBe(true)

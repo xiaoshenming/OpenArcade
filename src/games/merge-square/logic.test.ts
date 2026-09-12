@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { birthValueAt, createSpawner, hasAnyMove, maxValue, placeTile, slideGrid, type Cell, type Direction, type Grid, type Tile } from './logic'
+import { birthValueAt, createSpawner, EDGE_CELLS, hasAnyMove, maxValue, placeTile, slideGrid, type Cell, type Direction, type Grid, type Tile } from './logic'
 
 let nextId = 1
-const tile = (value: number, locked = false): Tile => ({ value, locked, id: (nextId += 1) })
+const tile = (value: number, locked = false): Tile => ({ value, locked, fixed: false, id: (nextId += 1) })
+const fixedTile = (value: number): Tile => ({ value, locked: false, fixed: true, id: (nextId += 1) })
 
 function gridWith(row: number, values: (Tile | null)[]): Grid {
   const grid: Grid = Array(16).fill(null)
@@ -38,7 +39,34 @@ describe('merge square rules', () => {
     expect(values(rowOf(barrier.grid, 2))).toEqual([2, 2, 4, null])
     expect(barrier.gained).toBe(4)
     const spawned = placeTile(gridWith(3, [tile(8), null, tile(8), null]), 13, 2, 99, true)
-    expect(spawned[13]).toMatchObject({ value: 2, locked: true, id: 99 })
+    expect(spawned[13]).toMatchObject({ value: 2, locked: true, fixed: false, id: 99 })
+  })
+
+  it('treats fixed anchor tiles as immovable walls that split lanes', () => {
+    const anchor = gridWith(0, [tile(2), fixedTile(2), tile(2), tile(2)])
+    const left = slideGrid(anchor, 'left')
+    expect(values(rowOf(left.grid, 0))).toEqual([2, 2, 4, null])
+    expect(left.grid[1]?.fixed).toBe(true)
+    expect(left.gained).toBe(4)
+    const right = slideGrid(anchor, 'right')
+    expect(values(rowOf(right.grid, 0))).toEqual([2, 2, null, 4])
+    expect(right.grid[1]?.fixed).toBe(true)
+    const crossing = slideGrid(gridWith(1, [null, fixedTile(4), null, tile(2)]), 'left')
+    expect(values(rowOf(crossing.grid, 1))).toEqual([null, 4, 2, null])
+    const sealed = slideGrid(gridWith(2, [tile(2), fixedTile(2), null, null]), 'left')
+    expect(sealed.moved).toBe(false)
+    const wall = gridWith(3, [fixedTile(2), fixedTile(2), tile(4), tile(4)])
+    expect(values(rowOf(slideGrid(wall, 'left').grid, 3))).toEqual([2, 2, 8, null])
+    expect(slideGrid(wall, 'left').gained).toBe(8)
+  })
+
+  it('finds no escape on a board fully walled by fixed tiles', () => {
+    const walled: Grid = Array.from({ length: 16 }, (_, index) => (index === 5 ? fixedTile(2) : tile((index % 3) + 1)))
+    expect(hasAnyMove(walled)).toBe(false)
+    const open = [...walled]
+    open[5] = tile(2)
+    expect(hasAnyMove(open)).toBe(true)
+    expect(maxValue(walled)).toBe(3)
   })
 
   it('treats jammed directions as no-ops', () => {
@@ -80,9 +108,9 @@ describe('merge square rules', () => {
         if (!result.moved) continue
         grid = result.grid
         score += result.gained
-        const cell = spawner.cell(grid, spawnCount)
-        if (cell >= 0) {
-          grid = placeTile(grid, cell, spawner.value(spawnCount), 100 + spawnCount, spawner.locked(spawnCount))
+        const spawned = spawner.spawn(grid, spawnCount, 100 + spawnCount)
+        if (spawned) {
+          grid = spawned.grid
           spawnCount += 1
         }
       }
@@ -93,15 +121,40 @@ describe('merge square rules', () => {
 
   it('spawns only on empty cells and degrades safely on a full board', () => {
     const spawner = createSpawner(23, 0, 0)
-    const dead: Grid = Array.from({ length: 16 }, (_, index) => ({ value: (index + Math.floor(index / 4)) % 2 ? 4 : 2, locked: false, id: index }))
+    const dead: Grid = Array.from({ length: 16 }, (_, index) => ({ value: (index + Math.floor(index / 4)) % 2 ? 4 : 2, locked: false, fixed: false, id: index }))
     const board = [...dead]
     board[2] = null
     board[3] = null
-    const picks = new Set(Array.from({ length: 40 }, (_, index) => spawner.cell(board, index)))
+    let running: Grid = board
+    const picks = new Set<number>()
+    for (let index = 0; index < 40; index += 1) {
+      const outcome = spawner.spawn(running, index, 700 + index)
+      if (outcome) {
+        picks.add(outcome.cell)
+        running = outcome.grid
+      }
+    }
+    expect(picks.size).toBeLessThanOrEqual(2)
     expect([...picks].every((cell) => cell === 2 || cell === 3)).toBe(true)
     expect(hasAnyMove(board)).toBe(true)
-    expect(spawner.cell(dead, 0)).toBe(-1)
+    expect(spawner.spawn(dead, 0, 0)).toBeNull()
     expect(hasAnyMove(dead)).toBe(false)
     expect(maxValue(board)).toBe(4)
+  })
+
+  it('births locked spawns on the shared edge model and unlocked spawns anywhere', () => {
+    const sealed = createSpawner(41, 4, 1)
+    expect(sealed.locked(0)).toBe(true)
+    const interiorOnly: Grid = Array.from({ length: 16 }, (_, index) => ([5, 6, 9, 10].includes(index) ? null : tile(2)))
+    expect(sealed.spawn(interiorOnly, 0, 901)).toBeNull()
+    const edgeFree = [...interiorOnly]
+    edgeFree[0] = null
+    const pinned = sealed.spawn(edgeFree, 1, 902)
+    expect(EDGE_CELLS).toContain(pinned?.cell)
+    expect(pinned?.grid[0]).toMatchObject({ locked: true, fixed: false })
+    const loose = createSpawner(43, 0, 0)
+    const anywhere = loose.spawn(edgeFree, 0, 903)
+    expect([0, 5, 6, 9, 10]).toContain(anywhere?.cell)
+    expect(anywhere?.grid[anywhere?.cell ?? 0]).toMatchObject({ locked: false })
   })
 })

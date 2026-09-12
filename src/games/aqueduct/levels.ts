@@ -49,7 +49,8 @@ export function getAquaLevel(level: number): AquaLevel {
   const safe = Math.min(AQUA_LEVEL_COUNT, Math.max(1, Math.floor(level)))
   const chapter = chapterOf(safe)
   const spec = CHAPTERS[chapter - 1]
-  const chaos = chapter === 1 ? Math.min(1, spec.chaos + (safe - 1) * 0.045) : spec.chaos
+  const inChapter = safe - (1 + (chapter - 1) * 11)
+  const chaos = Math.min(1, spec.chaos + inChapter * (chapter === 1 ? 0.045 : 0.02))
   const lockRatio = spec.locks ? Math.min(0.28, spec.lockRatio + (safe - 23) * 0.012) : 0
   return {
     rows: spec.rows, cols: spec.cols, chapter, dual: spec.dual, fog: spec.fog, budgeted: spec.budgeted,

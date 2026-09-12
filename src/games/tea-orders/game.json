@@ -1,0 +1,30 @@
+{
+  "id": "tea-orders",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "茶韵流香",
+  "shortTitle": "茶韵",
+  "description": "记住茶馆客人的订单,按序点用原料冲泡,在渐隐订单、双客交替、逆序出品与干扰茶架中端出每一盏好茶。",
+  "category": "cozy",
+  "accent": "#f4a583",
+  "order": 32,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "按客人订单依次点击原料,全部冲对即出一单。",
+    "亮起的头像是当前要服务的客人,跟着他的订单走。",
+    "渐隐关的订单展示数秒后隐藏,凭记忆继续冲泡。",
+    "带 ⇄ 徽记的客人要求把订单倒序冲出。",
+    "每单只有两条命,点错两次该单作废,废三单即失败。",
+    "高阶关的茶架混入无关原料,别被干扰迷惑。"
+  ],
+  "highlights": ["订单记忆", "双客交替", "逆序出品", "渐隐订单", "干扰茶架", "连对奖励"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

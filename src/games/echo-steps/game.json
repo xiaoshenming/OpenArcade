@@ -1,0 +1,29 @@
+{
+  "id": "echo-steps",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "记忆星轨",
+  "shortTitle": "星轨",
+  "description": "六颗星传感器依次闪烁，记住星轨并复现：倒叙、静默重播与干扰星闪将逐章登场。",
+  "category": "cozy",
+  "accent": "#a78bfa",
+  "order": 28,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "观察六颗星的闪烁顺序，灯灭后按同样顺序点亮它们。",
+    "每步得分乘以章节倍率，零失误通关额外加 300 分。",
+    "错三次星轨中断；从第四章起重播轮只亮不响。",
+    "倒叙章要从最后一个星反向复现整个序列。",
+    "终章的干扰星会伴随闪烁，只认序列星本尊。"
+  ],
+  "highlights": ["六星传感器", "章节提速", "倒叙复现", "静默重播", "干扰星闪", "三命挑战"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

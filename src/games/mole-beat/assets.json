@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/mole-beat/mole-beat.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "adfbf99974a7ade7dd2136573e2dd715db400bd17e3f5e4a54e997ba041f48a2"
+    }
+  ]
+}

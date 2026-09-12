@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/meadow-run/meadow-run.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "197d2904fafd68ae95924b21d549c404deeb57b7607e3878d332c552c2027f82"
+    }
+  ]
+}

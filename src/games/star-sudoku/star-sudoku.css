@@ -1,7 +1,9 @@
 .sudoku-game { --accent: #7c8cf8; position: relative; display: grid; grid-template-rows: auto auto 1fr auto; min-height: 540px; padding: 20px; overflow: hidden; background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #1a2144 0%, #0d1122 76%); }
 .sudoku-game::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(88% 70% at 50% 40%, rgba(124,140,248,.12) 0%, rgba(124,140,248,.03) 46%, rgba(4,7,16,.52) 100%); box-shadow: inset 0 0 130px rgba(4,7,16,.5); }
 .sudoku-game.chapter-1 { --accent: #2fd6b8; }
-.sudoku-game.chapter-2 { --accent: #ffc94d; }
+/* 第二章「霜锁星域」accent 微调：纯金与通用高亮金同源，改 frost 蓝呼应冻结机制，
+   并与冻结格的浅冰蓝 #9fd8ff、默认靛蓝 #7c8cf8 拉开层次。 */
+.sudoku-game.chapter-2 { --accent: #7fc9f8; }
 .sudoku-game.chapter-4 { --accent: #ff5f7e; }
 .sudoku-game.chapter-5 { --accent: #ff7a92; }
 .sudoku-readout, .sudoku-rule, .sudoku-board, .sudoku-pad { position: relative; z-index: 1; }
@@ -23,6 +25,9 @@
 .sudoku-cell.is-same { background: rgba(255,201,77,.16); }
 .sudoku-cell.is-selected { background: rgba(124,140,248,.30); box-shadow: inset 0 0 0 2px var(--accent); }
 .sudoku-cell.is-wrong { color: #ff5f7e; text-shadow: 0 0 10px rgba(255,95,126,.5); animation: sudoku-shake 320ms var(--ease-standard); }
+.sudoku-cell.is-frozen { color: #9fd8ff; text-shadow: 0 0 10px rgba(140,200,255,.55); animation: none; background: linear-gradient(180deg, rgba(64,120,180,.26), rgba(24,40,72,.38)); box-shadow: inset 0 0 0 1px rgba(140,200,255,.45); cursor: not-allowed; }
+.sudoku-freeze { position: absolute; right: 2px; bottom: 1px; color: #9fd8ff; font-size: 10px; font-style: normal; line-height: 1; opacity: .95; font-variant-numeric: tabular-nums; pointer-events: none; }
+.sudoku-live { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 .sudoku-notes { position: absolute; inset: 1px; display: grid; grid-template-columns: repeat(2, 1fr); pointer-events: none; }
 .sudoku-notes.cols-3 { grid-template-columns: repeat(3, 1fr); }
 .sudoku-notes i { display: grid; place-items: center; font-style: normal; font-size: clamp(7px, calc(min(92vw, 472px) / var(--cells) * .22), 12px); color: #8b96b8; opacity: .28; }

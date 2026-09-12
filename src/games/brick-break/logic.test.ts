@@ -3,6 +3,7 @@ import {
   BALL_RADIUS,
   FIELD,
   MAX_DEFLECT,
+  MAX_DROPS,
   PADDLE_TOP,
   SCORE_PER_BRICK,
   WIDE_BONUS,
@@ -161,6 +162,26 @@ describe('brick-break boundaries', () => {
     const over: GameState = { ...state, status: 'over' }
     expect(step(over, 0.016)).toBe(over)
     expect(launch(over)).toBe(over)
+  })
+
+  it('honours the dropChance boundaries and keeps drops frozen while paused', () => {
+    const withDrop: GameState = { ...createGameState(plan(23)), drops: [{ id: 4, x: 200, y: 300, kind: 'slow' }], effects: { wide: 0, slow: 5 } }
+    const paused = step(withDrop, 0)
+    expect(paused).toBe(withDrop)
+    expect(paused.drops[0].y).toBe(300)
+    const zeroChance = step(freeBall({ ...createGameState(plan(1)), dropChance: 0 }, 171, 126, 0, -260), 0.1)
+    expect(zeroChance.events).toContain('brick')
+    expect(zeroChance.drops).toHaveLength(0)
+    const alwaysChance = step(freeBall({ ...createGameState(plan(1)), dropChance: 1 }, 171, 126, 0, -260), 0.1)
+    expect(alwaysChance.events).toContain('brick')
+    expect(alwaysChance.combo).toBe(1)
+    expect(alwaysChance.drops).toHaveLength(1)
+    expect(['wide', 'slow', 'multi']).toContain(alwaysChance.drops[0].kind)
+    expect(alwaysChance.drops[0].x).toBeGreaterThan(0)
+    expect(alwaysChance.drops[0].x).toBeLessThan(FIELD.width)
+    const capped = step(freeBall({ ...createGameState(plan(1)), dropChance: 1 }, 217, 40, 0, 3600), 0.05)
+    expect(capped.drops.length).toBeGreaterThan(0)
+    expect(capped.drops.length).toBeLessThanOrEqual(MAX_DROPS)
   })
 
   it('bounces off side walls and costs a life when the last ball falls', () => {

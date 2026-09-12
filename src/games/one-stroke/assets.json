@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/one-stroke/one-stroke.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "9a7265afc82078e3c1980b4b5dbd7c971ea6b375befabdd8642f7ef5aa6f485f"
+    }
+  ]
+}

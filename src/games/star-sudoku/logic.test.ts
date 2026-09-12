@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { mulberry32 } from '../../platform/rng'
-import { bit, boxOf, clearPeerNotes, computeScore, countSolutions, digHoles, fillGrid, hasConflict, isPuzzleSolved, peerIndexes, specFor, toggleNote } from './logic'
+import { bit, boxOf, clearPeerNotes, computeScore, countSolutions, decrementFrozen, digHoles, FROZEN_SECONDS, fillGrid, hasConflict, isPuzzleSolved, moveSelection, peerIndexes, specFor, toggleNote } from './logic'
 
 const rowsOf = (grid: number[], size: number, row: number) => grid.slice(row * size, row * size + size)
 const colsOf = (grid: number[], size: number, col: number) => grid.filter((_, index) => index % size === col)
@@ -73,6 +73,28 @@ describe('star sudoku core', () => {
     expect(computeScore(0, 50, 40, true)).toBe(970)
     expect(computeScore(3, 400, 360, true)).toBe(700)
     expect(computeScore(20, 6000, 40, true)).toBe(100)
+  })
+
+  it('moves the keyboard selection with wrap-around in every direction', () => {
+    expect(FROZEN_SECONDS).toBe(3)
+    expect(moveSelection(null, 'left', 4)).toBe(0)
+    expect(moveSelection(null, 'down', 9)).toBe(0)
+    expect(moveSelection(0, 'up', 4)).toBe(12)
+    expect(moveSelection(0, 'left', 4)).toBe(3)
+    expect(moveSelection(5, 'right', 4)).toBe(6)
+    expect(moveSelection(5, 'down', 4)).toBe(9)
+    expect(moveSelection(5, 'up', 4)).toBe(1)
+    expect(moveSelection(14, 'down', 4)).toBe(2)
+    expect(moveSelection(10, 'right', 6)).toBe(11)
+  })
+
+  it('thaws frozen cells one second at a time', () => {
+    expect(decrementFrozen({})).toEqual({})
+    expect(decrementFrozen({ 3: 1 })).toEqual({})
+    expect(decrementFrozen({ 3: 3, 7: 2 })).toEqual({ 3: 2, 7: 1 })
+    let frozen: Record<number, number> = { 5: FROZEN_SECONDS }
+    for (let tick = 0; tick < FROZEN_SECONDS; tick += 1) frozen = decrementFrozen(frozen)
+    expect(frozen).toEqual({})
   })
 
   it('only reports solved boards when every entry matches the unique solution', () => {

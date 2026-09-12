@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/rhythm-lane/rhythm-lane.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "ff3a8d9222b76b646039dbddbcf80f94b7b84c996703072328bc5933e13c4bbd"
+    }
+  ]
+}

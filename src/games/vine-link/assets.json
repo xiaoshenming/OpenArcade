@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/vine-link/vine-link.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "56c8c779a17aa25132b82ef8652c0593fbbdb4278d2ebbb6f4422832e6c4039e"
+    }
+  ]
+}

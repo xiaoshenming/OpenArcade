@@ -1,0 +1,29 @@
+{
+  "id": "meteor-corridor",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "陨石回廊",
+  "shortTitle": "回廊",
+  "description": "在回廊中横移飞船，闪避直线、斜向、分裂与追踪陨石，撑满存活时长并抓准擦弹赏分。",
+  "category": "arcade",
+  "accent": "#b0a8ff",
+  "order": 22,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "拖动舞台或按住左右按钮横移飞船，躲开下落的陨石。",
+    "存活满目标时长即过关，每存活 1 秒获得 10 分。",
+    "被陨石命中扣 1 格护盾并获得短暂无敌，护盾归零即失败。",
+    "章节逐步加入斜向、分裂与追踪陨石，当前规则显示在顶部。",
+    "终章开启擦弹赏分：贴近陨石而未被击中，每枚加 25 分。"
+  ],
+  "highlights": ["直线陨石", "斜向偏航", "分裂碎片", "追踪猎手", "擦弹赏分", "回廊风暴"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

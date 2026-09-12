@@ -161,3 +161,26 @@ export function computeScore(errors: number, elapsed: number, par: number, stric
   const overtimeSteps = Math.floor(Math.max(0, elapsed - par) / 10)
   return Math.min(10000, Math.max(100, 1000 - errors * 60 - overtimeSteps * (strict ? 30 : 15)))
 }
+
+export const FROZEN_SECONDS = 3
+
+export type MoveDirection = 'up' | 'down' | 'left' | 'right'
+
+export function moveSelection(current: number | null, direction: MoveDirection, size: number): number {
+  if (current === null) return 0
+  const row = Math.floor(current / size)
+  const col = current % size
+  if (direction === 'up') return ((row - 1 + size) % size) * size + col
+  if (direction === 'down') return ((row + 1) % size) * size + col
+  if (direction === 'left') return row * size + (col - 1 + size) % size
+  return row * size + (col + 1) % size
+}
+
+export function decrementFrozen(frozen: Readonly<Record<number, number>>): Record<number, number> {
+  const next: Record<number, number> = {}
+  for (const [index, seconds] of Object.entries(frozen)) {
+    const left = seconds - 1
+    if (left > 0) next[Number(index)] = left
+  }
+  return next
+}

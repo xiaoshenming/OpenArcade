@@ -230,8 +230,7 @@ function injectSwap(board: BoardState): BoardState {
   return board
 }
 
-export function createGemBoard(level: number): BoardState {
-  const spec = getGemLevel(level)
+export function createGemBoard(level: number, spec: GemLevel = getGemLevel(level)): BoardState {
   for (let salt = 0; salt < 120; salt += 1) {
     const board = buildBoard(spec, salt)
     if (hasValidSwap(board.colors, board.locks)) return board

@@ -1,0 +1,29 @@
+{
+  "id": "tidy-shelf",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "收纳小筑",
+  "shortTitle": "收纳",
+  "description": "用相邻交换把架子整理成同类相邻、尺寸有序，在预算步数内完成归置。",
+  "category": "cozy",
+  "accent": "#fbbf24",
+  "order": 34,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点选一件物品，再点它与相邻的物品即可交换位置。",
+    "同类型物品必须连续排列，且类型内按尺寸从小到大。",
+    "结霜物品已经就位且不可移动，请绕开它们规划路线。",
+    "交错章节中，指定的两种颜色必须一隔一交替排列。",
+    "交换次数不超过预算即通关，超出参考步数会扣分。"
+  ],
+  "highlights": ["相邻交换", "尺寸归组", "冰封定位", "双色交错", "预算挑战"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

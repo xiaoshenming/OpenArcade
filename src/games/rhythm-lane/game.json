@@ -1,0 +1,30 @@
+{
+  "id": "rhythm-lane",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "节奏轨道",
+  "shortTitle": "节奏",
+  "description": "四轨下落式音击：在判定线上捕捉 Perfect，穿越双押和弦、变速窗口与热身保护，完成六十关节奏试炼。",
+  "category": "arcade",
+  "accent": "#ff5f7e",
+  "order": 24,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "DFJK 或方向键对应四条轨道，触屏可直接点按底部轨道键。",
+    "音符落到判定线时击打：±60ms 为 Perfect，±130ms 为 Good。",
+    "血量 100：Miss 扣 12、Good 扣 4，血量归零立即失败。",
+    "双押关同一瞬间两轨齐落；变速段下落突然放缓，盯紧减速标记。",
+    "终章热身段 Miss 伤害减半；曲目播完且血量大于 0 即通关。",
+    "Perfect 300 分、Good 150 分，每 10 连击额外奖励 50 分。"
+  ],
+  "highlights": ["四轨下落", "±60ms 判定", "双押和弦", "变速窗口", "热身血量保护", "连击奖励"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

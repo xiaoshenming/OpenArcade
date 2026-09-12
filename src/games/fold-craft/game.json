@@ -1,0 +1,29 @@
+{
+  "id": "fold-craft",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "折纸工坊",
+  "shortTitle": "折纸",
+  "description": "纯函数折叠模拟驱动的穿刺谜题：推演折痕与纸层，找出每个孔在原纸上的全部落点。",
+  "category": "cozy",
+  "accent": "#d4a5ff",
+  "order": 31,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "先看折痕演示与折后穿刺点，再在原纸上标记所有孔位。",
+    "每次对折都会让纸层翻倍，孔会洞穿该位置的全部纸层。",
+    "镜像章每个穿刺点都会在中心对称位自动开第二孔，两处落点都要标记。",
+    "点选原纸格子标记孔位，提交后用展开动画验证对错。",
+    "错一个孔位扣一心，三心用尽则失败；终章四折限时，超时直接判负。"
+  ],
+  "highlights": ["折痕演示", "层叠映射", "镜像双孔", "多孔穿刺", "四折硬限时"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

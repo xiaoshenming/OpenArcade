@@ -1,0 +1,30 @@
+{
+  "id": "window-slide",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "拼图窗景",
+  "shortTitle": "窗景",
+  "description": "旋转错位的瓦片，让程序生成的山水窗景重新对齐。迷雾瓦、联动瓦与预算会层层加码。",
+  "category": "cozy",
+  "accent": "#67e8f9",
+  "order": 36,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "每块瓦片显示窗景的一角，点击即顺时针旋转九十度。",
+    "天空在上、山峦在下，对照缩略图判断每块瓦片的朝向。",
+    "参考步数是打乱时的旋转次数，超出部分每步扣十二分。",
+    "联动瓦成对同转，点一块两块一起转，规划好先后次序。",
+    "灰雾瓦遮住图案，靠邻瓦与缩略图推断朝向。",
+    "预算关超步即失败；迷雾关缩略图八秒后隐去，重看一次扣三十分。"
+  ],
+  "highlights": ["程序山水", "旋转复原", "步数预算", "联动瓦", "迷雾瓦"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

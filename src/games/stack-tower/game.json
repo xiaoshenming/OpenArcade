@@ -1,0 +1,30 @@
+{
+  "id": "stack-tower",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "方块堆塔",
+  "shortTitle": "堆塔",
+  "description": "六十关轻量俄罗斯方块：垃圾行、限定块序、高速与一次性重铸逐章叠加，消除目标行数即可通关，堆顶溢出或方块耗尽则失败。",
+  "category": "arcade",
+  "accent": "#f4d35e",
+  "order": 23,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "左右键移动、下键加速、上键旋转（带踢墙）、空格速降锁定。",
+    "移动端使用底部按钮组，第五章节解锁一次性重铸清底行。",
+    "填满整行即消除：单行 100、双行 300、三行 500、四行 800，乘以章节速度档。",
+    "达成目标实心行数即通关；含垃圾块的消除不计入目标。",
+    "方块预算耗尽或新方块无法进入场地即失败。",
+    "第四章节起只轮换五种方块，序列完全由关卡种子决定。"
+  ],
+  "highlights": ["种子块序", "踢墙旋转", "垃圾行", "限定块序", "重铸技能", "章节速度档"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

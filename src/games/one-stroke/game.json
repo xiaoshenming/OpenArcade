@@ -1,0 +1,29 @@
+{
+  "id": "one-stroke",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "一笔千线",
+  "shortTitle": "一笔",
+  "description": "从旗标点出发一笔画遍点阵：每条边恰走一次，预算与契约锁边在后续章节步步收紧。",
+  "category": "cozy",
+  "accent": "#f0a35e",
+  "order": 29,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "从旗标交点出发，点击相邻交点沿边前进。",
+    "每条边只能走一次，画遍所有边即通关。",
+    "重复已走边、点击不相邻交点或乱序踏上契约边都算失误，扣一命。",
+    "预算章节落笔超耗直接失败，规划好再动笔。",
+    "契约关的金色虚线边必须按标号顺序经过，乱序即违约。"
+  ],
+  "highlights": ["欧拉一笔画", "3×3 到 6×6 点阵", "步数预算", "契约锁边", "构造保证可解", "三命挑战"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

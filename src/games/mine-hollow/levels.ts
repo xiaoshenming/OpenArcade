@@ -41,19 +41,19 @@ interface ChapterPreset {
 
 const presets: readonly ChapterPreset[] = [
   {
-    mode: 'garden', rows: 6, columns: 6, mines: () => 3, par: () => 60, safeRadius: 1, flagBonus: 0, timer: false,
+    mode: 'garden', rows: 6, columns: 6, mines: (offset) => 3 + Math.floor(offset / 3), par: () => 60, safeRadius: 1, flagBonus: 0, timer: false,
     title: '初境·微光', detail: '6x6 小场，首击必开一片空白',
   },
   {
-    mode: 'clocked', rows: 8, columns: 8, mines: () => 10, par: () => 140, safeRadius: 1, flagBonus: 0, timer: true,
+    mode: 'clocked', rows: 8, columns: 8, mines: (offset) => 10 + Math.floor(offset / 3), par: (level) => 140 - (level - 12) * 2, safeRadius: 1, flagBonus: 0, timer: true,
     title: '回廊·滴漏', detail: '计时 par 亮起，超时每 10 秒扣 10 分',
   },
   {
-    mode: 'deep', rows: 10, columns: 10, mines: (offset) => 15 + Math.floor(offset / 3), par: () => 210, safeRadius: 1, flagBonus: 0, timer: true,
+    mode: 'deep', rows: 10, columns: 10, mines: (offset) => 15 + Math.floor(offset / 3), par: (level) => 210 - (level - 23) * 3, safeRadius: 1, flagBonus: 0, timer: true,
     title: '深径·密雷', detail: '10x10 密雷场，雷数逐关上浮',
   },
   {
-    mode: 'flagless', rows: 12, columns: 12, mines: (offset) => 24 + Math.floor(offset / 4), par: () => 290, safeRadius: 1, flagBonus: 150, timer: true,
+    mode: 'flagless', rows: 12, columns: 12, mines: (offset) => 24 + Math.floor(offset / 4), par: (level) => 290 - (level - 34) * 3, safeRadius: 1, flagBonus: 150, timer: true,
     title: '远征·无旗', detail: '不用旗帜完成可获 150 分奖励',
   },
   {

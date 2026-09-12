@@ -1,0 +1,30 @@
+{
+  "id": "meadow-run",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "跳跳旅人",
+  "shortTitle": "旅人",
+  "description": "单键横版跑酷：长按高跳、二段飞越、下蹲避鸟，沿物理可达的障碍流奔向距离配额与金币串。",
+  "category": "arcade",
+  "accent": "#6bd6a3",
+  "order": 25,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "旅人自动前进：点按舞台、空格或上键起跳，长按跳得更高。",
+    "越过木墩与沟壑抵达距离配额；每 10m 得 10 分，金币每枚 50 分。",
+    "每关 3 条命：撞障或落坑各扣一命，护盾扣完即失败。",
+    "第三章解锁空中二段跳，悬空平台上藏着额外金币。",
+    "第四章起疾风鸟迎面俯冲，按下键蹲伏让它从头顶掠过。",
+    "终章把双障、沟壑、飞鸟与金币串全部合流，冲向草原尽头。"
+  ],
+  "highlights": ["长按高跳", "物理可达谱面", "二段跳解锁", "疾风鸟蹲伏", "金币串奖励", "60 关合流"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

@@ -190,6 +190,17 @@ export function puzzleComplete(pattern: readonly number[], marks: readonly CellM
   return pattern.every((cell, index) => cell === EMPTY || marks[index] === FILLED)
 }
 
+export function weaveLockedRows(pattern: readonly number[], size: number, rows: readonly number[]): CellMark[] {
+  const marks = Array<CellMark>(pattern.length).fill(EMPTY)
+  for (const row of rows) {
+    for (let col = 0; col < size; col += 1) {
+      const index = row * size + col
+      marks[index] = pattern[index] === FILLED ? FILLED : CROSSED
+    }
+  }
+  return marks
+}
+
 export function scoreFor(mistakes: number, elapsed: number, par: number): number {
   return Math.max(100, 1000 - mistakes * 80 - Math.max(0, Math.floor((elapsed - par) / 10)) * 12)
 }

@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/window-slide/window-slide.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "59531d14a27bd242130922caa115e2a58f5fe3a6bb5216af2b606f80d4da0602"
+    }
+  ]
+}

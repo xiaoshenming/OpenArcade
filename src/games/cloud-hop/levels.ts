@@ -52,7 +52,7 @@ const chapterCopy = [
   ['风暴之心', '浮门、罡风与金币门叠加,穿过金环另得重赏'],
 ] as const
 const gapRange = [[27, 25], [24, 22], [21.5, 20], [19.5, 18], [17.5, 16]] as const
-const speedBase = [26, 29, 32, 33.2, 34.4] as const
+const speedBase = [26, 29, 32, 33.6, 35] as const
 const spacingBase = [26, 25, 26, 26, 27] as const
 const deltaMax = [7, 8, 5, 3, 2] as const
 

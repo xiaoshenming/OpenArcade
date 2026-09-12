@@ -1,0 +1,275 @@
+.bd-game {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: min(560px, 100%);
+  margin: 0 auto;
+  color: var(--ink, #eef1fb);
+}
+
+.bd-readout {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted, #8b96b8);
+}
+
+.bd-readout strong {
+  font-size: 20px;
+  color: var(--ink, #eef1fb);
+  font-variant-numeric: tabular-nums;
+}
+
+.bd-rule {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--line, #232a44);
+  border-radius: 12px;
+  background: var(--surface, #151a2d);
+  font-size: 12px;
+}
+
+.bd-rule span {
+  color: var(--muted, #8b96b8);
+}
+
+.bd-rule em {
+  font-style: normal;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255, 158, 195, 0.12);
+  color: var(--ink, #eef1fb);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.bd-rule em.is-target {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bd-rule em.is-target::before {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.bd-rule em.is-target.bd-red::before { background: #ff5f7e; }
+.bd-rule em.is-target.bd-gold::before { background: #ffc94d; }
+.bd-rule em.is-target.bd-teal::before { background: #2fd6b8; }
+.bd-rule em.is-target.bd-violet::before { background: #b18cff; }
+
+.bd-rule em.is-lives {
+  background: rgba(255, 95, 126, 0.14);
+  color: var(--coral, #ff5f7e);
+  letter-spacing: 2px;
+}
+
+.bd-rule em.is-time {
+  background: rgba(47, 214, 184, 0.12);
+  color: var(--teal, #2fd6b8);
+}
+
+.bd-rule em.is-wind,
+.bd-rule em.is-chain {
+  background: rgba(255, 201, 77, 0.14);
+  color: var(--gold, #ffc94d);
+}
+
+.bd-stage {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  max-height: 560px;
+  border: 1px solid var(--line, #232a44);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #131a30 0%, #0d1122 55%, #101628 100%);
+  overflow: hidden;
+  cursor: crosshair;
+  touch-action: manipulation;
+}
+
+.bd-field {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 480px;
+  height: 640px;
+  transform-origin: top left;
+}
+
+.bd-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.bd-balloon,
+.bd-spike,
+.bd-burst {
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform;
+}
+
+.bd-balloon {
+  width: 68px;
+  height: 78px;
+  border-radius: 50% 50% 46% 46%;
+  animation: bd-float 1.6s ease-in-out infinite alternate;
+}
+
+.bd-balloon::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  width: 10px;
+  height: 8px;
+  transform: translateX(-50%);
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+  background: inherit;
+}
+
+.bd-balloon::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -30px;
+  width: 2px;
+  height: 26px;
+  background: linear-gradient(180deg, rgba(238, 241, 251, 0.4), rgba(238, 241, 251, 0));
+}
+
+.bd-balloon.is-red { background: radial-gradient(58% 52% at 34% 30%, #ffb3c0 0%, #ff5f7e 58%, #d23b5c 100%); }
+.bd-balloon.is-gold { background: radial-gradient(58% 52% at 34% 30%, #ffe9ad 0%, #ffc94d 58%, #d29a1f 100%); }
+.bd-balloon.is-teal { background: radial-gradient(58% 52% at 34% 30%, #a6f0e0 0%, #2fd6b8 58%, #17947e 100%); }
+.bd-balloon.is-violet { background: radial-gradient(58% 52% at 34% 30%, #d9c8ff 0%, #b18cff 58%, #7f5cd6 100%); }
+
+.bd-balloon.is-chain {
+  box-shadow: 0 0 0 2px rgba(255, 201, 77, 0.55), 0 0 14px rgba(255, 201, 77, 0.35);
+}
+
+.bd-spike {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(60% 60% at 36% 32%, #4a5378 0%, #232a44 60%, #101527 100%);
+}
+
+.bd-spike::before,
+.bd-spike::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  background:
+    linear-gradient(45deg, transparent 46%, #3a4160 46%, #3a4160 54%, transparent 54%),
+    linear-gradient(-45deg, transparent 46%, #3a4160 46%, #3a4160 54%, transparent 54%),
+    linear-gradient(0deg, transparent 46%, #3a4160 46%, #3a4160 54%, transparent 54%),
+    linear-gradient(90deg, transparent 46%, #3a4160 46%, #3a4160 54%, transparent 54%);
+  border-radius: 6px;
+}
+
+.bd-spike::after {
+  transform: rotate(45deg);
+}
+
+.bd-burst {
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  animation: bd-burst 380ms var(--ease-exit, ease-out) forwards;
+}
+
+.bd-burst.is-red { box-shadow: 0 0 0 3px #ff5f7e; }
+.bd-burst.is-gold { box-shadow: 0 0 0 3px #ffc94d; }
+.bd-burst.is-teal { box-shadow: 0 0 0 3px #2fd6b8; }
+.bd-burst.is-violet { box-shadow: 0 0 0 3px #b18cff; }
+.bd-burst.is-spike { box-shadow: 0 0 0 3px #4a5378; }
+
+.bd-stamp {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 8px;
+  background: rgba(10, 13, 26, 0.84);
+  backdrop-filter: blur(3px);
+  text-align: center;
+}
+
+.bd-stamp span {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.bd-stamp strong {
+  font-size: 30px;
+  color: var(--gold, #ffc94d);
+  font-variant-numeric: tabular-nums;
+}
+
+.bd-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.bd-stamp button,
+.bd-restart {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--line, #232a44);
+  border-radius: 12px;
+  background: var(--surface, #151a2d);
+  color: var(--ink, #eef1fb);
+  cursor: pointer;
+  font-size: 14px;
+  transition: transform var(--dur-fast, 120ms) var(--ease-standard, ease), border-color var(--dur-fast, 120ms) var(--ease-standard, ease);
+}
+
+.bd-stamp button:hover,
+.bd-restart:not(:disabled):hover {
+  border-color: var(--coral, #ff9ec3);
+  transform: translateY(-1px);
+}
+
+.bd-restart:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+@keyframes bd-float {
+  from { filter: brightness(1); }
+  to { filter: brightness(1.16); }
+}
+
+@keyframes bd-burst {
+  from { transform: scale(1); opacity: 0.95; }
+  to { transform: scale(7); opacity: 0; }
+}
+
+@media (max-width: 640px) {
+  .bd-stage {
+    border-radius: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bd-balloon,
+  .bd-burst {
+    animation: none;
+  }
+}

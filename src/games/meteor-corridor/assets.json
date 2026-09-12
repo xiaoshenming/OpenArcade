@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/meteor-corridor/meteor-corridor.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "a974c7fdc84cc57e14e7294cbec30701cec4c93b2814d5a0d322a563f408f89b"
+    }
+  ]
+}

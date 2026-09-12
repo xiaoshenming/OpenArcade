@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { COLS, ROWS, START, queueDir, sameCell, step, type GameState } from './logic'
+import { COLS, ROWS, START, pickFree, queueDir, sameCell, step, type GameState, type Point } from './logic'
 import { LEVEL_COUNT, buildWalls, createSnakeState, getSnakeLevel, isConnected } from './levels'
 
 describe('snake garden levels', () => {
@@ -140,5 +140,40 @@ describe('snake garden levels', () => {
     const second = step(first)
     expect(second.dir).toBe('left')
     expect(second.snake[0]).toEqual({ x: START.x - 1, y: START.y - 1 })
+  })
+
+  it('never drops spawns on blocked cells and judges the tail-cell boundary', () => {
+    const grid: Point[] = []
+    for (let y = 0; y < ROWS; y += 1) for (let x = 0; x < COLS; x += 1) grid.push({ x, y })
+    const sparse = pickFree(4242, [{ x: START.x, y: START.y }, { x: 0, y: 0 }])
+    expect([...grid].filter((cell) => sameCell(cell, sparse.cell))).toHaveLength(1)
+    const exceptCorner = grid.filter((cell) => !(cell.x === COLS - 1 && cell.y === ROWS - 1))
+    expect(pickFree(99, exceptCorner).cell).toEqual({ x: COLS - 1, y: ROWS - 1 })
+    const head = { x: 3, y: 6 }
+    const twoLong: GameState = { ...createSnakeState(1), snake: [head, { x: 4, y: 6 }], dir: 'right', queue: [], golden: null }
+    const chased = step({ ...twoLong, fruit: { x: 0, y: 0 } })
+    expect(chased.status).toBe('running')
+    expect(chased.snake[0]).toEqual({ x: 4, y: 6 })
+    expect(chased.snake).toHaveLength(2)
+    const grown = step({ ...twoLong, fruit: { x: 4, y: 6 } })
+    expect(grown.status).toBe('failed')
+    expect(grown.events).toContain('self')
+  })
+
+  it('lets golden fruit lapse exactly at its lifespan unless claimed in time', () => {
+    const base = createSnakeState(37)
+    expect(base.rule.golden).toBe(true)
+    const lifespan = base.rule.goldenLifespan
+    let state: GameState = { ...base, golden: { x: 2, y: 2 }, goldenAge: lifespan - 2, fruit: { x: 0, y: 0 } }
+    state = step(state)
+    expect(state.golden).not.toBeNull()
+    expect(state.events).not.toContain('golden-gone')
+    state = step(state)
+    expect(state.events).toContain('golden-gone')
+    expect(state.golden).toBeNull()
+    const claimed = step({ ...base, golden: { x: START.x + 1, y: START.y }, goldenAge: lifespan - 1, fruit: { x: 0, y: 0 } })
+    expect(claimed.events).toContain('golden')
+    expect(claimed.golden).toBeNull()
+    expect(claimed.score).toBe(300 * claimed.rule.tier)
   })
 })

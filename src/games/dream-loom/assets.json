@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/dream-loom/dream-loom.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "ba4a30f78c9d5022f85ba0cd774606513ba2da54445d2712fdddddf76a1d06fd"
+    }
+  ]
+}

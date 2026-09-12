@@ -1,0 +1,45 @@
+.ws-game { position: relative; display: grid; grid-template-rows: auto auto 1fr; min-height: 500px; padding: 20px; overflow: hidden; background: radial-gradient(rgba(103,232,249,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #142a38 0%, #0d1122 76%); }
+.ws-game::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(88% 72% at 50% 40%, rgba(103,232,249,.07) 0%, rgba(103,232,249,.02) 46%, rgba(4,7,16,.46) 100%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23f)'/%3E%3C/svg%3E"); box-shadow: inset 0 0 130px rgba(4,7,16,.5); }
+.ws-game.mode-deepen { background: radial-gradient(rgba(103,232,249,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #1a2547 0%, #0d1122 76%); }
+.ws-game.mode-budget { background: radial-gradient(rgba(103,232,249,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #2a2030 0%, #0d1122 76%); }
+.ws-game.mode-fogged { background: radial-gradient(rgba(103,232,249,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #25303e 0%, #0d1122 76%); }
+.ws-game.mode-gauntlet { background: radial-gradient(rgba(103,232,249,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #1e1a3d 0%, #0d1122 76%); }
+.ws-readout, .ws-rule, .ws-stage { position: relative; z-index: 1; }
+.ws-readout { display: flex; align-items: center; justify-content: space-between; padding: 7px 12px; border: 1px solid rgba(139,150,184,.24); border-radius: 8px; background: linear-gradient(180deg, rgba(33,40,70,.92), rgba(14,18,35,.88)); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), inset 0 -1px 0 rgba(0,0,0,.42), 0 6px 16px rgba(0,0,0,.35); color: #8b96b8; font-size: 11px; }
+.ws-readout strong { color: #eef1fb; font-size: 12px; font-variant-numeric: tabular-nums; }
+.ws-rule { display: flex; align-items: center; gap: 9px; min-height: 36px; margin-top: 8px; padding: 6px 10px; border: 1px solid rgba(139,150,184,.2); border-left: 3px solid #67e8f9; border-radius: 0 8px 8px 0; background: linear-gradient(180deg, rgba(30,37,64,.92), rgba(16,20,38,.9)); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), inset 0 -1px 0 rgba(0,0,0,.4), 0 8px 20px rgba(0,0,0,.4); }
+.ws-rule span { display: inline-flex; align-items: center; gap: 5px; color: #eef1fb; font-size: 11px; font-weight: 800; }
+.ws-rule small { flex: 1; color: #8b96b8; font-size: 10px; }
+.ws-rule em { padding: 3px 7px; border-radius: 6px; color: #67e8f9; background: rgba(103,232,249,.12); font-size: 10px; font-style: normal; font-weight: 800; }
+.ws-stage { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 14px 0; }
+.ws-window { position: relative; padding: 10px; border: 1px solid rgba(103,232,249,.32); border-radius: 14px; background: linear-gradient(180deg, #1b2440 0%, #10162b 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.14), inset 0 -6px 14px rgba(0,0,0,.4), 0 14px 30px rgba(0,0,0,.5); transition: border-color var(--dur-base) var(--ease-standard), box-shadow var(--dur-base) var(--ease-standard); }
+.ws-window.is-done { border-color: #2fd6b8; box-shadow: 0 0 26px rgba(47,214,184,.35), inset 0 1px 0 rgba(255,255,255,.14); }
+.ws-window.is-fail { border-color: #ff5f7e; box-shadow: 0 0 26px rgba(255,95,126,.32), inset 0 1px 0 rgba(255,255,255,.14); }
+.ws-board { display: grid; grid-template-columns: repeat(var(--ws-size), minmax(0, 86px)); gap: 6px; }
+.ws-tile { position: relative; aspect-ratio: 1; min-width: 0; padding: 0; border: 1px solid rgba(103,232,249,.24); border-radius: 6px; overflow: hidden; background: #0a0f1e; cursor: pointer; transition: border-color var(--dur-base) var(--ease-standard), box-shadow var(--dur-base) var(--ease-standard); }
+.ws-tile:hover:not(:disabled) { border-color: rgba(103,232,249,.72); box-shadow: 0 0 12px rgba(103,232,249,.28); }
+.ws-tile:active:not(:disabled) { border-color: #67e8f9; }
+.ws-tile:disabled { cursor: default; }
+.ws-tile-scene { position: absolute; inset: -1px; background-repeat: no-repeat; transform: rotate(0deg); transition: transform 420ms var(--ease-spring); will-change: transform; }
+.ws-tile::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(165deg, rgba(255,255,255,.15) 0%, transparent 34%); box-shadow: inset 0 0 0 1px rgba(255,255,255,.06); }
+.ws-tile.is-fogged .ws-tile-scene { opacity: 0; }
+.ws-tile-fog { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: #9fb4cc; background: linear-gradient(165deg, rgba(30,40,58,.94), rgba(13,17,34,.97)); font-size: 8px; font-weight: 700; letter-spacing: .08em; transition: opacity var(--dur-slow) var(--ease-standard); }
+.ws-window.is-done .ws-tile-fog { opacity: 0; }
+.ws-tile-link { position: absolute; top: 3px; right: 3px; z-index: 3; display: grid; place-items: center; width: 15px; height: 15px; border-radius: 5px; color: #7ff0d8; background: rgba(6,20,16,.74); box-shadow: 0 0 6px rgba(47,214,184,.4); pointer-events: none; }
+.ws-banner { position: absolute; top: -14px; left: 50%; z-index: 3; transform: translateX(-50%); padding: 5px 14px; border-radius: 999px; font-size: 12px; font-weight: 800; letter-spacing: .12em; animation: ws-pop 340ms var(--ease-spring); }
+.ws-banner.is-win { color: #0d1122; background: linear-gradient(180deg, #7ff0d8, #2fd6b8); box-shadow: 0 6px 18px rgba(47,214,184,.4); }
+.ws-banner.is-lose { color: #ffe3ea; background: linear-gradient(180deg, #b23a58, #802238); box-shadow: 0 6px 18px rgba(255,95,126,.35); }
+.ws-side { display: grid; gap: 10px; justify-items: center; }
+.ws-thumb { position: relative; width: 150px; aspect-ratio: 1; overflow: hidden; border: 1px solid rgba(103,232,249,.4); border-radius: 10px; background-repeat: no-repeat; box-shadow: 0 10px 22px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.08); transition: filter var(--dur-slow) var(--ease-standard), opacity var(--dur-slow) var(--ease-standard); }
+.ws-thumb.is-fogged { filter: saturate(.4) brightness(.55); }
+.ws-thumb-tag { position: absolute; left: 6px; bottom: 6px; z-index: 1; padding: 2px 7px; border-radius: 999px; color: #d9f6ff; background: rgba(10,16,30,.72); font-size: 9px; font-weight: 700; }
+.ws-thumb-fog { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #aeb8d4; background: rgba(9,12,24,.72); font-size: 11px; font-weight: 700; letter-spacing: .1em; }
+.ws-peek, .ws-restart { display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 13px; border: 1px solid rgba(139,150,184,.4); border-radius: 9px; color: #eef1fb; background: linear-gradient(180deg, #39406b 0%, #161c33 100%); font-size: 11px; font-weight: 700; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 4px 10px rgba(0,0,0,.4); transition: border-color var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast) var(--ease-standard), transform var(--dur-fast) var(--ease-standard); }
+.ws-peek { border-color: rgba(103,232,249,.55); color: #d9f6ff; }
+.ws-peek:disabled, .ws-restart:disabled { opacity: .45; cursor: default; }
+.ws-peek:hover:not(:disabled) { border-color: #67e8f9; box-shadow: 0 0 14px rgba(103,232,249,.3), inset 0 1px 0 rgba(255,255,255,.16); }
+.ws-restart { border-color: rgba(255,95,126,.5); }
+.ws-restart:hover:not(:disabled) { border-color: #ff7a92; box-shadow: 0 0 14px rgba(255,95,126,.3), inset 0 1px 0 rgba(255,255,255,.16); }
+.ws-peek:active:not(:disabled), .ws-restart:active:not(:disabled) { transform: translateY(2px); }
+@keyframes ws-pop { from { opacity: 0; transform: translateX(-50%) scale(.6); } }
+@media (max-width: 640px) { .ws-game { min-height: 430px; padding: 12px; } .ws-stage { flex-direction: column; gap: 14px; padding: 10px 0; } .ws-board { grid-template-columns: repeat(var(--ws-size), minmax(0, 56px)); gap: 4px; } .ws-window { padding: 7px; border-radius: 10px; } .ws-thumb { width: 112px; } .ws-side { grid-auto-flow: column; align-items: center; } }

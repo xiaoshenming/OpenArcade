@@ -1,0 +1,29 @@
+{
+  "id": "bonsai-prune",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "剪枝成景",
+  "shortTitle": "剪枝",
+  "description": "点击枝干剪除整段子树,让盆景余留的叶影与目标剪影吻合;步数预算与雾隐叶影逼你落剪前先看三步。",
+  "category": "cozy",
+  "accent": "#86efac",
+  "order": 33,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点击任意枝干,把该枝以下的子树整体剪除。",
+    "让剩余叶片的编号与目标叶影完全一致即完成。",
+    "任何达成剪影的剪法都算对,不必复刻参考剪点。",
+    "剪错了可以撤销,但每次撤销计五步并扣分。",
+    "预算关里剪数超耗直接失败,雾叶位置需要推断。"
+  ],
+  "highlights": ["确定性盆景", "剪影校验", "落枝动画", "撤销代价", "步数预算", "雾隐叶影"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

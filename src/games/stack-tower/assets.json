@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/stack-tower/stack-tower.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "a9778ae0364a2ec1a00bf27915835c7aafd9360987c628f11a1739f61e50de5c"
+    }
+  ]
+}

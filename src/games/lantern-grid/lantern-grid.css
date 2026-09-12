@@ -11,7 +11,7 @@
 .lantern-rule span { display: inline-flex; align-items: center; gap: 5px; color: #eef1fb; font-size: 11px; font-weight: 800; }
 .lantern-rule small { flex: 1; color: #8b96b8; font-size: 10px; }
 .lantern-rule em { padding: 4px 7px; border-radius: 6px; color: #4ecdc4; background: rgba(78,205,196,.13); font-size: 10px; font-style: normal; font-weight: 800; }
-.lantern-grid { --lantern-cols: 4; display: grid; grid-template-columns: repeat(var(--lantern-cols), minmax(0, 68px)); align-content: center; justify-content: center; gap: clamp(6px, 1.5vw, 11px); padding: 16px 0; }
+.lantern-grid { --lantern-cols: 4; display: grid; grid-template-columns: repeat(var(--lantern-cols), minmax(0, 68px)); align-content: center; justify-content: center; gap: clamp(6px, 1.5vw, 11px); padding: 16px 0; max-width: 100%; }
 .lantern-cell { position: relative; display: grid; place-items: center; aspect-ratio: 1; min-width: 0; padding: 0; border: 1px solid rgba(139,150,184,.28); border-radius: 14px; background: linear-gradient(180deg, #1b2238, #10162a); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 -6px 12px rgba(4,7,16,.5), 0 6px 14px rgba(0,0,0,.42); cursor: pointer; transition: border-color var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast) var(--ease-standard), transform var(--dur-fast) var(--ease-standard); animation: lantern-enter 380ms var(--ease-standard) backwards; animation-delay: calc(var(--lantern-index, 0) * 14ms); }
 @keyframes lantern-enter { from { opacity: 0; transform: scale(.7); } }
 .lantern-cell:hover { border-color: rgba(78,205,196,.55); transform: translateY(-2px); }
@@ -22,12 +22,17 @@
 .lantern-cell.is-locked { cursor: not-allowed; border-style: dashed; border-color: rgba(255,201,77,.42); background: repeating-linear-gradient(45deg, rgba(255,201,77,.07) 0 6px, transparent 6px 12px), linear-gradient(180deg, #1b2238, #10162a); }
 .lantern-cell.is-locked:hover { transform: none; border-color: rgba(255,201,77,.42); }
 .lantern-cell.is-locked svg { position: absolute; right: 5px; bottom: 5px; color: rgba(255,201,77,.78); }
+.lantern-cell.is-prelit { border-color: rgba(255,122,89,.62); background: repeating-linear-gradient(45deg, rgba(255,122,89,.09) 0 6px, transparent 6px 12px), linear-gradient(180deg, #33202a, #1c1420); box-shadow: 0 0 16px rgba(255,122,89,.25), inset 0 1px 0 rgba(255,255,255,.08), 0 6px 14px rgba(0,0,0,.42); }
+.lantern-cell.is-prelit .lantern-lamp { background: radial-gradient(circle at 34% 30%, #ffe3d1 0%, #ff7a59 44%, #8a2f18 100%); }
+.lantern-cell.is-prelit svg { position: absolute; right: 5px; bottom: 5px; color: rgba(255,158,128,.85); }
 .lantern-actions { display: flex; justify-content: center; }
-.lantern-restart { display: inline-flex; align-items: center; gap: 7px; height: 38px; padding: 0 14px; border: 1px solid rgba(78,205,196,.5); border-radius: 10px; color: #eef1fb; background: linear-gradient(180deg, #274a52 0%, #1a2f3c 55%, #131f2b 100%); font-weight: 700; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,.18), inset 0 -2px 5px rgba(0,0,0,.4), 0 4px 0 #0a0e1c, 0 10px 20px rgba(0,0,0,.45); transition: border-color var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast) var(--ease-standard), transform var(--dur-fast) var(--ease-standard); }
+.lantern-restart { display: inline-flex; align-items: center; gap: 7px; height: 44px; padding: 0 14px; border: 1px solid rgba(78,205,196,.5); border-radius: 10px; color: #eef1fb; background: linear-gradient(180deg, #274a52 0%, #1a2f3c 55%, #131f2b 100%); font-weight: 700; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,.18), inset 0 -2px 5px rgba(0,0,0,.4), 0 4px 0 #0a0e1c, 0 10px 20px rgba(0,0,0,.45); transition: border-color var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast) var(--ease-standard), transform var(--dur-fast) var(--ease-standard); }
 .lantern-restart:hover { border-color: #6fe6de; box-shadow: inset 0 1px 0 rgba(255,255,255,.18), inset 0 -2px 5px rgba(0,0,0,.4), 0 4px 0 #0a0e1c, 0 0 18px rgba(78,205,196,.35); }
 .lantern-restart:active { transform: translateY(3px); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 1px 0 #0a0e1c; }
-.lantern-stamp { position: absolute; inset: 0; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(13,17,34,.86); backdrop-filter: blur(8px); animation: stamp-in .35s var(--ease-standard) both; pointer-events: none; }
+.lantern-stamp { position: absolute; inset: 0; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; background: rgba(13,17,34,.86); backdrop-filter: blur(8px); animation: stamp-in .35s var(--ease-standard) both; }
 .lantern-stamp span { color: #4ecdc4; font-size: 11px; font-weight: 800; letter-spacing: .2em; }
-.lantern-stamp strong { margin-top: 8px; color: #ffc94d; font-size: clamp(24px, 5vw, 40px); text-shadow: 0 0 18px rgba(255,201,77,.35); }
+.lantern-stamp strong { color: #ffc94d; font-size: clamp(24px, 5vw, 40px); text-shadow: 0 0 18px rgba(255,201,77,.35); }
+.lantern-again { display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 16px; border: 1px solid rgba(78,205,196,.55); border-radius: 10px; color: #eef1fb; background: linear-gradient(180deg, #274a52, #131f2b); font-weight: 700; cursor: pointer; }
 @keyframes stamp-in { from { opacity: 0; transform: scale(1.05); } }
-@media (max-width: 640px) { .lantern-game { min-height: 420px; padding: 14px; } .lantern-grid { grid-template-columns: repeat(var(--lantern-cols), minmax(0, 52px)); gap: 6px; padding: 10px 0; } }
+/* 7×7 迷阵在窄屏保持每格 ≥40px,容器限宽并允许横向滚动兜底 */
+@media (max-width: 640px) { .lantern-game { min-height: 420px; padding: 14px; } .lantern-grid { grid-template-columns: repeat(var(--lantern-cols), minmax(40px, 52px)); gap: 6px; padding: 10px 0; overflow-x: auto; justify-content: safe center; } }

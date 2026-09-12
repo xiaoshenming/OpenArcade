@@ -103,11 +103,6 @@ export default function PagodaGame({ paused, muted, emit, level = 1 }: GameModul
 
   const restart = () => {
     if (paused) return
-    setBoard(createBoard(spec.pegs, spec.discs))
-    setSelected(null)
-    setMoves(0)
-    setFailed(false)
-    setCompleted(false)
     emit({ type: 'request-restart' })
   }
 

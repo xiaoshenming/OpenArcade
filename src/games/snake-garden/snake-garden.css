@@ -37,10 +37,10 @@
 .snake-restart:hover:not(:disabled) { border-color: #ff7a92; }
 .snake-restart:active:not(:disabled) { transform: translateY(3px); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 1px 0 #0a0e1c; }
 .snake-restart:disabled { opacity: .45; cursor: default; }
-@keyframes snake-spawn { from { opacity: 0; scale: .3; } to { opacity: 1; scale: 1; } }
-@keyframes snake-bob { 0%, 100% { scale: 1; } 50% { scale: 1.12; } }
-@keyframes snake-shimmer { 0%, 100% { scale: 1; filter: brightness(1); } 50% { scale: 1.1; filter: brightness(1.35); } }
-@keyframes snake-urgent { 0%, 100% { opacity: 1; scale: 1; } 50% { opacity: .45; scale: .82; } }
+@keyframes snake-spawn { from { opacity: 0; transform: scale(.3); } to { opacity: 1; transform: scale(1); } }
+@keyframes snake-bob { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+@keyframes snake-shimmer { 0%, 100% { transform: scale(1); filter: brightness(1); } 50% { transform: scale(1.1); filter: brightness(1.35); } }
+@keyframes snake-urgent { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .45; transform: scale(.82); } }
 @keyframes snake-veil { from { opacity: 0; } }
 @media (max-width: 640px) { .snake-game { min-height: 440px; padding: 14px; } .snake-stage { padding: 10px 0; } .snake-board { width: 100%; border-radius: 10px; } .snake-pad-button { width: 48px; height: 44px; } .snake-controls { flex-wrap: wrap; justify-content: center; row-gap: 10px; } .snake-rule span { font-size: 10px; } }
 @media (prefers-reduced-motion: reduce) { .snake-fruit, .snake-veil { animation: none; } .snake-pad-button, .snake-restart { transition: none; } }

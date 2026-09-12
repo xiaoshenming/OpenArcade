@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/fold-craft/fold-craft.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "56c83869bb43c1b54d773640bd28c19082c0e0f1ff48ea485e34f81ca1df52d4"
+    }
+  ]
+}
