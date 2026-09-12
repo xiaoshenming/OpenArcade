@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/aqueduct/aqueduct.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "515b023663565fde510dfb4016973b2308fce7fa5abae37a27f100ff8ce44411"
+    }
+  ]
+}

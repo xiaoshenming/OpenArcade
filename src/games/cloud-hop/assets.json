@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/cloud-hop/cloud-hop.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "10e6128104ade646d864ba72d80706ecbdd0299973f082e207e2691352bc5c85"
+    }
+  ]
+}

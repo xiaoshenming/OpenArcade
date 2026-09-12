@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/gem-tide/gem-tide.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "7f90edbec107d54342be7fbde3edaf47d150f219742bd3fa8734ec0b518857ca"
+    }
+  ]
+}

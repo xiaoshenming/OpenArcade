@@ -1,0 +1,75 @@
+.pagoda-game {
+  --disc-h: clamp(13px, 2.6vh, 19px);
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  width: 100%;
+  min-height: 520px;
+  padding: 25px;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 0%, #221c0f 0%, #0d1122 72%);
+  box-shadow: inset 0 0 120px rgba(4, 7, 16, .52), inset 0 1px 0 rgba(255, 255, 255, .06);
+}
+.pagoda-game::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.045 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23f)'/%3E%3C/svg%3E");
+}
+.pagoda-game.mode-classic { background: radial-gradient(circle at 50% 0%, #241d10 0%, #0d1122 74%); }
+.pagoda-game.mode-rationed { background: radial-gradient(circle at 50% 0%, #2e2512 0%, #0d1122 74%); }
+.pagoda-game.mode-quad { background: radial-gradient(circle at 50% 0%, #14303a 0%, #0d1122 74%); }
+.pagoda-game.mode-sealed { background: radial-gradient(circle at 50% 0%, #241a38 0%, #0d1122 74%); }
+.pagoda-game.mode-rainbow { background: radial-gradient(circle at 18% 0%, rgba(255, 95, 126, .2) 0%, transparent 42%), radial-gradient(circle at 82% 0%, rgba(47, 214, 184, .18) 0%, transparent 42%), #0d1122; }
+.game-readout, .pagoda-rule, .peg-board, .game-actions { position: relative; z-index: 1; }
+.game-readout { display: flex; justify-content: space-between; align-items: center; padding: 7px 12px; border: 1px solid rgba(139,150,184,.24); border-radius: 8px; background: linear-gradient(180deg, rgba(33,40,70,.92), rgba(14,18,35,.88)); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), inset 0 -1px 0 rgba(0,0,0,.42), 0 6px 16px rgba(0,0,0,.35); color: #8b96b8; font-size: 11px; font-weight: 650; }
+.game-readout strong { color: #eef1fb; font-size: 13px; font-variant-numeric: tabular-nums; text-shadow: 0 0 14px rgba(232,176,75,.4); }
+.pagoda-rule { display: flex; align-items: center; gap: 10px; min-height: 38px; margin-top: 10px; padding: 8px 11px; border: 1px solid rgba(139,150,184,.2); border-left: 3px solid #e8b04b; border-radius: 0 8px 8px 0; background: linear-gradient(180deg, rgba(30,37,64,.92), rgba(16,20,38,.9)); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), inset 0 -1px 0 rgba(0,0,0,.4), 0 8px 20px rgba(0,0,0,.4); }
+.pagoda-rule span { display: inline-flex; align-items: center; gap: 6px; color: #eef1fb; font-size: 11px; font-weight: 800; white-space: nowrap; }
+.pagoda-rule small { color: #8b96b8; font-size: 10px; }
+.pagoda-rule em { margin-left: auto; padding: 3px 8px; border: 1px solid rgba(255,201,77,.4); border-radius: 6px; color: #ffd98a; background: rgba(255,201,77,.1); font-size: 10px; font-style: normal; font-weight: 700; white-space: nowrap; }
+.peg-board { display: flex; align-items: flex-end; justify-content: center; gap: clamp(10px, 3.4vw, 38px); width: min(100%, 780px); min-height: 360px; margin: 0 auto; padding: 24px 8px 18px; border-radius: 14px; background: radial-gradient(rgba(232,176,75,.07) 1px, transparent 1.6px) 0 0 / 17px 17px, linear-gradient(180deg, rgba(21,26,45,.9), rgba(13,17,34,.96)); box-shadow: inset 0 0 0 1px rgba(139,150,184,.16), inset 0 1px 0 rgba(255,255,255,.1), inset 0 14px 34px rgba(0,0,0,.4); }
+.peg { position: relative; width: clamp(58px, 19vw, 112px); min-height: 200px; height: calc(var(--peg-rows) * var(--disc-h) + 92px); border: 0; padding: 0; background: transparent; cursor: pointer; transition: transform .2s ease; }
+.peg:hover { transform: translateY(-5px); }
+.peg:hover .peg-rod { border-color: rgba(238,241,251,.75); }
+.peg.is-selected .peg-rod { border-color: rgba(255,201,77,.95); box-shadow: 0 0 18px rgba(255,201,77,.4), inset 2px 0 3px rgba(255,255,255,.3); }
+.peg.is-locked { cursor: not-allowed; filter: grayscale(.65); }
+.peg.is-locked:hover { transform: none; }
+.peg-rod { position: absolute; bottom: 24px; left: 50%; width: 11px; height: calc(var(--peg-rows) * var(--disc-h) + 26px); border: 1px solid rgba(139,150,184,.55); border-bottom: 0; border-radius: 7px 7px 0 0; background: linear-gradient(90deg, #565f7d 0%, #c7cfe8 46%, #39415a 100%); box-shadow: inset -1px 0 2px rgba(4,7,16,.45), 0 0 12px rgba(139,150,184,.2); transition: border-color .15s ease, box-shadow .15s ease; }
+.peg-base { position: absolute; bottom: 12px; left: 0; width: 100%; height: 13px; border-radius: 9px; background: linear-gradient(180deg, #3a4573 0%, #1a2138 55%, #10152a 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.2), inset 0 -2px 4px rgba(4,7,16,.5), 0 7px 14px rgba(0,0,0,.5); }
+.peg-stack { position: absolute; bottom: 24px; left: 0; width: 100%; height: 0; }
+.peg-disc { position: absolute; bottom: 0; left: 50%; height: var(--disc-h); width: calc(28% + var(--ratio) * 68%); border: 1px solid rgba(255,255,255,.2); border-radius: calc(var(--disc-h) / 2 + 1px); transform: translate(-50%, calc(var(--slot) * (-100% - 3px))); background: linear-gradient(180deg, #f4d18a 0%, #e8b04b 52%, #b9862f 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 3px rgba(4,7,16,.35), 0 2px 6px rgba(0,0,0,.42); transition: transform .26s var(--ease-standard), box-shadow .2s ease; will-change: transform; }
+.peg-disc.sheen-0 { filter: brightness(1.08); }
+.peg-disc.sheen-1 { filter: brightness(.98); }
+.peg-disc.sheen-2 { filter: brightness(.88); }
+.peg-disc.tone-0 { background: linear-gradient(180deg, #ff92a5 0%, #ff5f7e 52%, #c23a55 100%); }
+.peg-disc.tone-1 { background: linear-gradient(180deg, #74e9d1 0%, #2fd6b8 52%, #17907d 100%); }
+.peg-disc.tone-2 { background: linear-gradient(180deg, #ffe18f 0%, #ffc94d 52%, #cf9a28 100%); }
+.peg-disc.is-top { transform: translate(-50%, calc(var(--slot) * (-100% - 3px) - 9px)); box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 3px rgba(4,7,16,.35), 0 0 16px rgba(255,201,77,.45), 0 0 0 3px rgba(255,201,77,.22); }
+.peg-lock { position: absolute; z-index: 6; top: 42%; left: 50%; display: flex; align-items: center; gap: 3px; padding: 5px 7px; border: 1px solid rgba(255,201,77,.4); border-radius: 7px; color: #ffd98a; background: linear-gradient(180deg, #2c2650, #1d1834); font-size: 10px; font-weight: 700; transform: translate(-50%,-50%); box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 0 14px rgba(255,201,77,.25); }
+.game-actions { display: flex; justify-content: center; gap: 8px; }
+.game-icon-button { display: inline-flex; align-items: center; gap: 7px; height: 40px; padding: 0 16px; border: 1px solid rgba(139,150,184,.32); border-radius: 9px; color: #eef1fb; background: linear-gradient(180deg, #2c3560 0%, #1a2138 52%, #131829 100%); font-weight: 700; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,.18), inset 0 -2px 4px rgba(0,0,0,.35), 0 3px 0 rgba(5,8,18,.85), 0 8px 18px rgba(0,0,0,.4); transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease; }
+.game-icon-button:hover { border-color: rgba(232,176,75,.7); box-shadow: inset 0 1px 0 rgba(255,255,255,.18), inset 0 -2px 4px rgba(0,0,0,.35), 0 3px 0 rgba(5,8,18,.85), 0 0 18px rgba(232,176,75,.3); }
+.game-icon-button:active { transform: translateY(2px); }
+.game-icon-button:disabled { opacity: .35; cursor: not-allowed; }
+.end-stamp { position: absolute; inset: 0; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; background: rgba(13,17,34,.88); backdrop-filter: blur(8px); animation: stamp-in .35s var(--ease-spring) both; }
+.end-stamp span { color: #8b96b8; font-size: 11px; font-weight: 800; letter-spacing: .2em; }
+.end-stamp strong { color: #ffc94d; font-size: clamp(34px, 7vw, 56px); text-shadow: 0 0 18px rgba(255,201,77,.4); }
+.end-stamp small { color: #8b96b8; font-size: 11px; }
+.end-stamp.is-win span { color: #2fd6b8; }
+.end-stamp.is-lose strong { color: #ff5f7e; text-shadow: 0 0 18px rgba(255,95,126,.4); }
+@keyframes stamp-in { from { opacity: 0; transform: scale(1.06); } }
+@media (max-width: 640px) {
+  .pagoda-game { min-height: 430px; padding: 14px; }
+  .peg-board { min-height: 300px; gap: 8px; padding: 14px 4px 12px; }
+  .peg { width: clamp(44px, 22vw, 62px); min-height: 170px; }
+  .pagoda-rule { flex-wrap: wrap; gap: 6px; }
+  .pagoda-rule em { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .peg-disc { transition: none; }
+  .peg, .peg:hover { transform: none; }
+  .end-stamp { animation: none; }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "star-sudoku",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "星阵数独",
+  "shortTitle": "数独",
+  "description": "从 4x4 教学宫格一路推进到 9x9 极限星阵，铅笔笔记、失误上限与超时惩罚层层加码。",
+  "category": "logic",
+  "accent": "#7c8cf8",
+  "order": 10,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点选空格，再用底部数字键盘填入数字。",
+    "每行、每列和每个宫内数字都不能重复。",
+    "错误会立即标红扣分，超时的部分按 10 秒扣分。",
+    "第三章起可用铅笔笔记记录候选数字，填对会自动清理。",
+    "第四章起失误有上限，超过即判失败。"
+  ],
+  "highlights": ["同数引导高亮", "4x4 到 9x9 进阶", "铅笔候选笔记", "失误上限", "超时惩罚", "唯一解保证"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

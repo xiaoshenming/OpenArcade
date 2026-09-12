@@ -219,7 +219,7 @@ export default function App() {
               >
                 <span className="game-art" aria-hidden="true">
                   {game.status === 'ready'
-                    ? <img src={`/images/games/${game.id}.jpg`} alt="" width="64" height="52" loading={selectedId === game.id ? 'eager' : 'lazy'} decoding="async" />
+                    ? <img src={`/images/games/${game.id}.jpg`} alt="" width="64" height="52" loading={selectedId === game.id ? 'eager' : 'lazy'} decoding="async" onError={(event) => { event.currentTarget.style.opacity = '0' }} />
                     : <Sparkles size={25} />}
                 </span>
                 <span className="game-copy"><strong>{game.title}</strong><small>{game.category === 'logic' ? '逻辑解谜' : game.category === 'arcade' ? '反应挑战' : '轻松记忆'}</small></span>

@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/silk-nonogram/silk-nonogram.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "af3e2f3d979a6c40b25aac0b5f7d815c56fc1379c8998b6e035e7bd6e31e4eef"
+    }
+  ]
+}

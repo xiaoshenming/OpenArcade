@@ -1,0 +1,30 @@
+{
+  "id": "mine-hollow",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "扫雷秘境",
+  "shortTitle": "秘境",
+  "description": "首击必安全的六十章扫雷远征：从微光小场到无旗深径，五卷机制层层合流。",
+  "category": "logic",
+  "accent": "#8ea2c6",
+  "order": 15,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "首击必安全：首次揭示后才布雷，先点开一片空白再推理。",
+    "数字表示周围八格的地雷数，揭示全部安全格即过关。",
+    "左键点按揭示，长按或右键插旗，也可用底部旗/铲模式切换。",
+    "从第 12 关起有计时 par，超过部分每 10 秒扣 10 分。",
+    "无旗章节不用旗帜完成可获 150 分奖励。",
+    "终卷合并收紧 par 与扩大的首击安全区。"
+  ],
+  "highlights": ["首击必安全", "泛洪展开", "计时 par", "无旗挑战", "扩安全区", "五卷合流"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

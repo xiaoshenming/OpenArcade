@@ -24,7 +24,7 @@ export function GameLobby({ game, level, levelCount, unlocked, bestScore, resume
   return (
     <section className="game-lobby" style={{ '--game-accent': game.accent, '--game-action': safeAccent, '--game-ink': safeAccent } as React.CSSProperties} aria-label={`${game.title} 游戏大厅`}>
       <div className="lobby-hero">
-        <img src={`/images/games/${game.id}.jpg`} alt={`${game.title} 实际游戏画面`} width="1000" height="560" decoding="async" />
+        <img src={`/images/games/${game.id}.jpg`} alt={`${game.title} 实际游戏画面`} width="1000" height="560" decoding="async" onError={(event) => { event.currentTarget.style.opacity = '0' }} />
         <div className="lobby-hero-shade" />
         <div className="lobby-marquee"><div className={available ? 'lobby-badge' : 'lobby-badge is-soon'}>{available ? resume ? 'CONTINUE?' : 'READY' : 'SOON'}</div></div>
         <div className="lobby-hero-copy">

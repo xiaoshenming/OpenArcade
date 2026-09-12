@@ -1,0 +1,29 @@
+{
+  "id": "silk-nonogram",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "织锦谜图",
+  "shortTitle": "织锦",
+  "description": "按行与列的数字经纬填格打叉，从素机小样织到十二阶锦缎，五种章节机制层层加压。",
+  "category": "logic",
+  "accent": "#c98ef8",
+  "order": 11,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "按行列数字提示填格，切到打叉模式可做排除记号。",
+    "数字提示表示该行或列中连续填格段的长度与顺序。",
+    "行或列完全正确时提示会变灰；填错格会计入失误并标红。",
+    "第三章起有失误预算，第五章叠加硬性超时，超限即拆线失败。",
+    "金梭提示会揭示一个正确格，高章节金梭数量逐步收紧。"
+  ],
+  "highlights": ["双模式填织", "金梭提示", "失误经线", "疾纬催织", "终局合织"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

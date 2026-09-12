@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/mine-hollow/mine-hollow.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "e0918590d4f1ca1238db205b882ceebd39dbfe7f8577cf3f4e2edf41dafcb1a7"
+    }
+  ]
+}

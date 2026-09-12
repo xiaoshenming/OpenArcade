@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/number-drift/number-drift.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "62ad6dcfda4a62e26838c6231cc25f7162f155f4bbf88252651080119c153aed"
+    }
+  ]
+}

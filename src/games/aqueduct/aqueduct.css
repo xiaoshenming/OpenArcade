@@ -1,0 +1,52 @@
+.aq-game { position: relative; display: grid; grid-template-rows: auto auto 1fr auto; min-height: 520px; padding: 22px; overflow: hidden; background: radial-gradient(rgba(56,182,160,.06) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #14283a 0%, #0d1122 74%); }
+.aq-game::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(88% 70% at 50% 40%, rgba(56,182,160,.09) 0%, rgba(238,241,251,.02) 46%, rgba(4,7,16,.5) 100%); box-shadow: inset 0 0 130px rgba(4,7,16,.55); }
+.aq-readout, .aq-rule, .aq-board, .aq-actions { position: relative; z-index: 1; }
+.aq-game.ch2 { background: radial-gradient(rgba(255,201,77,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #2b2413 0%, #0d1122 74%); }
+.aq-game.ch3 { background: radial-gradient(rgba(255,95,126,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #2a161e 0%, #0d1122 74%); }
+.aq-game.ch4 { background: radial-gradient(rgba(102,135,232,.06) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #191d3c 0%, #0d1122 74%); }
+.aq-game.ch5 { background: radial-gradient(rgba(56,182,160,.07) 1px, transparent 1.5px) 0 0 / 18px 18px, radial-gradient(circle at 50% 10%, #0f2530 0%, #0d1122 74%); }
+.aq-readout { display: flex; align-items: center; justify-content: space-between; padding: 7px 12px; border: 1px solid rgba(139,150,184,.24); border-radius: 8px; background: linear-gradient(180deg, rgba(33,40,70,.92), rgba(14,18,35,.88)); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), inset 0 -1px 0 rgba(0,0,0,.42), 0 6px 16px rgba(0,0,0,.35); color: #8b96b8; font-size: 11px; }
+.aq-readout strong { color: #eef1fb; font-size: 12px; font-variant-numeric: tabular-nums; text-shadow: 0 0 14px rgba(56,182,160,.35); }
+.aq-rule { display: flex; align-items: center; gap: 9px; min-height: 38px; margin-top: 9px; padding: 7px 10px; border: 1px solid rgba(139,150,184,.2); border-left: 3px solid #38b6a0; border-radius: 0 8px 8px 0; background: linear-gradient(180deg, rgba(30,37,64,.92), rgba(16,20,38,.9)); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), inset 0 -1px 0 rgba(0,0,0,.4), 0 8px 20px rgba(0,0,0,.4); }
+.aq-rule span { display: inline-flex; align-items: center; gap: 5px; color: #eef1fb; font-size: 11px; font-weight: 800; }
+.aq-rule small { flex: 1; color: #8b96b8; font-size: 10px; }
+.aq-rule em { padding: 4px 7px; border-radius: 6px; color: #38b6a0; background: rgba(56,182,160,.14); font-size: 10px; font-style: normal; font-weight: 800; white-space: nowrap; }
+.aq-rule em.is-over { color: #ff5f7e; background: rgba(255,95,126,.16); }
+.aq-rule em.is-gold { color: #ffc94d; background: rgba(255,201,77,.14); animation: aq-glow 1.4s var(--ease-standard) infinite; }
+.aq-board { --aq-cols: 5; --aq-cell: clamp(44px, calc((100vw - 130px) / var(--aq-cols)), 62px); display: grid; grid-template-columns: repeat(var(--aq-cols), var(--aq-cell)); gap: clamp(5px, 1vw, 9px); align-content: center; justify-content: center; padding: 16px 0; overflow-x: auto; }
+.aq-cell { position: relative; width: var(--aq-cell); aspect-ratio: 1; padding: 0; border: 1px solid rgba(139,150,184,.22); border-radius: 11px; background: linear-gradient(180deg, #182036, #12172a); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 -6px 12px rgba(4,7,16,.4), 0 4px 10px rgba(0,0,0,.4); cursor: pointer; transition: border-color var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast) var(--ease-standard), transform var(--dur-fast) var(--ease-standard); animation: aq-enter 380ms var(--ease-standard) backwards; animation-delay: calc(var(--cell-index, 0) * 9ms); }
+.aq-cell:hover:not(.is-locked) { border-color: rgba(238,241,251,.6); }
+.aq-cell:active:not(.is-locked) { transform: scale(.93); }
+.aq-rotor { position: absolute; inset: 0; transform: rotate(var(--turns, 0deg)); transition: transform 300ms var(--ease-spring); }
+.aq-stub { position: absolute; background: linear-gradient(180deg, #2b3453, #1d2440); border: 1px solid rgba(139,150,184,.35); }
+.aq-stub-n { left: 32%; top: -1px; width: 36%; height: 56%; border-radius: 6px 6px 0 0; }
+.aq-stub-e { right: -1px; top: 32%; width: 56%; height: 36%; border-radius: 0 6px 6px 0; }
+.aq-stub-s { left: 32%; bottom: -1px; width: 36%; height: 56%; border-radius: 0 0 6px 6px; }
+.aq-stub-w { left: -1px; top: 32%; width: 56%; height: 36%; border-radius: 6px 0 0 6px; }
+.aq-core { position: absolute; left: 50%; top: 50%; width: 44%; height: 44%; transform: translate(-50%, -50%); border-radius: 50%; border: 2px solid rgba(139,150,184,.4); background: radial-gradient(circle at 34% 30%, #303a5e, #1a2138 70%); }
+.aq-cell.is-wet { border-color: rgba(56,182,160,.55); }
+.aq-cell.is-wet .aq-stub { border-color: rgba(56,182,160,.6); background: linear-gradient(180deg, rgba(56,182,160,.85), rgba(24,110,96,.92)); box-shadow: 0 0 10px rgba(56,182,160,.35); }
+.aq-cell.is-wet .aq-core { border-color: #2fd6b8; background: radial-gradient(circle at 34% 30%, #3fd8c0, #14584d 72%); box-shadow: 0 0 14px rgba(56,182,160,.55); animation: aq-pulse 1.5s var(--ease-standard) infinite; }
+.aq-stub.is-dripping { background: linear-gradient(180deg, rgba(255,95,126,.92), rgba(150,40,60,.92)); border-color: rgba(255,95,126,.6); box-shadow: 0 0 10px rgba(255,95,126,.5); animation: aq-drip 900ms var(--ease-standard) infinite; }
+.aq-cell.is-leaking { border-color: rgba(255,95,126,.5); }
+.aq-cell.is-source .aq-core { border-width: 3px; border-color: #2fd6b8; background: radial-gradient(circle at 34% 30%, #5ff2d8, #0f5a4c 72%); }
+.aq-cell.is-sink .aq-core { border-color: rgba(255,201,77,.75); }
+.aq-mark { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; font-size: calc(var(--aq-cell) * .18); font-weight: 800; color: #eef1fb; text-shadow: 0 1px 3px rgba(4,7,16,.85); pointer-events: none; }
+.aq-cell.is-source .aq-mark { color: #7ff0dd; }
+.aq-cell.is-sink .aq-mark { color: #ffc94d; }
+.aq-cell.is-locked { cursor: not-allowed; filter: saturate(.55) brightness(.82); }
+.aq-cell.is-locked::after { content: ''; position: absolute; inset: 3px; z-index: 1; border: 1px dashed rgba(255,201,77,.4); border-radius: 8px; background: repeating-linear-gradient(45deg, rgba(255,201,77,.12) 0 5px, transparent 5px 10px); }
+.aq-cell.is-dim::before { content: ''; position: absolute; inset: 0; z-index: 2; border-radius: 10px; background: rgba(4,7,16,.68); box-shadow: inset 0 0 12px rgba(4,7,16,.85); transition: opacity var(--dur-slow) var(--ease-standard); }
+.aq-cell.is-dim .aq-rotor, .aq-cell.is-dim .aq-mark { opacity: .35; filter: saturate(.4); }
+.aq-game.is-won .aq-board { filter: drop-shadow(0 0 22px rgba(56,182,160,.35)); }
+.aq-game.is-failed .aq-board { filter: saturate(.6) brightness(.85); }
+.aq-actions { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 10px; }
+.aq-restart { display: inline-flex; align-items: center; gap: 7px; height: 44px; padding: 0 16px; border: 1px solid rgba(56,182,160,.55); border-radius: 10px; color: #eef1fb; background: linear-gradient(180deg, #39406b 0%, #1c2340 55%, #141a2e 100%); font-weight: 700; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,.2), inset 0 -2px 5px rgba(0,0,0,.4), 0 4px 0 #0a0e1c, 0 10px 20px rgba(0,0,0,.45); transition: border-color var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast) var(--ease-standard), transform var(--dur-fast) var(--ease-standard); }
+.aq-restart:hover { border-color: #2fd6b8; box-shadow: inset 0 1px 0 rgba(255,255,255,.2), inset 0 -2px 5px rgba(0,0,0,.4), 0 4px 0 #0a0e1c, 0 0 18px rgba(56,182,160,.35); }
+.aq-restart:active { transform: translateY(3px); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 1px 0 #0a0e1c; }
+.aq-legend { color: #8b96b8; font-size: 10px; }
+@keyframes aq-enter { from { opacity: 0; transform: translateY(10px) scale(.92); } }
+@keyframes aq-pulse { 50% { filter: brightness(1.35); } }
+@keyframes aq-drip { 50% { opacity: .45; } }
+@keyframes aq-glow { 50% { filter: brightness(1.4); } }
+@media (max-width: 640px) { .aq-game { min-height: 430px; padding: 14px; } .aq-board { --aq-cell: clamp(44px, calc((100vw - 76px) / var(--aq-cols)), 52px); gap: 4px; padding: 10px 0; } .aq-actions { gap: 9px; } .aq-legend { display: none; } }

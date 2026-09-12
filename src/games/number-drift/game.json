@@ -1,0 +1,29 @@
+{
+  "id": "number-drift",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "数字华容",
+  "shortTitle": "华容",
+  "description": "把数字块滑入空格复位棋盘：逆推构造必解，穿越步数预算、目标迷雾与五阶终局，六十关难度层层递进。",
+  "category": "logic",
+  "accent": "#5fb4e5",
+  "order": 17,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点击与空格相邻的数字块，或用方向键把它滑入空格。",
+    "所有数字复位到目标排布即通关，步数越省得分越高。",
+    "预算关超出可用步数立即失败，行棋前先规划路线。",
+    "迷雾关的目标排布十秒后隐去，重看一次扣 30 分。",
+    "终局迷雾与预算同时生效，牢记目标再谨慎行棋。"
+  ],
+  "highlights": ["逆推构造必解", "方向键滑动", "步数预算", "迷雾记忆", "五阶终局", "组合挑战"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

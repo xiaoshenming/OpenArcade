@@ -3,7 +3,11 @@ import { games, getGameModule } from './registry'
 
 describe('automatic game discovery', () => {
   it('discovers and orders every descriptor without a central list', () => {
-    expect(games.map((game) => game.id)).toEqual(['water-sort', 'orbit-tap', 'petal-pairs'])
+    const ids = games.map((game) => game.id)
+    expect(ids.slice(0, 3)).toEqual(['water-sort', 'orbit-tap', 'petal-pairs'])
+    expect(ids).toContain('star-sudoku')
+    expect(new Set(ids).size).toBe(ids.length)
+    expect([...games].sort((a, b) => a.order - b.order).map((game) => game.id)).toEqual(ids)
   })
 
   it('connects only existing module entrypoints', () => {

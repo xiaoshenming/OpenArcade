@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/pagoda-stack/pagoda-stack.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "1fa7f03a8d165dff2d98aaf5e1081836b4247c8e2df494fd6df7cd4fe6f6a2c2"
+    }
+  ]
+}

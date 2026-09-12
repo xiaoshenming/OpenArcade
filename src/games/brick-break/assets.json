@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/brick-break/brick-break.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "163bc39e7eb22c3c47519fd9be285d4eb307b875fc7e827ffe251ac2743a09d4"
+    }
+  ]
+}

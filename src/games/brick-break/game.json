@@ -1,0 +1,30 @@
+{
+  "id": "brick-break",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "砖域突破",
+  "shortTitle": "砖域",
+  "description": "六十关街机打砖块：硬砖两击、道具馈赠、移动砖排与金属砖终局轮番登场，连击计分叠加速通奖励冲击万分榜。",
+  "category": "arcade",
+  "accent": "#ff7e5f",
+  "order": 19,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "左右移动挡板反弹小球，清空全部可破砖块即可通关。",
+    "支持指针横移、触控拖动、左右按钮与空格键发射。",
+    "硬砖需两次击破，金属砖不可破坏，要提前规划绕行路线。",
+    "接住掉落胶囊可获得加宽挡板、慢球与多球支援。",
+    "连击在不落球时逐次增值，球落三次即挑战失败。",
+    "快于 par 时间清场可获速通奖励，单关分数上限一万。"
+  ],
+  "highlights": ["连击倍增", "硬砖攻坚", "道具馈赠", "潮汐移阵", "合金终局", "速通奖励"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/star-sudoku/star-sudoku.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "9fcbd186fff9855c28612f6bfdb253e0e88564b1ee3767ea578bc1a644cb2473"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/snake-garden/snake-garden.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "c56d2901171dfccf82aa4182edf3dc1e0463a9c42a39e7cee247fbe685c11fd8"
+    }
+  ]
+}

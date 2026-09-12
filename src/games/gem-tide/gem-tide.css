@@ -1,0 +1,52 @@
+.tide-game { position: relative; display: grid; grid-template-rows: auto auto auto auto 1fr auto; min-height: 520px; padding: 20px; overflow: hidden; background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #2a1530 0%, #0d1122 76%); }
+.tide-game::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(86% 70% at 50% 40%, rgba(255,107,157,.09) 0%, rgba(238,241,251,.02) 46%, rgba(4,7,16,.5) 100%); box-shadow: inset 0 0 130px rgba(4,7,16,.5); }
+.tide-game.chapter-1 { background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #2c1a2e 0%, #0d1122 76%); }
+.tide-game.chapter-2 { background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #1c2440 0%, #0d1122 76%); }
+.tide-game.chapter-3 { background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #14303a 0%, #0d1122 76%); }
+.tide-game.chapter-4 { background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #26200f 0%, #0d1122 76%); }
+.tide-game.chapter-5 { background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #301427 0%, #0d1122 76%); }
+.tide-readout, .tide-rule, .tide-progress, .tide-chips, .tide-board, .tide-actions { position: relative; z-index: 1; }
+.tide-readout { display: flex; align-items: center; justify-content: space-between; padding: 7px 12px; border: 1px solid rgba(139,150,184,.24); border-radius: 8px; background: linear-gradient(180deg, rgba(33,40,70,.92), rgba(14,18,35,.88)); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), inset 0 -1px 0 rgba(0,0,0,.42), 0 6px 16px rgba(0,0,0,.35); color: #8b96b8; font-size: 11px; }
+.tide-readout strong { color: #eef1fb; font-size: 12px; font-variant-numeric: tabular-nums; }
+.tide-rule { display: flex; align-items: center; gap: 8px; min-height: 36px; margin-top: 9px; padding: 6px 10px; border: 1px solid rgba(139,150,184,.2); border-left: 3px solid #ff6b9d; border-radius: 0 8px 8px 0; background: linear-gradient(180deg, rgba(30,37,64,.92), rgba(16,20,38,.9)); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 8px 20px rgba(0,0,0,.4); }
+.tide-rule span { display: inline-flex; align-items: center; gap: 5px; color: #eef1fb; font-size: 11px; font-weight: 800; }
+.tide-rule small { flex: 1; color: #8b96b8; font-size: 10px; }
+.tide-rule em { padding: 3px 7px; border-radius: 6px; color: #ffc94d; background: rgba(255,201,77,.14); font-size: 10px; font-style: normal; font-weight: 800; white-space: nowrap; }
+.tide-rule .tide-chain { color: #ff9dc0; background: rgba(255,107,157,.18); box-shadow: 0 0 12px rgba(255,107,157,.35); }
+.tide-rule .tide-reshuffle { color: #7fd8ff; background: rgba(127,216,255,.14); }
+.tide-progress { height: 8px; margin-top: 9px; border-radius: 999px; background: rgba(139,150,184,.18); overflow: hidden; box-shadow: inset 0 1px 2px rgba(4,7,16,.6); }
+.tide-progress span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #ff6b9d, #ffc94d); box-shadow: 0 0 10px rgba(255,107,157,.5); transition: width 320ms var(--ease-standard); }
+.tide-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 8px; }
+.tide-chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border: 1px solid rgba(139,150,184,.25); border-radius: 7px; color: #eef1fb; background: rgba(33,40,70,.9); font-size: 11px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.tide-chip .gem { width: 13px; height: 13px; }
+.tide-board { position: relative; display: grid; grid-template-columns: repeat(7, minmax(0, 64px)); align-content: center; justify-content: center; gap: clamp(4px, 1vw, 8px); padding: 14px 0; }
+.tide-cell { position: relative; aspect-ratio: 1; min-width: 0; padding: 4px; border: 0; border-radius: 12px; background: rgba(21,26,45,.66); box-shadow: inset 0 0 0 1px rgba(139,150,184,.16), inset 0 -3px 6px rgba(4,7,16,.35); cursor: pointer; transition: transform var(--dur-fast) var(--ease-spring), box-shadow var(--dur-fast) var(--ease-standard); }
+.tide-cell:hover { box-shadow: inset 0 0 0 1px rgba(238,241,251,.3), inset 0 -3px 6px rgba(4,7,16,.35); }
+.tide-cell.is-selected { transform: scale(1.07); box-shadow: inset 0 0 0 2px rgba(255,255,255,.55), 0 0 16px rgba(255,107,157,.6); }
+.tide-cell.is-pop { animation: tide-pop 380ms var(--ease-standard); }
+.tide-cell.is-shake { animation: tide-shake 300ms var(--ease-standard); }
+.gem { display: block; width: 100%; height: 100%; background: radial-gradient(circle at 32% 26%, rgba(255,255,255,.85), rgba(255,255,255,0) 46%), linear-gradient(160deg, color-mix(in srgb, var(--c) 72%, #fff) 0%, var(--c) 52%, color-mix(in srgb, var(--c) 55%, #10152a) 100%); filter: drop-shadow(0 2px 3px rgba(4,7,16,.55)); }
+.gem-0 { --c: #ff5f7e; border-radius: 50%; }
+.gem-1 { --c: #ffc94d; clip-path: polygon(50% 2%, 98% 50%, 50% 98%, 2% 50%); }
+.gem-2 { --c: #2fd6b8; clip-path: polygon(25% 3%, 75% 3%, 98% 50%, 75% 97%, 25% 97%, 2% 50%); }
+.gem-3 { --c: #6d8dff; border-radius: 24%; }
+.gem-4 { --c: #c07aff; clip-path: polygon(50% 2%, 98% 38%, 80% 98%, 20% 98%, 2% 38%); }
+.gem-5 { --c: #8be04a; clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+.gem.is-spawn { animation: tide-spawn 320ms var(--ease-spring); }
+.tide-jelly { position: absolute; inset: 2px; z-index: 1; border: 2px solid rgba(214,235,255,.65); border-radius: 10px; background: repeating-linear-gradient(45deg, rgba(214,235,255,.16) 0 5px, rgba(214,235,255,.04) 5px 10px), rgba(168,205,255,.14); box-shadow: inset 0 0 8px rgba(214,235,255,.25); pointer-events: none; }
+.tide-jelly.is-thin { opacity: .5; border-style: dashed; }
+.tide-lock { position: absolute; top: 1px; right: 1px; z-index: 2; display: grid; place-items: center; width: 19px; height: 19px; border: 1px solid rgba(255,201,77,.8); border-radius: 50%; color: #ffc94d; background: rgba(16,12,32,.92); box-shadow: 0 0 8px rgba(255,201,77,.35); pointer-events: none; }
+.tide-banner { position: absolute; inset: 0; z-index: 3; display: grid; align-content: center; justify-items: center; gap: 6px; border-radius: 10px; background: rgba(8,11,24,.78); backdrop-filter: blur(3px); animation: tide-fade 300ms var(--ease-standard); }
+.tide-banner strong { color: #ffc94d; font-size: 21px; letter-spacing: .1em; text-shadow: 0 0 18px rgba(255,201,77,.5); }
+.tide-banner small { color: #8b96b8; font-size: 12px; }
+.tide-banner.is-won strong { color: #ffc94d; }
+.tide-banner.is-lost strong { color: #ff5f7e; text-shadow: 0 0 18px rgba(255,95,126,.45); }
+.tide-actions { display: flex; justify-content: center; padding-top: 4px; }
+.tide-restart { display: inline-flex; align-items: center; gap: 7px; height: 40px; padding: 0 16px; border: 1px solid rgba(255,107,157,.55); border-radius: 10px; color: #eef1fb; background: linear-gradient(180deg, #39406b 0%, #1c2340 55%, #141a2e 100%); font-weight: 700; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 4px 0 #0a0e1c, 0 10px 20px rgba(0,0,0,.45); transition: border-color var(--dur-fast) var(--ease-standard), transform var(--dur-fast) var(--ease-standard); }
+.tide-restart:hover { border-color: #ff9dc0; box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 4px 0 #0a0e1c, 0 0 18px rgba(255,107,157,.4); }
+.tide-restart:active { transform: translateY(3px); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 1px 0 #0a0e1c; }
+@keyframes tide-pop { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.14); filter: brightness(1.55); } }
+@keyframes tide-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-3px); } }
+@keyframes tide-spawn { from { opacity: 0; transform: translateY(-10px) scale(.4); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes tide-fade { from { opacity: 0; } }
+@media (max-width: 640px) { .tide-game { min-height: 440px; padding: 12px; } .tide-board { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; padding: 10px 0; } .tide-cell { padding: 3px; border-radius: 9px; } .tide-rule { flex-wrap: wrap; } .tide-lock { width: 15px; height: 15px; } }

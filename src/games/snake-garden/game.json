@@ -1,0 +1,28 @@
+{
+  "id": "snake-garden",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "蛇径迷藏",
+  "shortTitle": "蛇径",
+  "description": "驾驭果径之蛇：穿越种子墙阵、追逐限时果实与三倍金穗，在六十关速度曲线里吃得又稳又快。",
+  "category": "arcade",
+  "accent": "#7ed957",
+  "order": 20,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "方向键、WASD、滑动或四向按钮控制蛇径，不能直接掉头。",
+    "吃满关卡配额的果实即完成；撞墙或咬到自己立即失败。",
+    "疾速章的果实限时，超时会换位；金穗三倍分但很快消失。",
+    "穿墙章边界环绕相通，终章墙阵、限时与金果全部叠加。"
+  ],
+  "highlights": ["种子墙阵", "限时果实", "穿墙环绕", "金穗三倍分", "五段速度曲线"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

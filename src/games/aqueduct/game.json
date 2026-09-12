@@ -1,0 +1,28 @@
+{
+  "id": "aqueduct",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "连线水网",
+  "shortTitle": "水网",
+  "description": "旋转格网上的管道，让源头活水贯通每一处汇点。生成树构造保证可解，五章机制层层叠加：步数预算、锈蚀锁件、双源并流与迷雾暗格。",
+  "category": "logic",
+  "accent": "#38b6a0",
+  "order": 18,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点击管道使其顺时针旋转 90°，把源头的水引向每一个汇点。",
+    "所有管道口必须彼此对接，无漏水且全部格点通水即可过关。",
+    "步数预算关中超耗会失败；锈蚀锁件无法旋转，需围绕它们规划。",
+    "高章节叠加双源与迷雾：未通水区域隐入暗格，连通后点亮。"
+  ],
+  "highlights": ["生成树水路", "实时流光", "步数预算", "锈蚀锁件", "双源并流", "迷雾点亮"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

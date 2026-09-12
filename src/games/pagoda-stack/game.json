@@ -1,0 +1,29 @@
+{
+  "id": "pagoda-stack",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "梵塔秘录",
+  "shortTitle": "梵塔",
+  "description": "跨越五章的汉诺塔秘录：步数预算、四柱广厦、封印中柱与彩虹律法层层叠加，把金塔完整迁至彼岸。",
+  "category": "logic",
+  "accent": "#e8b04b",
+  "order": 16,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点击石柱选中顶盘，再点目标柱完成搬运，大盘不可压在小盘上。",
+    "非法移动会被摇动拒绝且不扣步数，把全塔移到最右柱即完成。",
+    "预算关的步数上限为参考解的 1.25 倍，耗尽即刻失败。",
+    "封印关的中柱会在若干步后自动解封，解封前禁止借道。",
+    "彩虹律要求同色盘不相邻，终局章与步数预算同时生效。"
+  ],
+  "highlights": ["Frame-Stewart 四柱", "封印倒计时", "彩虹律法", "步数预算", "六十关秘录"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

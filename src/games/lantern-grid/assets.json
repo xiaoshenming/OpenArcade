@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/lantern-grid/lantern-grid.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "19f631347488e897aadfc738b882b58b6bdd460530239bc5f9b037f1a3f8bfe7"
+    }
+  ]
+}

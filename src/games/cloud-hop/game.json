@@ -1,0 +1,29 @@
+{
+  "id": "cloud-hop",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "羽翼穿云",
+  "shortTitle": "穿云",
+  "description": "轻拍羽翼穿过云柱门隙，历经浮门、罡风与金币门的五章六十关风暴挑战。",
+  "category": "arcade",
+  "accent": "#9bd1ff",
+  "order": 21,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点击画面或按空格键拍动羽翼上升，松手任凭重力下坠。",
+    "穿过云柱门隙每道门得 100 分，贴中门心再奖 50 分。",
+    "浮门会上下缓动，罡风会周期性横向推移小鸟，风前有预警。",
+    "第五章风暴关叠加浮门、罡风与金币门，穿过金环另得 150 分。",
+    "碰到云柱或坠入云海即失败，通过全部配额门数即完成挑战。"
+  ],
+  "highlights": ["拍翅穿门", "门心精准奖", "浮门缓动", "罡风预警", "金币门", "五章节六十关"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

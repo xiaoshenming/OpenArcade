@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/merge-square/merge-square.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "88f947350d01ba94deaae21266520ab8f0f0a7cfc7e568301faa7ba194fb5b67"
+    }
+  ]
+}

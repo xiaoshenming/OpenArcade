@@ -1,0 +1,29 @@
+{
+  "id": "gem-tide",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "宝石连波",
+  "shortTitle": "连波",
+  "description": "交换相邻宝石掀起三连消除的连波：配额、集色、果冻、锁石五章递进，终局三潮合一。",
+  "category": "arcade",
+  "accent": "#ff6b9d",
+  "order": 14,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点击相邻两颗宝石交换，连成三颗同色即可消除。",
+    "无效交换会浪费一步并回弹，上方宝石坠落补充并触发连锁。",
+    "连锁波次提供最高五倍的分数加成，规划长连锁收益更高。",
+    "果冻格需要在其上消除两次，带锁宝石参与一次消除即解锁。",
+    "完成每关目标即胜利，步数耗尽仍未达标则失败。"
+  ],
+  "highlights": ["五章节机制", "连锁五倍加成", "果冻双消", "锁石解锁", "终局三潮合一"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}
