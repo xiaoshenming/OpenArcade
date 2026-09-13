@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/skyscraper-tale/skyscraper-tale.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "86af705b54afd951a72b36ed55815a111d1e64fc7d6981de9256ff7b4de6bb48"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "pulse-runner",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "脉冲行者",
+  "shortTitle": "脉冲",
+  "description": "变色奔跑：自动前进途中点击切换自身颜色，同色穿门得分、异色即撞，双门虚影金门层层加码，跑满距离配额。",
+  "category": "arcade",
+  "accent": "#818cf8",
+  "order": 54,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "行者自动前进：点击舞台、空格或 J 键切换自身颜色，三色循环。",
+    "门框与自身同色穿过得 100 分，异色硬闯扣一命，共 3 条命。",
+    "切色有 0.2 秒冷却，冷却中连按无效，提前看准下一门出手。",
+    "每 10m 得 10 分，半透明虚影门穿过无效也无害，只管无视它。",
+    "金色大门任意颜色可穿，额外 +200 分。",
+    "五章递进：三色、双门连穿、虚影提速，终章 1200m 全机制合流。"
+  ],
+  "highlights": ["三色循环切色", "切色冷却博弈", "双门连穿", "虚影干扰", "金门加分", "60 关色流确定"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

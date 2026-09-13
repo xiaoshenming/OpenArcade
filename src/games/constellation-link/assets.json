@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/constellation-link/constellation-link.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "768ea93d9716839b5259c43e6da57f270c0b271398831299621309a7185bc1c7"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+.slalom-game { --accent: #67e8f9; --glow: rgba(103, 232, 249, 0.45); position: relative; display: grid; grid-template-rows: auto auto 1fr auto; min-height: 540px; padding: 20px; overflow: hidden; background: radial-gradient(rgba(238, 241, 251, 0.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 8%, #14203c 0%, #0d1122 76%); }
+.slalom-game::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(88% 70% at 50% 42%, rgba(103, 232, 249, 0.1) 0%, rgba(103, 232, 249, 0.03) 46%, rgba(4, 7, 16, 0.55) 100%); box-shadow: inset 0 0 130px rgba(4, 7, 16, 0.5); }
+.slalom-game.chapter-1 { --accent: #2fd6b8; --glow: rgba(47, 214, 184, 0.4); }
+.slalom-game.chapter-3 { --accent: #ffc94d; --glow: rgba(255, 201, 77, 0.42); }
+.slalom-game.chapter-4 { --accent: #b18cf8; --glow: rgba(177, 140, 248, 0.42); }
+.slalom-game.chapter-5 { --accent: #ff5f7e; --glow: rgba(255, 95, 126, 0.42); }
+.slalom-readout, .slalom-rule, .slalom-board, .slalom-pad { position: relative; z-index: 1; }
+.slalom-readout { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 7px 12px; border: 1px solid rgba(139, 150, 184, 0.24); border-radius: 8px; background: linear-gradient(180deg, rgba(33, 40, 70, 0.92), rgba(14, 18, 35, 0.88)); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.13), 0 6px 16px rgba(0, 0, 0, 0.35); color: #8b96b8; font-size: 11px; }
+.slalom-readout strong { color: #eef1fb; font-size: 12px; font-variant-numeric: tabular-nums; }
+.slalom-rule { display: flex; align-items: center; gap: 9px; min-height: 36px; margin-top: 9px; padding: 6px 10px; border: 1px solid rgba(139, 150, 184, 0.2); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; background: linear-gradient(180deg, rgba(30, 37, 64, 0.92), rgba(16, 20, 38, 0.9)); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 8px 20px rgba(0, 0, 0, 0.4); }
+.slalom-rule span { color: #eef1fb; font-size: 11px; font-weight: 800; white-space: nowrap; }
+.slalom-rule small { flex: 1; color: #8b96b8; font-size: 10px; }
+.slalom-rule em { padding: 3px 7px; border: 1px solid var(--accent); border-radius: 6px; color: var(--accent); font-size: 10px; font-style: normal; font-weight: 800; font-variant-numeric: tabular-nums; }
+.slalom-board { display: grid; width: min(92vw, 500px); margin: 14px auto 0; border: 2px solid var(--accent); border-radius: 10px; background: rgba(11, 15, 30, 0.86); box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5), 0 0 26px var(--glow); touch-action: none; }
+.slalom-cell { position: relative; display: grid; place-items: center; }
+.slalom-clue { width: 62%; aspect-ratio: 1; border-radius: 999px; }
+.slalom-clue.is-white { border: 2px solid #eef1fb; box-shadow: 0 0 9px rgba(238, 241, 251, 0.3); }
+.slalom-clue.is-black { border: 2px solid rgba(238, 241, 251, 0.9); background: radial-gradient(#eef1fb 0 54%, transparent 58%); box-shadow: 0 0 9px rgba(238, 241, 251, 0.35); }
+.slalom-node { place-self: center; width: 6px; height: 6px; border-radius: 999px; background: rgba(139, 150, 184, 0.55); pointer-events: none; }
+.slalom-edge { --hit: 11px; position: relative; z-index: 1; margin: calc(0px - var(--hit)); border: 0; padding: 0; background: transparent; cursor: pointer; }
+.slalom-edge::after { content: ''; position: absolute; inset: var(--hit); border-radius: 6px; background-repeat: no-repeat; background-position: center; transition: background-color var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast) var(--ease-standard); }
+.slalom-edge.is-h::after { background-size: 100% 30%; background-image: linear-gradient(180deg, var(--accent), var(--accent)); opacity: 0; }
+.slalom-edge.is-v::after { background-size: 30% 100%; background-image: linear-gradient(90deg, var(--accent), var(--accent)); opacity: 0; }
+.slalom-edge:hover:not(:disabled)::after, .slalom-edge:focus-visible::after { opacity: 0.22; }
+.slalom-edge:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-radius: 8px; }
+.slalom-edge.is-h.is-on::after { opacity: 1; box-shadow: 0 0 10px var(--glow), 0 0 22px var(--glow); }
+.slalom-edge.is-v.is-on::after { opacity: 1; box-shadow: 0 0 10px var(--glow), 0 0 22px var(--glow); }
+.slalom-edge:disabled { cursor: default; }
+.slalom-pad { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+.slalom-key { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: 44px; min-width: 96px; padding: 0 14px; border: 1px solid rgba(139, 150, 184, 0.32); border-radius: 9px; color: #eef1fb; background: linear-gradient(180deg, #2a3157 0%, #1a2038 60%, #141a2e 100%); font-size: 12px; font-weight: 800; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 3px 0 #0a0e1c; transition: border-color var(--dur-fast) var(--ease-standard), transform var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast) var(--ease-standard); }
+.slalom-key:hover:not(:disabled) { border-color: var(--accent); }
+.slalom-key:active:not(:disabled) { transform: translateY(2px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 #0a0e1c; }
+.slalom-key:disabled { opacity: 0.45; cursor: default; }
+.slalom-live { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+.slalom-banner { position: absolute; right: 0; bottom: 92px; left: 0; z-index: 2; text-align: center; font-size: 13px; font-weight: 800; letter-spacing: 0.1em; pointer-events: none; animation: slalom-fade 420ms var(--ease-spring) backwards; }
+.slalom-banner.is-failed { color: #ff5f7e; text-shadow: 0 0 16px rgba(255, 95, 126, 0.5), 0 1px 2px rgba(4, 7, 16, 0.8); }
+.slalom-banner.is-complete { color: #ffc94d; text-shadow: 0 0 16px rgba(255, 201, 77, 0.5), 0 1px 2px rgba(4, 7, 16, 0.8); }
+@keyframes slalom-fade { from { opacity: 0; transform: translateY(10px) scale(0.92); } }
+@media (max-width: 640px) { .slalom-game { min-height: 460px; padding: 12px; } .slalom-board { width: min(94vw, 500px); } .slalom-banner { bottom: 96px; } }

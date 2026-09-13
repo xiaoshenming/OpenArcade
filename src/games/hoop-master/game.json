@@ -1,0 +1,29 @@
+{
+  "id": "hoop-master",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "套圈大师",
+  "shortTitle": "套圈",
+  "description": "街机套圈：力度条往复摆动，点击定时锁力抛出抛物线圆圈，套中横移木柱、连珠双圈与飞速金柱，御风夺满贯。",
+  "category": "arcade",
+  "accent": "#eab308",
+  "order": 57,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "下方力度条往复摆动，点击画面或按空格键锁定力度，圈沿抛物线飞向木柱台。",
+    "落点与木柱距离小于阈值即套中：普通柱 150 分，金柱 400 分，连中有倍率加成。",
+    "弹数配额内达到分数配额即过关；空投未中会中断连击。",
+    "木柱会横移，第三章一次蓄力连投双圈，金柱高分却飞快。",
+    "第五章阵风偏移力度，看准风向风速补偿出手。"
+  ],
+  "highlights": ["定时锁力", "抛物线落点", "连中倍率", "双圈连投", "飞速金柱", "阵风偏移"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

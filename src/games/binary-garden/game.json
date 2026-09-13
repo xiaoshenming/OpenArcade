@@ -1,0 +1,30 @@
+{
+  "id": "binary-garden",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "二进制花园",
+  "shortTitle": "二进",
+  "description": "在花圃里种下 0 与 1：每行每列两色各半、拒绝三连同色、任意两行两列不相同，从 4x4 新芽花圃一路修剪到迷雾终章的 8x8 花林。",
+  "category": "logic",
+  "accent": "#5ac8fa",
+  "order": 40,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点击空格在空、0、1 之间轮换，再次点击回到空格。",
+    "每行每列 0 与 1 数量相等，任意位置不能出现三个相同连续。",
+    "第二章起开局亮出一条正确的提示线，锁定不可更改。",
+    "任意两行、两列都不能完全相同，冲突格会立即标红。",
+    "整行或整列填对后，两侧标尺会自动变灰。",
+    "第四章起失误预算为 3；第五章迷雾关闭冲突红标，只能依靠推理完成花园。"
+  ],
+  "highlights": ["空 0 1 轮换", "开局提示线", "冲突即时红标", "行列完成变灰", "失误预算 3", "迷雾终章", "唯一解挖洞"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

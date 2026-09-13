@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/splash-dive/splash-dive.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "5716b00c84aadc19b9b93e0a8c2f352179f27c617d848444f540b165aab0981f"
+    }
+  ]
+}

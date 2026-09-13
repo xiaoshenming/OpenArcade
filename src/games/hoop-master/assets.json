@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/hoop-master/hoop-master.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "2032ab5f325c5e73072ea2fc95a0f53e5f2c10763742c4f2c971400b31af5324"
+    }
+  ]
+}

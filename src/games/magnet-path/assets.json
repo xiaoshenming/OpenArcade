@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/magnet-path/magnet-path.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "2555b12a1f42c7a04f6e134729ab5b77e0727eb7a86c262f30f69e3298f527f5"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "tangram-nest",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "七巧拼界",
+  "shortTitle": "七巧",
+  "description": "回溯构造保证可解的多联块拼装：把 I/L/T/S/Z 彩块嵌入剪影，旋转解锁、步数预算、定桩锁块逐章叠加，终章六族齐发。",
+  "category": "logic",
+  "accent": "#fb923c",
+  "order": 48,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点击下方色块选中，再点击拼台空格安放，色块包围盒左上角对齐所点格。",
+    "再点已选色块或旋转按钮可顺时针转 90°，首章色块固定不可旋转。",
+    "点击拼台上已放的色块可取回，误放压块会损失一次机会，三次失误判负。",
+    "预算章节中旋转与安放都计步，耗尽预算即失败；填满整个剪影即过关。"
+  ],
+  "highlights": ["回溯构造可解", "六族多联块", "旋转九十度", "步数预算", "定桩锁块", "五章节递进"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

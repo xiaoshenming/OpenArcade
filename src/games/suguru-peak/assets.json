@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/suguru-peak/suguru-peak.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "79927f0ff6bb5f80b58b47e8ff6962765d225342f9b2d711579339a96741f0b2"
+    }
+  ]
+}

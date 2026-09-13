@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/chain-zip/chain-zip.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "39088163d3d6bbdf5bea8dce517539c9366a6ee827c54c0cdc02842635a7841b"
+    }
+  ]
+}

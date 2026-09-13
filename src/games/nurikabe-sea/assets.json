@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/nurikabe-sea/nurikabe-sea.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "411bf6624286547d5ed865467e1d86a3820abed7770fb3b166299287885c8f55"
+    }
+  ]
+}

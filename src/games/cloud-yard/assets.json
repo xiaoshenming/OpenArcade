@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/cloud-yard/cloud-yard.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "840f5b88a26a707667a54a375f03c15ec4d8d48907e20fc94b28bf9b8b02f278"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+.cs-game { position: relative; display: grid; grid-template-rows: auto auto 1fr auto auto; gap: 9px; min-height: 520px; padding: 20px; overflow: hidden; background: radial-gradient(circle at 50% 6%, #2a1f14 0%, #0d1122 74%); }
+.cs-game::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(92% 70% at 50% 40%, rgba(238,241,251,.05) 0%, rgba(238,241,251,.02) 48%, rgba(4,7,16,.5) 100%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.6' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E"); box-shadow: inset 0 0 130px rgba(4,7,16,.55); }
+.cs-game.ch2 { background: radial-gradient(circle at 50% 6%, #2a2318 0%, #0d1122 74%); }
+.cs-game.ch3 { background: radial-gradient(circle at 50% 6%, #232216 0%, #0d1122 74%); }
+.cs-game.ch4 { background: radial-gradient(circle at 50% 6%, #262020 0%, #0d1122 74%); }
+.cs-game.ch5 { background: radial-gradient(circle at 50% 6%, #2e1f1a 0%, #0d1122 74%); }
+.cs-readout, .cs-rule, .cs-stage, .cs-power, .cs-key { position: relative; z-index: 1; }
+.cs-readout { display: flex; align-items: center; justify-content: space-between; padding: 7px 12px; border: 1px solid rgba(139,150,184,.24); border-radius: 8px; background: linear-gradient(180deg, rgba(33,40,70,.92), rgba(14,18,35,.88)); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), 0 6px 16px rgba(0,0,0,.35); color: #8b96b8; font-size: 11px; }
+.cs-readout strong { color: #eef1fb; font-size: 12px; font-variant-numeric: tabular-nums; }
+.cs-rule { display: flex; align-items: center; gap: 9px; min-height: 38px; padding: 7px 10px; border: 1px solid rgba(139,150,184,.2); border-left: 3px solid #f97316; border-radius: 0 8px 8px 0; background: linear-gradient(180deg, rgba(30,37,64,.92), rgba(16,20,38,.9)); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), 0 8px 20px rgba(0,0,0,.4); }
+.cs-rule span { display: inline-flex; align-items: center; gap: 5px; color: #eef1fb; font-size: 11px; font-weight: 800; white-space: nowrap; }
+.cs-rule small { flex: 1; color: #8b96b8; font-size: 10px; }
+.cs-rule em { padding: 4px 7px; border-radius: 6px; font-size: 10px; font-style: normal; font-weight: 800; white-space: nowrap; }
+.cs-rule em.is-teal { color: #6fe3cd; background: rgba(47,214,184,.14); }
+.cs-rule em.is-coral { color: #ff8fa3; background: rgba(255,95,126,.16); }
+.cs-rule em.is-brick { color: #e8a06b; background: rgba(249,115,22,.16); }
+.cs-rule em.is-gold { color: #ffdf8f; background: rgba(255,201,77,.16); }
+.cs-stage { position: relative; aspect-ratio: 120 / 68; min-height: 190px; overflow: hidden; border: 1px solid rgba(139,150,184,.22); border-radius: 12px; background: linear-gradient(180deg, #101a2e 0%, #1a2036 55%, #241d24 100%); box-shadow: inset 0 0 60px rgba(4,7,16,.7); touch-action: none; cursor: crosshair; }
+.cs-scaler { position: absolute; top: 0; left: 0; width: 960px; height: 544px; transform-origin: 0 0; }
+.cs-ground { position: absolute; left: 0; right: 0; bottom: 0; height: 26px; background: linear-gradient(180deg, #3d3226 0%, #292018 45%, #171310 100%); border-top: 2px solid rgba(249,115,22,.55); box-shadow: inset 0 3px 8px rgba(238,241,251,.08), inset 0 -10px 18px rgba(4,7,16,.6); }
+.cs-mark { position: absolute; bottom: 30px; left: 0; color: rgba(139,150,184,.55); font-size: 9px; font-weight: 800; letter-spacing: .08em; }
+.cs-mark::before { content: ''; position: absolute; bottom: -7px; left: 1px; width: 1px; height: 7px; background: rgba(139,150,184,.35); }
+.cs-wall { position: absolute; bottom: 24px; left: 0; background: repeating-linear-gradient(180deg, #8a5a3b 0 12px, #73492e 12px 14px), linear-gradient(90deg, rgba(238,241,251,.14) 0 2px, transparent 2px 100%); border: 1px solid rgba(232,160,107,.5); border-bottom: none; border-radius: 3px 3px 0 0; box-shadow: inset 0 2px 0 rgba(238,241,251,.22), 0 0 14px rgba(249,115,22,.18); }
+.cs-target { position: absolute; top: 0; left: 0; width: 34px; height: 34px; display: grid; place-items: center; transition: opacity 300ms var(--ease-exit), filter 300ms var(--ease-exit); }
+.cs-target i { width: 28px; height: 28px; border-radius: 50%; border: 2px solid rgba(238,241,251,.7); background: radial-gradient(circle at 34% 30%, #ffe1b0 0%, #f97316 52%, #9a3d12 100%); box-shadow: 0 0 16px rgba(249,115,22,.5); }
+.cs-target::before { content: ''; position: absolute; top: 100%; left: 50%; width: 2px; height: 22px; background: linear-gradient(180deg, rgba(139,150,184,.5), transparent); }
+.cs-target.is-helmet i { border-radius: 50% 50% 24% 24%; background: linear-gradient(180deg, #cfd6ea 0%, #8b96b8 58%, #4a5170 100%); border-color: rgba(238,241,251,.8); }
+.cs-target.is-cracked i { border-radius: 50%; background: radial-gradient(circle at 34% 30%, #ffd9c4 0%, #f97316 60%, #9a3d12 100%); filter: brightness(1.15); }
+.cs-target.is-cracked::after, .cs-target.is-helmet::after { content: ''; position: absolute; inset: 4px; border-radius: inherit; background: repeating-linear-gradient(45deg, transparent 0 6px, rgba(12,18,32,.55) 6px 8px); opacity: 0; }
+.cs-target.is-cracked::after { opacity: 1; }
+.cs-target.is-hit { opacity: 0; filter: brightness(2.2) saturate(.3); transform: scale(1.6); }
+.cs-dot { position: absolute; top: 0; left: 0; width: 6px; height: 6px; border-radius: 50%; background: rgba(238,241,251,.75); opacity: 0; pointer-events: none; }
+.cs-shell { position: absolute; top: 0; left: 0; width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff3d9 0%, #ffc94d 55%, #c78f1d 100%); box-shadow: 0 0 12px rgba(255,201,77,.75); opacity: 0; }
+.cs-cannon { position: absolute; bottom: 0; left: 0; width: 30px; height: 26px; }
+.cs-wheel { position: absolute; bottom: 2px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: radial-gradient(circle at 50% 50%, #4a3a2a 0 28%, #6b563e 30% 62%, #33281c 64% 100%); border: 2px solid rgba(232,160,107,.55); box-shadow: 0 0 10px rgba(249,115,22,.3); }
+.cs-barrel { position: absolute; bottom: 14px; left: 11px; width: 34px; height: 9px; border-radius: 4px; background: linear-gradient(180deg, #5a6a94 0%, #39406b 55%, #232946 100%); border: 1px solid rgba(139,150,184,.6); transform-origin: 4px 50%; box-shadow: inset 0 1px 0 rgba(238,241,251,.35); }
+.cs-veil { position: absolute; inset: 0; z-index: 4; display: grid; place-items: center; color: #eef1fb; font-size: 15px; font-weight: 800; letter-spacing: .3em; background: rgba(4,7,16,.55); backdrop-filter: blur(2px); }
+.cs-panel { position: absolute; inset: 0; z-index: 5; display: grid; place-content: center; justify-items: center; gap: 7px; text-align: center; background: rgba(4,7,16,.72); }
+.cs-panel strong { color: #eef1fb; font-size: 19px; letter-spacing: .1em; }
+.cs-panel span { color: #8b96b8; font-size: 11px; }
+.cs-panel em { color: #ffc94d; font-size: 22px; font-style: normal; font-weight: 900; font-variant-numeric: tabular-nums; text-shadow: 0 0 16px rgba(255,201,77,.5); }
+.cs-panel button { display: inline-flex; align-items: center; gap: 7px; margin-top: 6px; height: 44px; padding: 0 16px; border: 1px solid rgba(249,115,22,.55); border-radius: 10px; color: #eef1fb; background: linear-gradient(180deg, #4a4030 0%, #2a2318 55%, #1a1610 100%); font-weight: 700; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 4px 0 #0a0e1c, 0 10px 20px rgba(0,0,0,.45); transition: transform var(--dur-fast) var(--ease-standard); }
+.cs-panel button:active { transform: translateY(3px); }
+.cs-power { height: 8px; border-radius: 4px; background: rgba(139,150,184,.18); overflow: hidden; }
+.cs-power span { display: block; height: 100%; border-radius: 4px; background: linear-gradient(90deg, #ffc94d, #f97316, #ff5f7e); transform-origin: left center; transform: scaleX(0); }
+.cs-key { height: 52px; border-radius: 12px; border: 1px solid rgba(249,115,22,.5); color: #eef1fb; font-size: 14px; font-weight: 900; letter-spacing: .08em; cursor: pointer; background: linear-gradient(180deg, rgba(52,44,38,.95), rgba(26,22,18,.95)); box-shadow: inset 0 1px 0 rgba(255,255,255,.16), inset 0 -3px 6px rgba(0,0,0,.4), 0 4px 0 #0a0e1c; transition: transform 90ms var(--ease-standard), filter 90ms var(--ease-standard); touch-action: none; user-select: none; }
+.cs-key:active { transform: translateY(3px) scale(.98); filter: brightness(1.45); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 1px 0 #0a0e1c; }
+@media (max-width: 640px) { .cs-game { min-height: 440px; padding: 12px; gap: 7px; } .cs-stage { min-height: 140px; } .cs-key { height: 48px; font-size: 12px; } .cs-rule small { display: none; } }

@@ -1,0 +1,30 @@
+{
+  "id": "slalom-loop",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "回环滑径",
+  "shortTitle": "回环",
+  "description": "雪场 Masyu 回环：白圈直行、黑圈转弯，点击格边拖出一条不交叉不分支的闭环。五章 60 关从 6x6 紧凑滑道滑向 10x10 宽幅雪原，失误预算与超时扣分步步紧逼。",
+  "category": "logic",
+  "accent": "#67e8f9",
+  "order": 62,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点击格边画线，按住拖动可连续画线或擦除。",
+    "白圈处线必须直行，且至少一侧相邻格有转折。",
+    "黑圈处线必须转折，且前后两格都要直行。",
+    "画出经过所有圆圈、不交叉不分支的闭环即通关。",
+    "闭合错误环路会清空并记一次失误，达到上限判负。",
+    "越快闭合得分越高，超时与失误都会扣分。"
+  ],
+  "highlights": ["白圈黑圈规则", "点击拖线画环", "失误预算清空", "五章节五雪场", "全圈覆盖判胜", "削圈唯一性验证"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "constellation-link",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "星图连线",
+  "shortTitle": "星图",
+  "description": "在星点之间连线，让每颗星的连线数恰好等于标注度数。6 星启蒙到 14 星极限星阵，失误上限与连线预算层层叠加，每一关都由构造生成并经求解器验证唯一解。",
+  "category": "logic",
+  "accent": "#c7d2fe",
+  "order": 61,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点击一颗星选中，再点击它上下左右相邻的星即可连线。",
+    "再次点击已连线的两颗星之一可以拆除这条连线，拆除不计连线数。",
+    "让每颗星的连线数正好等于星上的度数标注即可过关。",
+    "向已满度的星连线会计一次失误，第三章起失误 3 次判负。",
+    "第四章起有连线次数预算，拆除重连同样消耗预算。",
+    "全部谜面由构造生成并经求解器验证唯一解。"
+  ],
+  "highlights": ["度数星座推演", "网格邻接连线不交叉", "60 关唯一解保证", "失误上限", "连线预算", "五章机制递进"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

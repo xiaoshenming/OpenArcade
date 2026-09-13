@@ -1,0 +1,29 @@
+{
+  "id": "honey-hive",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "蜂巢酿蜜",
+  "shortTitle": "蜂巢",
+  "description": "在六角蜂巢盘的空格里注入 1-6 花蜜，让每一圈环带的总和与环线索一致，在失误预算内酿满整巢。",
+  "category": "cozy",
+  "accent": "#fbbf24",
+  "order": 65,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点选空蜂格，再用数字盘注入 1-6 的花蜜量。",
+    "金色蜂房是固定线索，从中心向外的第 k 圈总和须等于环 k 的线索值。",
+    "超出环总和或注定补不齐的注蜜算失误，超预算即发酵失败。",
+    "差分暗环只给相邻环差值，先算内环和再推外环。",
+    "全部蜂格注满且各环总和吻合即酿蜜完成，越快越准分越高。"
+  ],
+  "highlights": ["六角环带", "环和线索", "差分暗环", "失误预算", "唯一解构造"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "star-chef",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "星厨配餐",
+  "shortTitle": "星厨",
+  "description": "按菜谱在食材架挑选食材，让甜辣鲜三维数值与目标分毫不差，限时上菜成为星级大厨。",
+  "category": "cozy",
+  "accent": "#fca5a5",
+  "order": 69,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点击食材把它放上案板，再次点击取下；实时对照菜谱三味数值。",
+    "上菜时甜、辣、鲜三项总和必须与目标完全一致，缺一不可、多一不行。",
+    "看差异提示：缺多少就补哪种风味，超了就取下食材。",
+    "错误上菜会消耗一命，三命用尽即失败；步数预算用尽也会失败。",
+    "配额章节里部分食材可重复取用，注意次数上限。",
+    "终章双席宴要连续精确交出两道菜，中途不能失误太多。"
+  ],
+  "highlights": ["三维配平", "构造可解", "次数配额", "三命容错", "双席连宴", "差值高亮"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

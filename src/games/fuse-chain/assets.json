@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/fuse-chain/fuse-chain.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "33f817a6cfe7884481d5d9786bb7074ecf8ed7eb8686b51b9b94823fd77ecc24"
+    }
+  ]
+}

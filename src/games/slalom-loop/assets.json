@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/slalom-loop/slalom-loop.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "4cb9d174272ae02c1a69d9f02cd23577d41aa9bb668b804fe5d5384bfcc42333"
+    }
+  ]
+}

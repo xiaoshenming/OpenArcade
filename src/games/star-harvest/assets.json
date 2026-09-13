@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/star-harvest/star-harvest.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "a0754243abf230afde53cd45ce50f068f578274de761235875b5c0b8cc503d44"
+    }
+  ]
+}

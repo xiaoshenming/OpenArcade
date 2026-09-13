@@ -1,0 +1,29 @@
+{
+  "id": "chain-zip",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "锁链飞渡",
+  "shortTitle": "飞渡",
+  "description": "荡索飞人飞渡峡谷：摆荡蓄能松手抛出、再点吸附前锚，历经高度差、浮枢、长索与金锚的五章六十关征程。",
+  "category": "arcade",
+  "accent": "#2dd4bf",
+  "order": 56,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "主角悬挂在锚点下单摆摆动，点击画面或按空格键松手，沿切线方向抛出。",
+    "飞行中再次点击，绳索自动吸附前进方向最近的锚点并重新起摆。",
+    "每前进 10 米得 10 分，坠地损一命共三命，达到距离配额即过关。",
+    "浮枢锚点上下缓动，长索甩速更快，第五章金锚吸附每枚另奖 200 分。",
+    "锚点间距按摆动能量守恒校验，前倾三十度松手必能够到下一锚。"
+  ],
+  "highlights": ["单摆切线抛射", "吸附自动选锚", "浮枢缓动", "长索分级", "金锚重赏", "五章节六十关"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "echo-maze",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "回音迷宫",
+  "shortTitle": "回音",
+  "description": "漆黑迷宫全靠回声：用有限的声呐脉冲短暂照亮身边墙壁，凭记忆走向出口；迷宫更大、脉冲更少、出口游移，步数越接近最短路得分越高。",
+  "category": "arcade",
+  "accent": "#94a3b8",
+  "order": 66,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "迷宫完全不可见：点按脉冲键或按空格发出声呐，短暂照亮半径内的墙壁。",
+    "方向键、WASD 或滑动移动；撞墙不扣步，只有真正移动才计入步数。",
+    "脉冲有限，耗尽后只能凭记忆盲走；抵达出口即完成，脉冲与步数均不判负。",
+    "计分 = 1000 − 脉冲×80 − 超出最短路的步数×5，越省脉冲越少绕路分越高。",
+    "第三章开局有 2 秒出口方向提示；第四章起出口每 30 步迁移并短暂显形。",
+    "终章合并大迷宫、稀缺脉冲与游移出口，挑战最短路径的记忆力极限。"
+  ],
+  "highlights": ["声呐脉冲", "纯记忆盲走", "最短路计分", "游移出口", "五章机制递进", "60 关全连通"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

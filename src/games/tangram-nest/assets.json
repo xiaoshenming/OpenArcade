@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/tangram-nest/tangram-nest.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "35780f7864e205ac564d3a93b6c8b668c2c0287eaed8e85d9268014c813f0c64"
+    }
+  ]
+}

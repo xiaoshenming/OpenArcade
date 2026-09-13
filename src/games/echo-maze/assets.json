@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/echo-maze/echo-maze.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "01398133ef259749958acc77ae5f863abfe04641c21eba0218be602640b62af2"
+    }
+  ]
+}

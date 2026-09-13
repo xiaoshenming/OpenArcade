@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/cannon-siege/cannon-siege.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "c585ef7732144ccc3101f8c11eb5517e880d15cd823b4d4214a35f91ad17502f"
+    }
+  ]
+}

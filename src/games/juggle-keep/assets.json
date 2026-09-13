@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/juggle-keep/juggle-keep.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "456b64fbd0b46ba3bee19504c1248cbcc95a6be8db4657a9260cceb4295a8ba8"
+    }
+  ]
+}

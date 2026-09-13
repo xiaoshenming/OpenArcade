@@ -1,0 +1,30 @@
+{
+  "id": "calc-casket",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "算符迷匣",
+  "shortTitle": "迷匣",
+  "description": "KenKen 式算符迷匣：笼内数字按加减乘除组成目标数，行列不得重复。从 4x4 双格加减一路玩到 6x6 乘除与失误预算的终章合契，每关都经求解器验证唯一解。",
+  "category": "logic",
+  "accent": "#fca5a5",
+  "order": 42,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点选格子，再用底部数字键盘或键盘数字键填入，0 或退格擦除。",
+    "每行、每列数字不重复，笼内数字按运算符组成目标数。",
+    "减法与除法笼限定两格，除法笼的商必为整数。",
+    "违反行列或笼约束的落子会即时红标并计一次失误。",
+    "完成越快得分越高，超出 par 时间每 10 秒扣 15 分。",
+    "第四章起失误上限 3 次，超过即判失败。"
+  ],
+  "highlights": ["笼运算 KenKen", "唯一解验证", "笼冲突红标", "5 章节递进", "失误预算", "par 计分"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

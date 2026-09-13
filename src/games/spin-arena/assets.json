@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/spin-arena/spin-arena.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "ba2824fe7eb24d56a9ac13fbc6ae468f9015963b3472ca91dc04810aa30cc71f"
+    }
+  ]
+}

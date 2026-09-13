@@ -1,0 +1,45 @@
+.garden-game { --accent: #5ac8fa; position: relative; display: grid; grid-template-rows: auto auto 1fr auto; gap: 10px; min-height: 540px; padding: 20px; overflow: hidden; background: radial-gradient(rgba(90,200,250,.05) 1px, transparent 1.5px) 0 0 / 24px 24px, radial-gradient(circle at 50% 8%, #14283c 0%, #0d1122 78%); }
+.garden-game::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(88% 70% at 50% 38%, rgba(90,200,250,.13) 0%, rgba(90,200,250,.03) 48%, rgba(4,7,16,.52) 100%); box-shadow: inset 0 0 130px rgba(4,7,16,.5); }
+.garden-game.mode-thorn { --accent: #ffc94d; }
+.garden-game.mode-mist { --accent: #8b96b8; }
+.garden-readout, .garden-rule, .garden-board, .garden-actions { position: relative; z-index: 1; }
+.garden-readout { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 7px 12px; border: 1px solid rgba(139,150,184,.24); border-radius: 8px; background: linear-gradient(180deg, rgba(33,40,70,.92), rgba(14,18,35,.88)); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), 0 6px 16px rgba(0,0,0,.35); color: #8b96b8; font-size: 11px; }
+.garden-readout strong { color: #eef1fb; font-size: 12px; font-variant-numeric: tabular-nums; }
+.garden-rule { display: flex; align-items: center; gap: 9px; min-height: 36px; padding: 6px 10px; border: 1px solid rgba(139,150,184,.2); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; background: linear-gradient(180deg, rgba(30,37,64,.92), rgba(16,20,38,.9)); box-shadow: inset 0 1px 0 rgba(255,255,255,.12); }
+.garden-rule span { color: #eef1fb; font-size: 11px; font-weight: 800; white-space: nowrap; }
+.garden-rule small { flex: 1; color: #8b96b8; font-size: 10px; }
+.garden-rule em { padding: 3px 7px; border: 1px solid var(--accent); border-radius: 6px; color: var(--accent); font-size: 10px; font-style: normal; font-weight: 800; font-variant-numeric: tabular-nums; }
+.garden-rule em.is-tight { border-color: #ff5f7e; color: #ff5f7e; animation: garden-pulse 900ms var(--ease-standard) infinite; }
+.garden-rule em.is-warn { border-color: #ffc94d; color: #ffc94d; }
+.garden-rule em.is-fog { border-style: dashed; color: #8b96b8; }
+.garden-rule em.is-hint { border-style: double; border-color: #2fd6b8; color: #2fd6b8; }
+.garden-board { --garden-size: 4; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto 1fr; width: min(92vw, 460px); margin: 0 auto; }
+.garden-col-heads { display: grid; grid-template-columns: repeat(var(--garden-size), minmax(0, 1fr)); }
+.garden-row-heads { display: grid; grid-template-rows: repeat(var(--garden-size), minmax(0, 1fr)); }
+.garden-head { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; color: #8b96b8; font-size: 10px; font-style: normal; line-height: 1.2; font-variant-numeric: tabular-nums; transition: opacity var(--dur-base) var(--ease-standard); }
+.garden-col-heads .garden-head { flex-direction: row; gap: 4px; }
+.garden-head.is-done { color: #4a5578; opacity: .55; text-decoration: line-through; }
+.garden-grid { display: grid; grid-template-columns: repeat(var(--garden-size), minmax(0, 1fr)); border: 2px solid var(--accent); border-radius: 10px; overflow: hidden; background: rgba(13,17,34,.78); box-shadow: 0 14px 34px rgba(0,0,0,.5), 0 0 26px rgba(90,200,250,.16); }
+.garden-game.mode-mist .garden-grid { box-shadow: 0 14px 34px rgba(0,0,0,.55), 0 0 26px rgba(139,150,184,.14); filter: saturate(.72); }
+.garden-cell { display: grid; place-items: center; aspect-ratio: 1; min-width: 0; padding: 0; border-right: 1px solid rgba(139,150,184,.22); border-bottom: 1px solid rgba(139,150,184,.22); color: #eef1fb; font-size: clamp(14px, calc(min(92vw, 460px) / var(--garden-size) * .5), 30px); font-weight: 800; font-variant-numeric: tabular-nums; cursor: pointer; background: transparent; transition: background var(--dur-fast) var(--ease-standard), color var(--dur-fast) var(--ease-standard); }
+.garden-cell[data-br='0'] { border-right: 0; }
+.garden-cell[data-bb='0'] { border-bottom: 0; }
+.garden-cell.is-given { color: #6d7ba3; }
+.garden-cell.is-hint { color: #2fd6b8; text-shadow: 0 0 10px rgba(47,214,184,.45); }
+.garden-cell.is-zero { color: #2fd6b8; text-shadow: 0 0 10px rgba(47,214,184,.45); }
+.garden-cell.is-one { color: #5ac8fa; text-shadow: 0 0 10px rgba(90,200,250,.5); }
+.garden-cell.is-conflict { color: #ff5f7e; background: rgba(255,95,126,.16); box-shadow: inset 0 0 0 2px rgba(255,95,126,.6); animation: garden-shake 320ms var(--ease-standard); }
+.garden-cell:disabled { cursor: default; }
+.garden-actions { display: flex; gap: 8px; justify-content: center; }
+.garden-action { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: 44px; min-width: 132px; padding: 0 12px; border: 1px solid rgba(139,150,184,.32); border-radius: 9px; color: #eef1fb; background: linear-gradient(180deg, #2a3157 0%, #1a2038 60%, #141a2e 100%); font-size: 12px; font-weight: 800; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 3px 0 #0a0e1c; transition: transform var(--dur-fast) var(--ease-standard), border-color var(--dur-fast) var(--ease-standard); }
+.garden-action:hover:not(:disabled) { border-color: var(--accent); }
+.garden-action:active:not(:disabled) { transform: translateY(2px); box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 #0a0e1c; }
+.garden-action:disabled { opacity: .45; cursor: default; }
+.garden-nudge { position: absolute; left: 50%; bottom: 88px; z-index: 2; transform: translateX(-50%); padding: 7px 14px; border: 1px solid rgba(90,200,250,.4); border-radius: 999px; background: rgba(13,17,34,.94); color: #eef1fb; font-size: 11px; white-space: nowrap; animation: garden-rise 420ms var(--ease-spring) backwards; }
+.garden-flash { position: absolute; right: 0; bottom: 96px; left: 0; z-index: 2; color: #ffc94d; text-align: center; font-size: 13px; font-weight: 800; letter-spacing: .1em; text-shadow: 0 0 16px rgba(255,201,77,.5), 0 1px 2px rgba(4,7,16,.8); pointer-events: none; animation: garden-pop 420ms var(--ease-spring) backwards; }
+.garden-flash.is-bad { color: #ff5f7e; text-shadow: 0 0 16px rgba(255,95,126,.5), 0 1px 2px rgba(4,7,16,.8); }
+@keyframes garden-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
+@keyframes garden-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .55; } }
+@keyframes garden-rise { from { opacity: 0; transform: translate(-50%, 10px) scale(.94); } }
+@keyframes garden-pop { from { opacity: 0; transform: translateY(10px) scale(.94); } }
+@media (max-width: 640px) { .garden-game { min-height: 460px; padding: 12px; } .garden-board { width: min(94vw, 460px); } .garden-nudge { bottom: 104px; } }

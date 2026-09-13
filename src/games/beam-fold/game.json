@@ -1,0 +1,29 @@
+{
+  "id": "beam-fold",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "光束折跃",
+  "shortTitle": "折跃",
+  "description": "布设平面镜与分光器，引导光束拐弯、分身、绕过挡板，点亮全部目标格。五章机制递进：多标折跃、步数预算、分光双束与黑盒终局，生成器构造保证每一关可解。",
+  "category": "logic",
+  "accent": "#a5f3fc",
+  "order": 58,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点击空镜位放入平面镜，再次点击在 / 与 \\ 两种朝向间切换。",
+    "光束自光源直线传播，途经的格子被点亮，撞上挡板即被吞噬。",
+    "全部目标格点亮后按下折跃；错报会扣除护盾，护盾归零即失败。",
+    "分光器让一束光分成透射与反射两束；预算关中超耗操作即失败。",
+    "终章光路隐入黑盒，只能凭目标格的亮灭推理镜位布局。"
+  ],
+  "highlights": ["镜面折跃", "分光双束", "步数预算", "挡板迷局", "黑盒推理"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

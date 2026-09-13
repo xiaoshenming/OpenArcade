@@ -1,0 +1,29 @@
+{
+  "id": "hue-blend",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "流光调色",
+  "shortTitle": "流光",
+  "description": "对准六只色瓶向烧杯滴入定量滴数，实时混合 RGB 三通道，在步数预算内把烧杯调成目标色。",
+  "category": "cozy",
+  "accent": "#fda4af",
+  "order": 64,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "看目标色的 RGB 数值，点击对应色瓶向烧杯滴入，每滴改变通道 ±5。",
+    "正瓶加通道、负瓶减通道，超出 0-255 的滴会被拒绝且不计步。",
+    "每滴实时混合颜色，烧杯与目标完全一致即通关。",
+    "五滴连珠章节起可切换每次 1/5 滴，规划好再出手。",
+    "终局章节混入哑瓶，误滴会浪费步数，滴错超预算即失败。"
+  ],
+  "highlights": ["实时混色", "六色滴瓶", "步数预算", "五连滴", "干扰哑瓶"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

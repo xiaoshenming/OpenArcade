@@ -1,0 +1,30 @@
+{
+  "id": "skyscraper-tale",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "摩天楼阵",
+  "shortTitle": "摩天楼",
+  "description": "一座座拉丁方阵之城：按四边视线线索填出每行每列 1 到 n 的楼高，从 4x4 全 clue 奠基广厦一路登上撤去三成半线索的云顶终章。",
+  "category": "logic",
+  "accent": "#f9a8d4",
+  "order": 41,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点击格子选中，再用底部数字键盘或键盘数字键填入楼高。",
+    "每行每列楼高 1 到 n 各出现一次，不能重复。",
+    "边缘数字是该方向能看到的楼数，只有比之前都高的楼才可见。",
+    "选中格子会点亮所在行列与四边对应的视线线索。",
+    "第四章起失误预算 3，且一整侧边缘线索被雾锁撤空，超限即失败。",
+    "第五章叠加硬性限时，超时惩罚翻倍。"
+  ],
+  "highlights": ["全 clue 入门", "贪心去 clue", "视线行列高亮", "雾锁单岸", "失误预算 3", "硬性限时", "唯一解保证"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/beam-fold/beam-fold.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "19001b792c75540c174537a4d700be187de546407bf13667b82cc912db26720d"
+    }
+  ]
+}

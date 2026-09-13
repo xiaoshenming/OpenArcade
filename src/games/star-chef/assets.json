@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/star-chef/star-chef.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "a36718db7e3a533f37c021206608487f69e15b78c0635a0b6d1446b983bff3ba"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+.spin-game { position: relative; display: grid; grid-template-rows: auto auto 1fr auto auto; min-height: 540px; padding: 22px; overflow: hidden; background: radial-gradient(circle at 50% 42%, #2a1530 0%, #0d1122 78%); }
+.spin-game::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(88% 70% at 50% 44%, rgba(240,171,252,.09) 0%, rgba(238,241,251,.02) 48%, rgba(4,7,16,.5) 100%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23f)'/%3E%3C/svg%3E"); box-shadow: inset 0 0 130px rgba(4,7,16,.5); }
+.spin-game.ch2 { background: radial-gradient(circle at 50% 42%, #2c1a22 0%, #0d1122 78%); }
+.spin-game.ch3 { background: radial-gradient(circle at 50% 42%, #30203a 0%, #0d1122 78%); }
+.spin-game.ch4 { background: radial-gradient(circle at 50% 42%, #3a1f28 0%, #0d1122 78%); }
+.spin-game.ch5 { background: radial-gradient(circle at 50% 42%, #241738 0%, #0a0d1a 80%); }
+.spin-readout, .spin-rule, .spin-stage, .spin-meters, .spin-controls { position: relative; z-index: 1; }
+.spin-readout { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 7px 12px; border: 1px solid rgba(139,150,184,.24); border-radius: 8px; background: linear-gradient(180deg, rgba(33,40,70,.92), rgba(14,18,35,.88)); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), 0 6px 16px rgba(0,0,0,.35); color: #8b96b8; font-size: 11px; }
+.spin-readout strong { color: #eef1fb; font-size: 12px; font-variant-numeric: tabular-nums; text-align: right; }
+.spin-rule { display: flex; align-items: center; gap: 7px; min-height: 38px; margin-top: 9px; padding: 7px 10px; border: 1px solid rgba(139,150,184,.2); border-left: 3px solid #f0abfc; border-radius: 0 8px 8px 0; background: linear-gradient(180deg, rgba(30,37,64,.92), rgba(16,20,38,.9)); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), 0 8px 20px rgba(0,0,0,.4); }
+.spin-rule span { flex: 1; color: #eef1fb; font-size: 11px; font-weight: 700; }
+.spin-rule em { padding: 4px 7px; border-radius: 6px; color: #f5d0fe; background: rgba(240,171,252,.16); font-size: 10px; font-style: normal; font-weight: 800; white-space: nowrap; }
+.spin-stage { position: relative; display: grid; place-items: center; min-height: 0; margin: 12px 0; aspect-ratio: 1 / 1; max-height: 380px; justify-self: center; width: min(100%, 380px); border-radius: 18px; background: radial-gradient(circle at 50% 50%, #131a30 0%, #0a0d1c 100%); box-shadow: inset 0 0 46px rgba(4,7,16,.8); touch-action: none; user-select: none; -webkit-user-select: none; overflow: hidden; }
+.spin-ring { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); border: 2px solid rgba(240,171,252,.65); border-radius: 50%; background: radial-gradient(circle at 50% 44%, rgba(240,171,252,.10) 0%, rgba(240,171,252,.03) 58%, rgba(4,7,16,.35) 100%); box-shadow: 0 0 26px rgba(240,171,252,.28), inset 0 0 34px rgba(4,7,16,.55); width: 84%; height: 84%; }
+.spin-body, .spin-dot { position: absolute; left: 50%; top: 50%; will-change: transform; }
+.spin-body { width: 36px; height: 36px; z-index: 2; }
+.spin-player { z-index: 3; }
+.spin-enemy { z-index: 2; transition: opacity 260ms var(--ease-standard); }
+.spin-enemy.is-out { opacity: 0; }
+.spin-body::after { content: ''; position: absolute; inset: 0; border-radius: 50%; }
+.spin-player::after { background: conic-gradient(#ffe9a6 0deg 70deg, #ffc94d 70deg 180deg, #e0a933 180deg 250deg, #ffc94d 250deg 290deg, #ffe9a6 290deg 360deg); box-shadow: 0 0 16px rgba(255,201,77,.75), inset 0 -3px 6px rgba(120,84,20,.55); animation: spin-rotor 1.1s linear infinite; }
+.spin-enemy::after { background: conic-gradient(#ffb3c2 0deg 80deg, #ff5f7e 80deg 200deg, #c93b58 200deg 300deg, #ff5f7e 300deg 360deg); box-shadow: 0 0 12px rgba(255,95,126,.6), inset 0 -3px 6px rgba(120,20,45,.55); animation: spin-rotor 1.5s linear infinite; }
+.spin-enemy.is-out::after { animation: none; }
+.spin-dot { width: 13px; height: 13px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #b7f5e4 0%, #2fd6b8 55%, #178a74 100%); box-shadow: 0 0 10px rgba(47,214,184,.7); animation: spin-pulse 1.4s ease-in-out infinite; transition: opacity 200ms var(--ease-standard); }
+.spin-dot.is-taken { opacity: 0; animation: none; }
+.spin-veil { position: absolute; inset: 0; z-index: 4; display: grid; place-items: center; color: #eef1fb; font-weight: 800; letter-spacing: .2em; background: rgba(4,7,16,.55); backdrop-filter: blur(2px); }
+.spin-panel { position: absolute; inset: 0; z-index: 5; display: grid; place-content: center; justify-items: center; gap: 7px; text-align: center; background: rgba(4,7,16,.78); backdrop-filter: blur(3px); animation: spin-fade 320ms var(--ease-standard) backwards; }
+.spin-panel strong { color: #f0abfc; font-size: 22px; letter-spacing: .1em; text-shadow: 0 0 18px rgba(240,171,252,.5), 0 2px 6px rgba(4,7,16,.9); }
+.spin-panel.is-lose strong { color: #ff5f7e; text-shadow: 0 0 18px rgba(255,95,126,.5), 0 2px 6px rgba(4,7,16,.9); }
+.spin-panel span { color: #8b96b8; font-size: 12px; }
+.spin-panel em { color: #ffc94d; font-size: 16px; font-style: normal; font-weight: 800; font-variant-numeric: tabular-nums; }
+.spin-panel button { display: inline-flex; align-items: center; gap: 7px; margin-top: 5px; padding: 10px 16px; border: 1px solid rgba(240,171,252,.6); border-radius: 10px; color: #eef1fb; background: linear-gradient(180deg, #39406b 0%, #1c2340 55%, #141a2e 100%); font-size: 13px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 0 #0a0e1c; }
+.spin-panel button:active { transform: translateY(3px); box-shadow: 0 1px 0 #0a0e1c; }
+.spin-meters { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 2px; }
+.spin-meters label { display: flex; align-items: center; gap: 8px; color: #8b96b8; font-size: 10px; font-weight: 800; }
+.spin-meters span { flex: 1; height: 8px; overflow: hidden; border-radius: 99px; background: rgba(139,150,184,.18); box-shadow: inset 0 1px 2px rgba(4,7,16,.6); }
+.spin-meters i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, #ffc94d 0%, #f0abfc 100%); transform-origin: left center; transition: transform 150ms linear; }
+.spin-meters label + label i { background: linear-gradient(90deg, #2fd6b8 0%, #6bd6a3 100%); }
+.spin-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; }
+.spin-pad { display: grid; grid-template-areas: '. up .' 'left down right'; gap: 8px; }
+.spin-pad-button { display: grid; place-items: center; width: 54px; height: 48px; border: 1px solid rgba(240,171,252,.5); border-radius: 12px; color: #eef1fb; background: linear-gradient(180deg, #39406b 0%, #1c2340 55%, #141a2e 100%); cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 4px 0 #0a0e1c, 0 10px 20px rgba(0,0,0,.45); transition: transform var(--dur-fast) var(--ease-standard), border-color var(--dur-fast) var(--ease-standard); }
+.spin-pad-button:hover:not(:disabled) { border-color: #f5d0fe; }
+.spin-pad-button:active:not(:disabled) { transform: translateY(3px); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 1px 0 #0a0e1c; }
+.spin-pad-button:disabled { opacity: .45; cursor: default; }
+.pad-up { grid-area: up; } .pad-left { grid-area: left; } .pad-down { grid-area: down; } .pad-right { grid-area: right; }
+.spin-restart { display: inline-flex; align-items: center; gap: 7px; height: 44px; padding: 0 16px; border: 1px solid rgba(255,95,126,.55); border-radius: 10px; color: #eef1fb; background: linear-gradient(180deg, #39406b 0%, #1c2340 55%, #141a2e 100%); font-size: 13px; font-weight: 700; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 4px 0 #0a0e1c, 0 10px 20px rgba(0,0,0,.45); transition: transform var(--dur-fast) var(--ease-standard), border-color var(--dur-fast) var(--ease-standard); }
+.spin-restart:hover:not(:disabled) { border-color: #ff7a92; }
+.spin-restart:active:not(:disabled) { transform: translateY(3px); }
+.spin-restart:disabled { opacity: .45; cursor: default; }
+.spin-game.is-paused .spin-stage { opacity: .42; filter: saturate(.55); }
+@keyframes spin-rotor { to { transform: rotate(360deg); } }
+@keyframes spin-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .55; } }
+@keyframes spin-fade { from { opacity: 0; } }
+@media (max-width: 640px) { .spin-game { min-height: 460px; padding: 14px; } .spin-stage { width: 100%; max-height: 320px; } .spin-pad-button { width: 48px; height: 44px; } .spin-controls { flex-wrap: wrap; justify-content: center; row-gap: 10px; } .spin-rule span { font-size: 10px; } }
+@media (prefers-reduced-motion: reduce) { .spin-player::after, .spin-enemy::after, .spin-dot, .spin-panel { animation: none; } .spin-pad-button, .spin-restart, .spin-meters i { transition: none; } }

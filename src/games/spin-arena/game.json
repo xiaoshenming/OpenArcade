@@ -1,0 +1,30 @@
+{
+  "id": "spin-arena",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "陀螺角斗",
+  "shortTitle": "陀螺",
+  "description": "陀螺相扑擂台：收集能量点维持转速，用动量碰撞把 1 到 3 只敌陀撞出环外；转速高者撞人更远，缩圈与追击 AI 在终章全面合流。",
+  "category": "arcade",
+  "accent": "#f0abfc",
+  "order": 67,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "指针指向或方向键、WASD 推进你的陀螺，撞把敌陀挤出粉环即得 400 分。",
+    "转速持续衰减：吃能量点回转 18 点，转速归零直接判负。",
+    "转速高于敌陀时碰撞把它推得更远，保持高速就是最强的武器。",
+    "存活每秒 20 分、能量点每枚 30 分；撑满 45 秒或清空敌陀即完成。",
+    "第四章起竞技场每 15 秒缩圈 10%，被挤出环外或转速熄火都算失败。",
+    "终章三敌主动追击、能量稀疏、缩圈不停，全要素终极合流。"
+  ],
+  "highlights": ["动量碰撞", "转速对抗", "能量续航", "缩圈绝地", "追击 AI", "60 关合流"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

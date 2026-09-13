@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/kakuro-run/kakuro-run.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "c7c5573235155d05e36f749832020114d612bcc969eb29c8216f64f9804c29c1"
+    }
+  ]
+}

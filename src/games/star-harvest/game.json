@@ -1,0 +1,29 @@
+{
+  "id": "star-harvest",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "星屑收割",
+  "shortTitle": "收割",
+  "description": "化身摘星客：在种子迷宫里吃满星屑配额，躲开守卫的视线追击，抓住能量星的十秒反杀期把猎场翻过来。",
+  "category": "arcade",
+  "accent": "#facc15",
+  "order": 52,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "方向键、WASD、滑动或方向按钮移动，撞墙会被挡下。",
+    "吃满关卡星屑配额即完成；被守卫碰到损一命，共三命。",
+    "守卫同排同列且面向你时会加速直追，用墙体遮蔽视线周旋。",
+    "能量星十秒内星屑三倍分，碰到守卫直接反杀得三百分。",
+    "隧道章左右边界相通，再生章被吃星屑会缓慢长回。"
+  ],
+  "highlights": ["视线追击", "能量反杀", "边界隧道", "星屑再生", "终章全机制组合"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

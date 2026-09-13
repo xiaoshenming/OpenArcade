@@ -1,0 +1,28 @@
+{
+  "id": "cloud-yard",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "云汐花园",
+  "shortTitle": "云汐",
+  "description": "从起点拖拽绘制一条不自交的云径，串起所有锚点并在预算步数内收笔。五章机制递进：步数预算、迷雾锚点、风暴格与终局组合，随机自回避行走构造保证每一关可解。",
+  "category": "cozy",
+  "accent": "#bef264",
+  "order": 59,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "从起点出发，点击或拖拽逐格延伸云径，方向限于上下左右。",
+    "云径不能自交，也不能踏入风暴格；划到已走过格会自动回退。",
+    "经过所有锚点且步数不超过预算后按下收笔，错报会扣除护盾。",
+    "迷雾关的锚点五秒后隐去，需凭记忆完成路线；撤销可逐步回退。"
+  ],
+  "highlights": ["禅意划线", "迷雾锚点", "风暴绕行", "步数预算", "自回避行走"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

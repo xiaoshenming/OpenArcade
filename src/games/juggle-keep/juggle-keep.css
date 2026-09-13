@@ -1,0 +1,38 @@
+.jk-game { position: relative; display: grid; grid-template-rows: auto auto 1fr auto; gap: 9px; min-height: 540px; padding: 20px; overflow: hidden; color: #8b96b8; background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #2b1620 0%, #0d1122 74%); }
+.jk-game::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(88% 70% at 50% 40%, rgba(251,113,133,.09) 0%, rgba(238,241,251,.02) 46%, rgba(4,7,16,.48) 100%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23f)'/%3E%3C/svg%3E"); box-shadow: inset 0 0 130px rgba(4,7,16,.5); }
+.jk-game > * { position: relative; z-index: 1; }
+.jk-readout { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 7px 12px; border: 1px solid rgba(139,150,184,.24); border-radius: 8px; background: linear-gradient(180deg, rgba(33,40,70,.92), rgba(14,18,35,.88)); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), inset 0 -1px 0 rgba(0,0,0,.42), 0 6px 16px rgba(0,0,0,.35); font-size: 11px; }
+.jk-readout strong { color: #eef1fb; font-size: 12px; font-variant-numeric: tabular-nums; text-align: right; }
+.jk-rule { display: flex; align-items: center; gap: 7px; min-height: 34px; padding: 6px 10px; border: 1px solid rgba(139,150,184,.2); border-left: 3px solid #fb7185; border-radius: 0 8px 8px 0; background: linear-gradient(180deg, rgba(30,37,64,.92), rgba(16,20,38,.9)); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), inset 0 -1px 0 rgba(0,0,0,.4), 0 8px 20px rgba(0,0,0,.4); }
+.jk-rule span { flex: 1; color: #eef1fb; font-size: 11px; font-weight: 700; }
+.jk-rule em { padding: 4px 7px; border-radius: 6px; color: #fb7185; background: rgba(251,113,133,.14); font-size: 10px; font-style: normal; font-weight: 800; white-space: nowrap; }
+.jk-rule em.jk-gilt { color: #ffc94d; background: rgba(255,201,77,.14); }
+.jk-rule em.jk-zone-chip { color: #2fd6b8; background: rgba(47,214,184,.14); }
+.jk-stage { position: relative; width: 100%; max-width: 430px; aspect-ratio: 480 / 620; margin: 0 auto; overflow: hidden; border: 1px solid rgba(251,113,133,.32); border-radius: 12px; background: linear-gradient(180deg, rgba(10,14,28,.9), rgba(6,9,20,.95)), radial-gradient(circle at 50% 30%, rgba(251,113,133,.08), transparent 60%); box-shadow: inset 0 0 60px rgba(4,7,16,.7), 0 12px 30px rgba(0,0,0,.5); touch-action: none; user-select: none; -webkit-user-select: none; }
+.jk-game.is-cleared .jk-stage { border-color: rgba(47,214,184,.7); }
+.jk-game.is-over .jk-stage { border-color: rgba(255,126,95,.7); }
+.jk-scaler { position: absolute; top: 0; left: 0; width: 480px; height: 620px; transform-origin: 0 0; }
+.jk-zone { position: absolute; left: 0; right: 0; background: repeating-linear-gradient(180deg, rgba(47,214,184,.16) 0 9px, rgba(47,214,184,.05) 9px 18px); border-top: 1px dashed rgba(47,214,184,.5); border-bottom: 1px dashed rgba(47,214,184,.5); animation: jk-zone 2.4s ease-in-out infinite; }
+.jk-ball { position: absolute; top: 0; left: 0; border-radius: 50%; background: radial-gradient(circle at 32% 28%, #ffe1e7 0%, #fb7185 52%, #b03a52 100%); box-shadow: inset 0 -2px 4px rgba(110,25,45,.5), 0 0 11px rgba(251,113,133,.5); will-change: translate; }
+.jk-ball.is-gold { background: radial-gradient(circle at 32% 28%, #fff3c9 0%, #ffc94d 52%, #b78d0a 100%); box-shadow: inset 0 -2px 4px rgba(120,84,20,.5), 0 0 12px rgba(255,201,77,.65); }
+.jk-paddle { position: absolute; top: 0; left: 0; height: 12px; border-radius: 7px; background: linear-gradient(180deg, #eef1fb 0%, #97a3d6 45%, #4a5578 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.65), 0 3px 8px rgba(4,7,16,.6), 0 0 14px rgba(251,113,133,.35); will-change: translate; }
+.jk-track { position: absolute; left: 12px; right: 12px; top: 8px; height: 5px; border-radius: 3px; background: rgba(4,7,16,.65); overflow: hidden; }
+.jk-track i { display: block; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #fb7185, #ffc94d); transition: width 140ms linear; }
+.jk-stamp { position: absolute; inset: 0; z-index: 3; display: grid; place-content: center; justify-items: center; gap: 8px; text-align: center; background: rgba(4,7,16,.74); backdrop-filter: blur(3px); animation: jk-stamp 320ms var(--ease-standard) backwards; }
+.jk-stamp span { color: #8b96b8; font-size: 12px; letter-spacing: .18em; }
+.jk-stamp strong { color: #eef1fb; font-size: 26px; font-variant-numeric: tabular-nums; text-shadow: 0 2px 8px rgba(4,7,16,.9); }
+.jk-stamp.is-win strong { color: #2fd6b8; }
+.jk-stamp.is-lose strong { color: #fb7185; }
+.jk-game.is-paused .jk-scaler { opacity: .4; filter: saturate(.55); }
+.jk-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.jk-pad { display: flex; gap: 10px; }
+.jk-pad-button, .jk-restart { display: inline-flex; align-items: center; justify-content: center; gap: 7px; height: 48px; border: 1px solid rgba(251,113,133,.5); border-radius: 12px; color: #eef1fb; background: linear-gradient(180deg, #39406b 0%, #1c2340 55%, #141a2e 100%); font-size: 13px; font-weight: 700; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,.2), inset 0 -2px 5px rgba(0,0,0,.4), 0 4px 0 #0a0e1c, 0 10px 20px rgba(0,0,0,.45); transition: transform var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast) var(--ease-standard), border-color var(--dur-fast) var(--ease-standard); }
+.jk-pad-button { width: 62px; }
+.jk-pad-button:hover:not(:disabled), .jk-restart:hover:not(:disabled) { border-color: #fb8fa5; }
+.jk-pad-button:active:not(:disabled), .jk-restart:active:not(:disabled) { transform: translateY(3px); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 1px 0 #0a0e1c; }
+.jk-pad-button:disabled, .jk-restart:disabled { opacity: .45; cursor: default; }
+.jk-restart { padding: 0 16px; }
+@keyframes jk-zone { 0%, 100% { opacity: .8; } 50% { opacity: 1; } }
+@keyframes jk-stamp { from { opacity: 0; } }
+@media (max-width: 640px) { .jk-game { min-height: 460px; padding: 14px; } .jk-stage { max-width: 100%; } .jk-rule span { font-size: 10px; } .jk-actions { flex-wrap: wrap; justify-content: center; row-gap: 10px; } }
+@media (prefers-reduced-motion: reduce) { .jk-zone, .jk-stamp { animation: none; } .jk-pad-button, .jk-restart { transition: none; } }

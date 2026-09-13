@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/honey-hive/honey-hive.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "283ffad2c4f92a8d4eabb599f5d47ef0923dc2d608bf40405b2fa67283399bd1"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+.hm-game { position: relative; display: grid; grid-template-rows: auto auto 1fr auto; gap: 9px; min-height: 520px; padding: 18px; overflow: hidden; color: #eef1fb; font-size: 12px; background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #3a3153 0%, #0d1122 76%); }
+.hm-game::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(90% 70% at 50% 30%, rgba(234,179,8,.1) 0%, rgba(234,179,8,.02) 50%, rgba(4,7,16,.5) 100%); box-shadow: inset 0 0 130px rgba(4,7,16,.55); }
+.hm-readout, .hm-rule, .hm-stage, .hm-actions { position: relative; z-index: 1; }
+.hm-readout { display: flex; align-items: center; justify-content: space-between; padding: 7px 12px; border: 1px solid rgba(139,150,184,.24); border-radius: 8px; background: linear-gradient(180deg, rgba(33,40,70,.92), rgba(14,18,35,.88)); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), 0 6px 16px rgba(0,0,0,.35); color: #8b96b8; font-size: 11px; }
+.hm-readout strong { color: #eef1fb; font-size: 13px; font-variant-numeric: tabular-nums; }
+.hm-rule { display: flex; align-items: center; gap: 9px; min-height: 36px; padding: 6px 10px; border: 1px solid rgba(139,150,184,.2); border-left: 3px solid #eab308; border-radius: 0 8px 8px 0; background: linear-gradient(180deg, rgba(30,37,64,.92), rgba(16,20,38,.9)); }
+.hm-rule span { flex: 1; min-width: 0; color: #eef1fb; font-weight: 700; }
+.hm-rule small { color: #8b96b8; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.hm-wind { padding: 3px 8px; border-radius: 6px; color: #9bd1ff; background: rgba(155,209,255,.12); font-size: 10px; font-style: normal; font-weight: 800; font-variant-numeric: tabular-nums; }
+.hm-wind.is-blowing { color: #ffc94d; background: rgba(255,201,77,.16); animation: hm-blink 620ms var(--ease-standard) infinite alternate; }
+.hm-bar { position: relative; flex: none; width: 74px; height: 8px; border: 1px solid rgba(234,179,8,.4); border-radius: 4px; background: rgba(8,12,24,.8); overflow: hidden; font-style: normal; }
+.hm-bar i { display: block; height: 100%; background: linear-gradient(90deg, #a07c0a, #eab308); box-shadow: 0 0 8px rgba(234,179,8,.6); transition: width var(--dur-fast) var(--ease-standard); }
+.mode-calm { background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #33304f 0%, #0d1122 76%); }
+.mode-drift { background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #2f3a56 0%, #0d1122 76%); }
+.mode-twin { background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #37355c 0%, #0d1122 76%); }
+.mode-gilded { background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #40372f 0%, #0d1122 76%); }
+.mode-storm { background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 10%, #2c3a55 0%, #0d1122 76%); }
+.hm-stage { position: relative; aspect-ratio: 19 / 12; overflow: hidden; border: 1px solid rgba(139,150,184,.28); border-radius: 12px; background: linear-gradient(180deg, rgba(46,40,66,.66) 0%, rgba(12,16,30,.9) 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 -18px 40px rgba(6,10,22,.5), 0 10px 26px rgba(0,0,0,.45); cursor: pointer; touch-action: manipulation; user-select: none; }
+.hm-field { position: absolute; top: 0; left: 0; width: 950px; height: 600px; transform-origin: 0 0; }
+.hm-table { position: absolute; background: repeating-linear-gradient(90deg, rgba(139,150,184,.16) 0 22px, transparent 22px 44px), linear-gradient(180deg, #4a3d2e 0%, #241c14 100%); border-top: 3px solid rgba(234,179,8,.4); box-shadow: 0 -6px 18px rgba(234,179,8,.12), inset 0 2px 0 rgba(255,255,255,.08); }
+.hm-rail { position: absolute; height: 2px; background: rgba(234,179,8,.3); border-radius: 1px; }
+.hm-peg { position: absolute; width: 8px; height: 30px; margin: -30px 0 0 -4px; border-radius: 4px 4px 2px 2px; background: linear-gradient(180deg, #ffe9a8 0%, #c98a2e 60%, #8a5a1a 100%); box-shadow: 0 0 10px rgba(234,179,8,.35), inset -1px -2px 3px rgba(60,30,4,.6); transition: opacity var(--dur-base) var(--ease-standard), filter var(--dur-base) var(--ease-standard); }
+.hm-peg::after { content: ''; position: absolute; top: -7px; left: -6px; width: 20px; height: 12px; border: 3px solid rgba(45,212,191,.85); border-bottom: none; border-radius: 10px 10px 0 0; box-shadow: 0 -2px 8px rgba(45,212,191,.4); }
+.hm-peg.is-gold { background: linear-gradient(180deg, #fff6d8 0%, #eab308 55%, #a07c0a 100%); box-shadow: 0 0 16px rgba(234,179,8,.65), inset -1px -2px 3px rgba(80,50,4,.6); }
+.hm-peg.is-gold::after { border-color: rgba(255,201,77,.95); box-shadow: 0 -2px 10px rgba(255,201,77,.55); animation: hm-pulse 900ms var(--ease-standard) infinite alternate; }
+.hm-peg.is-claimed { opacity: .3; filter: saturate(.35); }
+.hm-peg.is-claimed::after { border-color: rgba(139,150,184,.5); box-shadow: none; animation: none; }
+.hm-mark { position: absolute; width: 10px; height: 4px; margin-left: -5px; border-radius: 2px; background: rgba(255,95,126,.7); }
+.hm-mark.is-hit { background: rgba(45,212,191,.85); box-shadow: 0 0 8px rgba(45,212,191,.6); }
+.hm-hoop { position: absolute; width: 22px; height: 22px; margin: -11px 0 0 -11px; border: 4px solid #2fd6b8; border-radius: 50%; box-shadow: 0 0 12px rgba(47,214,184,.55), inset 0 0 6px rgba(47,214,184,.4); }
+.hm-thrower { position: absolute; width: 26px; height: 34px; margin: -34px 0 0 -13px; border: 1px solid rgba(90,50,10,.6); border-radius: 10px 10px 5px 5px; background: linear-gradient(160deg, #ffb27a 0%, #e2704d 55%, #a8452f 100%); box-shadow: 0 0 14px rgba(255,150,90,.4); }
+.hm-thrower.is-aiming { animation: hm-aim 1s var(--ease-standard) infinite alternate; }
+.hm-meter { position: absolute; left: 14px; bottom: 14px; z-index: 3; width: 22px; height: 110px; border: 2px solid rgba(234,179,8,.55); border-radius: 8px; background: rgba(8,12,24,.82); overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,.4); }
+.hm-meter i { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(180deg, #ffc94d 0%, #e2704d 100%); box-shadow: 0 0 10px rgba(255,201,77,.55); }
+.hm-meter.is-locked i { filter: saturate(.5) brightness(.8); }
+.is-paused .hm-thrower.is-aiming, .is-paused .hm-peg.is-gold::after, .is-paused .hm-wind.is-blowing { animation-play-state: paused; }
+.hm-stamp { position: absolute; inset: 0; z-index: 4; display: grid; place-content: center; gap: 6px; text-align: center; background: rgba(6,10,22,.68); backdrop-filter: blur(2px); animation: hm-stamp 360ms var(--ease-spring) backwards; }
+.hm-stamp span { font-size: 24px; font-weight: 900; letter-spacing: .1em; }
+.hm-stamp strong { color: #ffc94d; font-size: 30px; font-variant-numeric: tabular-nums; text-shadow: 0 0 18px rgba(255,201,77,.5); }
+.hm-stamp small { color: #8b96b8; }
+.hm-stamp.is-lose span { color: #ff5f7e; }
+.hm-stamp.is-win span { color: #2fd6b8; }
+.hm-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.hm-actions span { color: #8b96b8; }
+.hm-actions button { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 16px; border: 1px solid rgba(234,179,8,.5); border-radius: 10px; color: #eef1fb; background: linear-gradient(180deg, #453a20 0%, #2a2438 55%, #141a2e 100%); font-weight: 700; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 4px 0 #0a0e1c, 0 10px 20px rgba(0,0,0,.45); transition: transform var(--dur-fast) var(--ease-standard), border-color var(--dur-fast) var(--ease-standard); }
+.hm-actions button:hover { border-color: #eab308; }
+.hm-actions button:active { transform: translateY(3px); box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 #0a0e1c; }
+.hm-actions button:disabled { opacity: .55; cursor: default; }
+@keyframes hm-pulse { from { filter: brightness(.94); transform: scale(.95); } to { filter: brightness(1.2); transform: scale(1.08); } }
+@keyframes hm-aim { from { transform: rotate(-6deg); } to { transform: rotate(8deg); } }
+@keyframes hm-blink { from { opacity: .65; } to { opacity: 1; } }
+@keyframes hm-stamp { from { opacity: 0; transform: scale(.82); } }
+@media (max-width: 640px) { .hm-game { min-height: 430px; padding: 12px; gap: 7px; } .hm-rule span { display: none; } .hm-stamp span { font-size: 19px; } .hm-stamp strong { font-size: 24px; } }

@@ -1,0 +1,30 @@
+{
+  "id": "snow-roller",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "雪球滚滚",
+  "shortTitle": "雪球",
+  "description": "滚雪球下坡闯关：吃雪花养大雪球，碾碎碎石、跃过跳台、滑过冰面、穿透风雪与雪人王，滚到山脚或滚到目标半径即过关。",
+  "category": "arcade",
+  "accent": "#e0f2fe",
+  "order": 60,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "雪球自动下滚并逐渐加速，按左右键、A/D 或点按舞台左右半边控制横移。",
+    "吃雪花让半径按对数增长，半径够大就能碾碎碎石得 150 分，太大也更难躲避。",
+    "撞上大石或半径不足时撞雪人王会损一命并缩小雪球，3 命耗尽即失败。",
+    "压过跳台腾空可飞跃一切障碍，空中的高雪花串只有腾空时才吃得到。",
+    "冰面转向带打滑惯性要提前变向，暴风雪章节可视范围骤减，凭预判滚行。",
+    "滚完配额距离或半径达到目标即过关；每 10m 得 10 分，雪花每片 25 分。"
+  ],
+  "highlights": ["对数半径成长", "碾碎与躲避抉择", "跳台腾空吃串", "冰面打滑惯性", "风雪视界压缩", "雪人王终局关卡"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

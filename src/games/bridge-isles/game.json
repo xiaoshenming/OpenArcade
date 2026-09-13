@@ -1,0 +1,30 @@
+{
+  "id": "bridge-isles",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "桥连诸岛",
+  "shortTitle": "桥岛",
+  "description": "在群岛之间架设单桥与双桥，让每座岛的桥数与岛上数字吻合且全岛连通。生成树构造保证可解；五章递进：限时刻漏、固定古桥与大图终章组合发力。",
+  "category": "logic",
+  "accent": "#a3e635",
+  "order": 46,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点击两岛之间的水面架桥：一击单桥，两击双桥，三击拆除。",
+    "每座岛的桥数必须正好等于岛上数字，桥不能交叉或穿过第三座岛。",
+    "先点选一座岛再点目标岛，可以精准在两岛之间架桥或拆桥。",
+    "全部岛屿桥数吻合且相互连通即过关；谜面不要求唯一解，任意合法桥网均可，架出超载或交叉的桥会损失船员。",
+    "船员共 3 人，耗尽即失败；限时关超时同样失败。",
+    "金色古桥为固定桥，已架好且不可拆改，可借它们补全航路。"
+  ],
+  "highlights": ["生成树可解", "单双桥切换", "无交叉航道", "固定古桥", "限时刻漏", "三命挑战"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

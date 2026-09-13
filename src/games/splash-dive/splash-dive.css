@@ -1,0 +1,55 @@
+.sd-game { position: relative; display: grid; grid-template-rows: auto auto 1fr auto; gap: 9px; min-height: 560px; padding: 20px; overflow: hidden; color: #8b96b8; background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 8%, #10283a 0%, #0d1122 74%); }
+.sd-game::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(90% 70% at 50% 30%, rgba(34,211,238,.1) 0%, rgba(238,241,251,.02) 46%, rgba(4,7,16,.55) 100%); box-shadow: inset 0 0 130px rgba(4,7,16,.55); }
+.sd-game > * { position: relative; z-index: 1; }
+.sd-game.chapter-2 { background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 8%, #0f3040 0%, #0d1122 74%); }
+.sd-game.chapter-3 { background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 8%, #0d3a44 0%, #0d1122 74%); }
+.sd-game.chapter-4 { background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 8%, #14284a 0%, #0d1122 74%); }
+.sd-game.chapter-5 { background: radial-gradient(rgba(238,241,251,.05) 1px, transparent 1.5px) 0 0 / 22px 22px, radial-gradient(circle at 50% 8%, #1c1b46 0%, #0d1122 74%); }
+.sd-readout { display: flex; align-items: center; justify-content: space-between; padding: 7px 12px; border: 1px solid rgba(139,150,184,.24); border-radius: 8px; background: linear-gradient(180deg, rgba(33,40,70,.92), rgba(14,18,35,.88)); box-shadow: inset 0 1px 0 rgba(255,255,255,.13), 0 6px 16px rgba(0,0,0,.35); font-size: 11px; }
+.sd-readout strong { color: #eef1fb; font-size: 12px; font-variant-numeric: tabular-nums; }
+.sd-rule { display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 6px 10px; border: 1px solid rgba(139,150,184,.2); border-left: 3px solid #22d3ee; border-radius: 0 8px 8px 0; background: linear-gradient(180deg, rgba(30,37,64,.92), rgba(16,20,38,.9)); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 8px 20px rgba(0,0,0,.4); font-size: 10px; }
+.sd-rule span { flex: 1; color: #eef1fb; font-weight: 700; }
+.sd-rule em { padding: 4px 7px; border-radius: 6px; font-size: 10px; font-style: normal; font-weight: 800; white-space: nowrap; }
+.sd-rule .is-flow-left, .sd-rule .is-flow-right { color: #0d1122; background: #22d3ee; box-shadow: 0 0 10px rgba(34,211,238,.5); }
+.sd-rule .is-combo { color: #ffc94d; background: rgba(255,201,77,.16); box-shadow: 0 0 10px rgba(255,201,77,.3); }
+.sd-rule .is-pearl { color: #e8ecff; background: rgba(232,236,255,.14); }
+.sd-rule .is-depth { color: #2fd6b8; background: rgba(47,214,184,.14); font-variant-numeric: tabular-nums; }
+.sd-rule .is-life { color: #ff5f7e; background: rgba(255,95,126,.14); letter-spacing: 2px; }
+.sd-stage { position: relative; width: 100%; max-width: 420px; aspect-ratio: 360 / 560; margin: 0 auto; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; border: 1px solid rgba(139,150,184,.3); border-radius: 12px; background: linear-gradient(180deg, #14324a 0%, #0f2438 34%, #0a1526 68%, #060b18 100%); box-shadow: inset 0 0 60px rgba(4,7,16,.72), 0 12px 30px rgba(0,0,0,.5); }
+.sd-stage::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(rgba(238,241,251,.07) 1px, transparent 1.4px) 0 0 / 26px 26px; }
+.sd-game.is-cleared .sd-stage { border-color: rgba(47,214,184,.7); box-shadow: inset 0 0 60px rgba(4,7,16,.72), 0 0 26px rgba(47,214,184,.35); }
+.sd-game.is-over .sd-stage { border-color: rgba(255,95,126,.7); box-shadow: inset 0 0 60px rgba(4,7,16,.72), 0 0 26px rgba(255,95,126,.32); }
+.sd-scaler { position: absolute; top: 0; left: 0; width: 360px; height: 560px; transform-origin: 0 0; }
+.sd-progress { position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, #2fd6b8, #22d3ee 78%); transform-origin: 0 50%; box-shadow: 0 0 12px rgba(34,211,238,.55); }
+.sd-hazards, .sd-pearls { position: absolute; inset: 0; }
+.sd-hazard { position: absolute; top: 0; left: 0; will-change: transform; }
+.sd-hazard.is-mine { border-radius: 50%; border: 1px solid rgba(255,95,126,.55); background: radial-gradient(circle at 36% 30%, #6b7488 0%, #3a4258 44%, #141a2c 100%); box-shadow: inset -2px -3px 6px rgba(4,7,16,.7), 0 0 12px rgba(255,95,126,.3); }
+.sd-hazard.is-mine::before { content: ''; position: absolute; inset: -4px; border-radius: 50%; background: radial-gradient(circle, transparent 54%, rgba(255,95,126,.4) 55%, transparent 62%), conic-gradient(rgba(255,95,126,.75) 0 6deg, transparent 6deg 45deg, rgba(255,95,126,.75) 45deg 51deg, transparent 51deg 90deg, rgba(255,95,126,.75) 90deg 96deg, transparent 96deg 135deg, rgba(255,95,126,.75) 135deg 141deg, transparent 141deg 180deg, rgba(255,95,126,.75) 180deg 186deg, transparent 186deg 225deg, rgba(255,95,126,.75) 225deg 231deg, transparent 231deg 270deg, rgba(255,95,126,.75) 270deg 276deg, transparent 276deg 315deg, rgba(255,95,126,.75) 315deg 321deg, transparent 321deg); }
+.sd-hazard.is-jelly { border-radius: 46% 46% 40% 40%; border: 1px solid rgba(176,168,255,.6); background: radial-gradient(circle at 40% 30%, rgba(238,236,255,.55) 0%, rgba(176,168,255,.3) 48%, rgba(90,80,190,.22) 100%); box-shadow: 0 0 18px rgba(176,168,255,.55), inset 0 2px 4px rgba(255,255,255,.4); animation: sd-glow 1.6s var(--ease-standard) infinite; }
+.sd-hazard.is-jelly::after { content: ''; position: absolute; left: 30%; right: 30%; bottom: -34%; height: 40%; border-radius: 4px; background: repeating-linear-gradient(90deg, rgba(176,168,255,.5) 0 2px, transparent 2px 7px); filter: blur(1px); }
+.sd-pearl { position: absolute; top: 0; left: 0; width: 16px; height: 16px; border-radius: 50%; border: 1px solid rgba(255,255,255,.75); background: radial-gradient(circle at 34% 28%, #ffffff 0%, #dfe6ff 46%, #8f9cc9 100%); box-shadow: 0 0 10px rgba(232,236,255,.6), inset 0 1px 2px rgba(255,255,255,.85); will-change: transform; }
+.sd-game.reduce-motion .sd-hazard.is-jelly { animation: none; }
+.sd-diver { position: absolute; top: 0; left: 0; width: 32px; height: 40px; border-radius: 16px 16px 12px 12px; background: linear-gradient(180deg, #bff3ff 0%, #22d3ee 46%, #0e7490 100%); box-shadow: 0 0 18px rgba(34,211,238,.6), inset 0 2px 3px rgba(255,255,255,.75), inset 0 -4px 6px rgba(8,40,60,.7); will-change: transform; }
+.sd-diver::before { content: ''; position: absolute; top: 8px; left: 7px; width: 7px; height: 7px; border-radius: 50%; background: #0d1122; box-shadow: 11px 0 0 #0d1122; }
+.sd-diver::after { content: ''; position: absolute; top: -8px; left: 50%; width: 4px; height: 8px; translate: -50% 0; border-radius: 2px; background: rgba(238,241,251,.8); box-shadow: 0 0 8px rgba(238,241,251,.9); }
+.sd-diver.is-invuln { animation: sd-blink 200ms linear infinite; }
+.sd-stamp { position: absolute; inset: 0; z-index: 3; display: grid; place-content: center; justify-items: center; gap: 10px; text-align: center; background: rgba(6,9,20,.68); }
+.sd-stamp span { color: #22d3ee; font-size: 15px; font-weight: 800; letter-spacing: .2em; text-shadow: 0 0 16px rgba(34,211,238,.5); }
+.sd-game.is-over .sd-stamp span { color: #ff5f7e; text-shadow: 0 0 16px rgba(255,95,126,.55); }
+.sd-stamp strong { color: #eef1fb; font-size: 30px; font-variant-numeric: tabular-nums; text-shadow: 0 0 20px rgba(34,211,238,.5); }
+.sd-stamp button, .sd-restart { display: inline-flex; align-items: center; gap: 7px; height: 44px; padding: 0 16px; border: 1px solid rgba(34,211,238,.5); border-radius: 10px; color: #eef1fb; background: linear-gradient(180deg, #2c4a63 0%, #1a3048 55%, #101d2c 100%); font-weight: 700; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 4px 0 #08101c, 0 10px 20px rgba(0,0,0,.45); transition: transform var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast) var(--ease-standard); }
+.sd-stamp button:hover, .sd-restart:hover { border-color: #67e8f9; box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 4px 0 #08101c, 0 0 18px rgba(34,211,238,.4); }
+.sd-stamp button:active, .sd-restart:active { transform: translateY(3px); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 1px 0 #08101c; }
+.sd-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.sd-pad { display: flex; gap: 10px; }
+.sd-pad-button { display: grid; place-items: center; width: 62px; height: 54px; border: 1px solid rgba(34,211,238,.45); border-radius: 12px; color: #67e8f9; background: linear-gradient(180deg, #2c4a63 0%, #1a3048 55%, #101d2c 100%); cursor: pointer; touch-action: none; box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 4px 0 #08101c, 0 8px 16px rgba(0,0,0,.4); transition: transform var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast) var(--ease-standard); }
+.sd-pad-button:hover { border-color: #67e8f9; }
+.sd-pad-button:active { transform: translateY(3px); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 1px 0 #08101c; }
+.sd-pad-button:disabled, .sd-dive:disabled { opacity: .4; cursor: default; }
+.sd-dive { display: inline-flex; align-items: center; justify-content: center; gap: 6px; flex: 1; max-width: 150px; height: 54px; border: 1px solid rgba(47,214,184,.5); border-radius: 12px; color: #2fd6b8; background: linear-gradient(180deg, #23443f 0%, #142c2a 55%, #0c1a19 100%); font-weight: 800; cursor: pointer; touch-action: none; box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 4px 0 #08101c, 0 8px 16px rgba(0,0,0,.4); transition: transform var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast) var(--ease-standard), filter var(--dur-fast) var(--ease-standard); }
+.sd-dive.is-on { color: #0d1122; background: linear-gradient(180deg, #8ff0dc 0%, #2fd6b8 60%, #1a9a82 100%); box-shadow: 0 0 18px rgba(47,214,184,.6), 0 4px 0 #08101c; }
+.sd-dive:active { transform: translateY(3px); }
+.sd-restart { font-size: 12px; }
+@keyframes sd-blink { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
+@keyframes sd-glow { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.45); } }
+@media (max-width: 640px) { .sd-game { min-height: 460px; padding: 14px; } .sd-stage { max-width: 100%; border-radius: 10px; } .sd-pad-button { width: 56px; height: 50px; } .sd-dive { max-width: 120px; height: 50px; } }

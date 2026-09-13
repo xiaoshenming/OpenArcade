@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/turbo-lane/turbo-lane.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "dcb69bacd1c5bd98ad81841a55e14aac0af107b2133cc87513b90426470a9c63"
+    }
+  ]
+}

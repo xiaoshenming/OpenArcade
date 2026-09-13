@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/maze-lace/maze-lace.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "e0f1acbc12c460c4217204d25619b730151e772568e232d6896a2f733a906677"
+    }
+  ]
+}

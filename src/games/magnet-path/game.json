@@ -1,0 +1,30 @@
+{
+  "id": "magnet-path",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "磁石探径",
+  "shortTitle": "磁石",
+  "description": "在网格上布置 N/S 磁石，铁球每回合按邻近磁力的合力走一格，把球引入目标穴。",
+  "category": "logic",
+  "accent": "#7dd3fc",
+  "order": 68,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "先选 N 或 S 极磁石，再点空格放置；点击已放磁石可收回。",
+    "N 极吸引铁球，S 极推斥铁球，距离越近磁力越强。",
+    "点「推进回合」，铁球按四方向合力走一格；合力为零或被挡则不动。",
+    "撞墙、磁石或未解锁的穴都会挡住铁球，消耗一个回合。",
+    "在回合预算内把球送入目标穴即通关；终章双穴要依次入穴。",
+    "超出参考回合数会扣分，用尽预算则挑战失败。"
+  ],
+  "highlights": ["N/S 极性", "合力物理", "回溯可解", "障碍墙", "双穴顺序", "回合预算"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

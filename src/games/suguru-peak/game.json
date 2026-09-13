@@ -1,0 +1,30 @@
+{
+  "id": "suguru-peak",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "峰块相连",
+  "shortTitle": "峰块",
+  "description": "Suguru 峰块拼图：把山体划分为相连区域，每区恰好填 1 到区域格数，相邻八格数字不同。五章 60 关从 6x6 缓坡登到 10x8 绝顶，失误预算与预填减半层层加码。",
+  "category": "logic",
+  "accent": "#c4b8fd",
+  "order": 44,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点选空格，再用数字键盘或键盘数字键填入数字。",
+    "每个区域内恰好填 1 到区域格数，互不重复。",
+    "相邻八格（含斜角）的数字不能相同。",
+    "方向键移动选择，0 或退格键擦除。",
+    "第三章起失误预算 3 次，超过即判失败。",
+    "第四章起挖洞保留 2-3 个预填提示格，终章仅留 1 个。"
+  ],
+  "highlights": ["区域四色分块", "八向邻格约束", "唯一解保证", "失误预算", "预填提示格", "全键盘操作"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

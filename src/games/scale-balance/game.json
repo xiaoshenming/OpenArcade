@@ -1,0 +1,28 @@
+{
+  "id": "scale-balance",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "天平推演",
+  "shortTitle": "天平",
+  "description": "构造可解的天平推理：从砝码池选码配平每架天平，链式挂秤逐层递推，干扰砝码、放置预算与限时终章齐压。",
+  "category": "logic",
+  "accent": "#fda4af",
+  "order": 49,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点击砝码池选中砝码，再点天平右盘空位放置；点已放砝码可取回。",
+    "让每架天平左盘总重等于右盘总重，全部放满且全部平衡后提交验算。",
+    "链式关卡中右盘挂着小天平，其总重为它左右两盘之和，需先解下层。",
+    "提交不平衡会损失一次机会并清空砝码，三次失误或预算、限时耗尽判负。"
+  ],
+  "highlights": ["构造保证可解", "链式挂秤递推", "干扰砝码池", "放置预算", "终章限时", "五章节递进"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

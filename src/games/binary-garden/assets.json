@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/binary-garden/binary-garden.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "9f6e9c06ce8003292e0e8a98359e2ca1f12d8156772815fd58fe41b69030fef1"
+    }
+  ]
+}

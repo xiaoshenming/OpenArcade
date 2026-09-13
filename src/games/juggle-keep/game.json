@@ -1,0 +1,29 @@
+{
+  "id": "juggle-keep",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "空中续球",
+  "shortTitle": "续球",
+  "description": "移托板接住下坠的球：反弹角随触点偏移，多球轮替有加分，金球一跳抵五跳，终章重力带考验你的走位。",
+  "category": "arcade",
+  "accent": "#fb7185",
+  "order": 53,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "指针拖动、左右方向键或按住按钮横移底部托板。",
+    "反弹角随接触点偏移，用托板边缘把球送向两侧。",
+    "球落底损一命，共三命；弹跳次数达到配额即过关。",
+    "轮换接触不同的球每次加三十分，金球一跳抵五跳。",
+    "接力章新球按间隔入场，终章重力带会让球骤然下坠。"
+  ],
+  "highlights": ["触点偏移反弹", "多球轮替加分", "金球五连计", "新球接力入场", "重力带终章"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

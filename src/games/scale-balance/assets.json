@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/scale-balance/scale-balance.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "a17f8537538c37c47ea13707941dc9942764224159cd98e7cd5acdfa21fcdad3"
+    }
+  ]
+}

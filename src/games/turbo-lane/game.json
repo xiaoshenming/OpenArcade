@@ -1,0 +1,29 @@
+{
+  "id": "turbo-lane",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "赛道争锋",
+  "shortTitle": "赛道",
+  "description": "三车道公路上左右变道躲避车流，收集金币串，章节逐步加入重卡与油门冲刺，跑满里程配额即可过关。",
+  "category": "arcade",
+  "accent": "#ef4444",
+  "order": 50,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "按左右键或按钮在三车道间变道，躲开下卷车流。",
+    "撞车损失 1 条命并获得短暂无敌，3 条命耗尽即失败。",
+    "行驶距离达到里程配额即过关，每 10 米得 10 分。",
+    "第 3 章起公路出现金币串，冒险切入车道每枚金币 50 分。",
+    "第 4 章起按住上键开启油门：更快更险，距离分 ×1.5。"
+  ],
+  "highlights": ["三车道变道", "种子车流", "长卡占道", "金币串", "油门冲刺", "终局组合"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

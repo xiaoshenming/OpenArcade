@@ -1,0 +1,30 @@
+{
+  "id": "nurikabe-sea",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "海墓林苑",
+  "shortTitle": "海墓",
+  "description": "数墙谜题：涂黑海面，让每座岛的格数与数字吻合且互不相邻，海须连成一片且无 2x2 死水。约束传播求解器保证唯一解；预涂海面与限时刻漏终章压境。",
+  "category": "logic",
+  "accent": "#38bdf8",
+  "order": 47,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点击格子涂成海，再点一次退回陆地；数字格是岛心，不可涂。",
+    "每座岛（含数字的白格连通块）格数必须恰等于其数字。",
+    "任意两座岛不可上下左右相邻；海必须连成一片。",
+    "海中不允许出现 2x2 的实心方块；全部满足即过关。",
+    "「验证海图」若判定当前已入死局会损失一命，共 3 命。",
+    "限时关超时即失败；预涂海面不可更改。"
+  ],
+  "highlights": ["约束传播", "唯一解保证", "连通海面", "预涂引路", "限时刻漏", "三命挑战"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

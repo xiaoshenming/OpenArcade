@@ -1,0 +1,30 @@
+{
+  "id": "maze-lace",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "迷径铺陈",
+  "shortTitle": "迷径",
+  "description": "铺墙谜：在开放的格网上铺墙，让起点到终点恰好只剩一条路，且长度恰等于起点标注的数字。实时校验唯一性，预算收紧与预埋经线层层加码。",
+  "category": "logic",
+  "accent": "#93c5fd",
+  "order": 43,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点击格间墙缝铺墙，再点一次拆墙，预埋的金色墙不可拆。",
+    "目标：让起点到终点恰好只剩一条路径，长度等于起点数字。",
+    "徽标实时提示：多条通路、起点不通、唯一但长度不符或已达标。",
+    "墙数有预算章节限制，超出预算的墙无法铺下。",
+    "点提交校验：未达标扣 1 命共 3 命，耗尽即判失败。",
+    "用墙越接近参考墙数得分越高。"
+  ],
+  "highlights": ["唯一路径校验", "实时状态徽标", "预埋经线", "墙数预算", "三命挑战", "完美迷宫生成"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

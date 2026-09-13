@@ -1,0 +1,30 @@
+{
+  "id": "kakuro-run",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "数字和径",
+  "shortTitle": "和径",
+  "description": "Kakuro 数字和径：黑格切出横竖数字段，每段 1-9 不重复且段和等于端点 clue。五章 60 关从 5x5 小径走到 9x9 合流，暗段推理与失误预算步步升级。",
+  "category": "logic",
+  "accent": "#7dd3fc",
+  "order": 45,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点选白格，再用数字键盘或键盘数字键填入 1-9。",
+    "每段横竖白格内数字不重复，段内数字之和等于 clue。",
+    "段首角标显示该段的 clue，？角标是需自行推导的暗段。",
+    "方向键移动选择，0 或退格键擦除。",
+    "第三章起失误预算 3 次，并提前出现 1 段无 clue 暗段。",
+    "暗段数量逐章递增，请用交叉段的约束推理段和。"
+  ],
+  "highlights": ["段和角标", "暗段推理", "唯一解保证", "失误预算", "五章机制叠加", "全键盘操作"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

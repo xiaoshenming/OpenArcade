@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/snow-roller/snow-roller.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "f23e5ec26ef3a3ae26986d6b2a472d7d41c1a89e0857b50b3e97690b9fb65a55"
+    }
+  ]
+}

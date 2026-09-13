@@ -1,0 +1,30 @@
+{
+  "id": "cannon-siege",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "炮台攻城",
+  "shortTitle": "攻城",
+  "description": "攻城炮守理论：按住蓄力、松开放炮，抛物线炮弹受重力与风力双重作用，清空全部目标即破城，弹药耗尽则失败。",
+  "category": "arcade",
+  "accent": "#f97316",
+  "order": 55,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "移动指针或按 ←→ 调整炮管仰角，点击舞台可直接指向。",
+    "按住空格或按钮蓄力，力度条越满初速越大，松开立即放炮。",
+    "炮弹走抛物线：重力下拉、风力侧推，命中全部目标即过关。",
+    "每命中一座目标得 200 分乘连中倍率，打空一发连击清零。",
+    "虚线是当前角度与力度的弹道预览，风向箭头会告诉你修正方向。",
+    "高墙挡住直射就吊射越过，带头盔的硬目标要两发才能击碎。"
+  ],
+  "highlights": ["蓄力抛物线", "风力修正", "弹道预览", "连中倍率", "高墙吊射", "头盔两击"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

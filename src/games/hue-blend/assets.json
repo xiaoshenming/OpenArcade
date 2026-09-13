@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/hue-blend/hue-blend.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "43098db00ec1afe38b16894ca8355b314a83d45c9023442f1b8559355127fd17"
+    }
+  ]
+}

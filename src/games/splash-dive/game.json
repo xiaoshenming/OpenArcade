@@ -1,0 +1,29 @@
+{
+  "id": "splash-dive",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "深潜奇航",
+  "shortTitle": "深潜",
+  "description": "潜水员垂直下潜：左右游动收集珍珠、躲开水雷与水母，按下键加速下潜更快更险，洋流会推移你，深度达标即过关。",
+  "category": "arcade",
+  "accent": "#22d3ee",
+  "order": 51,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "潜水员自动缓降，按左右键或按钮横向游动收集珍珠。",
+    "撞上水雷或水母损失 1 条命并获得短暂无敌，3 条命耗尽即失败。",
+    "按下键加速下潜：更快达标但反应时间更短，每 10 米深度得 10 分。",
+    "第 3 章起留意顶部洋流预警，洋流会持续水平推移潜水员。",
+    "第 4 章起发光水母会缓慢吸向玩家；终章连收珍珠可提升得分倍率。"
+  ],
+  "highlights": ["垂直下潜", "种子雷海", "漂移水雷", "洋流推移", "追踪水母", "珍珠连收倍率"],
+  "scorePolicy": {
+    "max": 10000,
+    "eventsPerSecond": 30
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}

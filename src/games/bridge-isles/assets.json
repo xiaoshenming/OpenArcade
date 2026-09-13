@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/bridge-isles/bridge-isles.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "ab4eaf3f0575c55db0c15d8ebc048a8595d1124d71dfbda775acbcc3eead3f26"
+    }
+  ]
+}

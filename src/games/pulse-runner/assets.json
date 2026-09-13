@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/pulse-runner/pulse-runner.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "f8951a5e67a44fa0ec1fb06a286cc9265c46f1a4c75ae280c57e5f315d6400b6"
+    }
+  ]
+}

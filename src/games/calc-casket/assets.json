@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "src/games/calc-casket/calc-casket.css",
+      "author": "OpenArcade contributors",
+      "license": "MIT",
+      "source": "original",
+      "sha256": "0817915575834699e1c751da0342072492870b97dfb85f65b9330860abb7da81"
+    }
+  ]
+}

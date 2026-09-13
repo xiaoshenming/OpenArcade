@@ -1,0 +1,30 @@
+{
+  "id": "fuse-chain",
+  "sdkVersion": 1,
+  "gameVersion": "1.0.0",
+  "owner": "@xiaoshenming",
+  "license": "MIT",
+  "title": "雷管连锁",
+  "shortTitle": "连锁",
+  "description": "点击起爆十字范围内的雷管，爆炸沿十字连锁波及相邻雷管。规划最少起爆点清空整片雷区，起爆预算与锁定雷管让每一次引爆都值得深思。",
+  "category": "logic",
+  "accent": "#f87171",
+  "order": 63,
+  "status": "ready",
+  "levelCount": 60,
+  "instructions": [
+    "点击任意格子起爆，十字范围内的雷管被引爆，并沿十字连锁波及相邻雷管。",
+    "一次或多次起爆清空全部雷管即通关，起爆次数越接近参考值得分越高。",
+    "锁定雷管无法直接起爆，只能被相邻雷管爆炸的连锁唤醒。",
+    "预算章节限定起爆次数，耗尽仍未清空将扣除一条命并重置雷区。",
+    "共有三条命，命尽判负；结算按 1000 减起爆耗损加剩余命奖励计分。",
+    "终章棋盘更宽，预算与锁定同时生效；窄屏下每格不小于 40px，可横向滑动查看全貌。"
+  ],
+  "highlights": ["十字连锁", "构造可解", "起爆预算", "锁定雷管", "三条命", "波次动画"],
+  "scorePolicy": {
+    "max": 5000,
+    "eventsPerSecond": 20
+  },
+  "loader": "module",
+  "isolation": "trusted-module"
+}
